@@ -1,23 +1,14 @@
-<?php $title = 'Actus'; ?>
+<?php $title = 'Séries TV'; ?>
 
 <!-- HEADER -->
-<?php ob_start(); ?>
+<?php 
+    ob_start(); 
 
-<header>
-    <h2>Liste des séries auxquelles vous pouvez vous abonner !</h2>
+    $h2Header = 'Liste des séries auxquelles vous pouvez vous abonner !';
+    require('header_template.php'); 
 
-    <nav>
-        <a href="index.php">Actus</a>
-        <a href="index.php?action=weLoved">On a aimé</a>
-        <a href="index.php?action=tvShows">Séries TV</a>
-        <a href="index.php?action=mySpace">Mon espace</a>
-
-        <a href="index.php?action=connexion">Connexion</a>
-        <a href="index.php?action=deconnexion">Déconnexion</a>
-    </nav>
-</header>
-
-<?php $header = ob_get_clean(); ?>
+    $header = ob_get_clean(); 
+?>
 
 
 <!-- SECTION -->
