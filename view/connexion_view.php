@@ -40,7 +40,7 @@
     <input type="email" name="email" id="email"><br/><br/>
 
     <label for="password1">Mot de passe :</label>
-    <input type="password" name"password1" id="password1"><br/><br/>
+    <input type="password" name="password1" id="password1"><br/><br/>
 
     <label for="password2">Vérification de votre mot de passe :</label>
     <input type="password" name="password2" id="password2" ><br/><br/>
