@@ -14,9 +14,38 @@ spl_autoload_register('autoloading');
 
 try {
 
-    if(isset($_GET['action'])) {
+    if (isset($_GET['action'])) {
 
+        //AFFICHAGE DES PAGES DU SITE
     
+        if ($_GET['action'] == "weLoved") {
+            weLovedPage();
+        }
+
+        elseif ($_GET['action'] == "tvShows") {
+            tvShowsPage();
+        }
+
+        elseif ($_GET['action'] == "mySpace") {
+            mySpacePage();
+        }
+
+        elseif ($_GET['action'] == "connexion") {
+            connexionPage();
+        }
+
+        elseif ($_GET['action'] == "contact") {
+            contactPage();
+        }
+
+        elseif ($_GET['action'] == "deconnexion") {
+            startSession();
+            session_unset();
+            session_destroy();
+
+            header('Location: index.php');
+            exit;
+        }
     } 
     
     // Par défaut : affichage de la page d'accueil du site
