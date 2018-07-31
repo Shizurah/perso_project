@@ -14,7 +14,41 @@
 <!-- SECTION -->
 <?php ob_start(); ?>
 
+<br/><br/>
+
 <p>Ici DEUX formulaires : connexion et création de compte</p>
+
+<p>Je me connecte :</p>
+<form action="index.php?action=connexion">
+    <label for="pseudo">Pseudo :</label>
+    <input type="text" name="pseudo" id="pseudo"> <br/><br/>
+
+    <label for="password">Mot de passe :</label>
+    <input type="password" name="password" id="password"> <br/><br/>
+
+    <input type="submit" value="Connexion">
+</form>
+
+<br/>
+
+<p>Pas encore de compte ?</p>
+<form action="index.php?action=registration">
+    <label for="pseudo">Pseudo :</label>
+    <input type="text" name="pseudo" id="pseudo"><br/><br/>
+
+    <label for="email">E-mail :</label>
+    <input type="email" name="email" id="email"><br/><br/>
+
+    <label for="password1">Mot de passe :</label>
+    <input type="password" name"password1" id="password1"><br/><br/>
+
+    <label for="password2">Vérification de votre mot de passe :</label>
+    <input type="password" name="password2" id="password2" ><br/><br/>
+
+    <input type="submit" value="Créer mon compte">
+</form>
+
+<br/><br/>
 
 <?php $section = ob_get_clean(); ?>
 
