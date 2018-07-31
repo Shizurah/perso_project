@@ -4,7 +4,7 @@
 <?php ob_start(); ?>
 
 <header>
-    <h2>Vous pouvez ici nous contacter via notre formulaire</h2>
+    <h2>Vous pouvez ici gérer votre compte : avatar, infos persos, séries suivies ...</h2>
 
     <nav>
         <a href="index.php">Actus</a>
@@ -23,7 +23,7 @@
 <!-- SECTION -->
 <?php ob_start(); ?>
 
-<p>Ici notre formulaire de contact</p>
+<p>Ici votre espace</p>
 
 <?php $section = ob_get_clean(); ?>
 
