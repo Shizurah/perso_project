@@ -30,7 +30,7 @@ try {
             mySpacePage();
         }
 
-        elseif ($_GET['action'] == "connexion") {
+        elseif ($_GET['action'] == "connexionPage") {
             connexionPage();
         }
 
