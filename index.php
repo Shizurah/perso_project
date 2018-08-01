@@ -3,14 +3,23 @@
 // appel des fichiers + classes
 require_once('controllers/posts_controller.php');
 require_once('controllers/comments_controller.php');
+require_once('controllers/users_controller.php');
 
 function autoloading($class) {
- require 'model/' . $class . '.php';
+    require 'model/' . $class . '.php';
 }
 
 spl_autoload_register('autoloading');
 
 // 
+
+function startSession() {
+    if (!isset($_SESSION)) {
+        session_start();
+    }
+}
+
+//
 
 try {
 
@@ -45,6 +54,20 @@ try {
 
             header('Location: index.php');
             exit;
+        }
+
+        // Création de compte : 
+        elseif ($_GET['action'] == 'registration') {
+
+            if (isset($_POST['pseudo']) && isset($_POST['password1']) && isset($_POST['password2']) && isset($_POST['email'])) {
+                addNewUser($_POST['pseudo'], $_POST['password1'], $_POST['email']);
+                
+                header('Location: index.php?action=connexionPage');
+                exit;
+
+            } else {
+                connexionPage();
+            }
         }
     } 
     
