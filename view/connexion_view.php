@@ -42,7 +42,7 @@
     <label for="password1">Mot de passe :</label>
     <input type="password" name="password1" id="password1"><br/><br/>
 
-    <label for="password2">Vérification de votre mot de passe :</label>
+    <label for="password2">Confirmation du mot de passe :</label>
     <input type="password" name="password2" id="password2" ><br/><br/>
 
     <input type="submit" value="Créer mon compte">
