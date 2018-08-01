@@ -19,7 +19,7 @@
 <p>Ici DEUX formulaires : connexion et création de compte</p>
 
 <p>Je me connecte :</p>
-<form action="index.php?action=connexion">
+<form action="index.php?action=connexion" method="post">
     <label for="pseudo">Pseudo :</label>
     <input type="text" name="pseudo" id="pseudo"> <br/><br/>
 
@@ -32,18 +32,18 @@
 <br/>
 
 <p>Pas encore de compte ?</p>
-<form action="index.php?action=registration">
+<form action="index.php?action=registration" method="post">
     <label for="pseudo">Pseudo :</label>
-    <input type="text" name="pseudo" id="pseudo"><br/><br/>
+    <input type="text" name="pseudo" id="pseudo" required><br/><br/>
 
     <label for="email">E-mail :</label>
-    <input type="email" name="email" id="email"><br/><br/>
+    <input type="email" name="email" id="email" required><br/><br/>
 
     <label for="password1">Mot de passe :</label>
-    <input type="password" name="password1" id="password1"><br/><br/>
+    <input type="password" name="password1" id="password1" required><br/><br/>
 
     <label for="password2">Confirmation du mot de passe :</label>
-    <input type="password" name="password2" id="password2" ><br/><br/>
+    <input type="password" name="password2" id="password2" required><br/><br/>
 
     <input type="submit" value="Créer mon compte">
 </form>
