@@ -25,6 +25,12 @@ class UsersManager {
         $req->bindValue('pass', $pass, PDO::PARAM_STR);
 
         $req->execute();
+
+        $infosUser = $req->fetch();
+
+        if (!empty($infosUser)) {
+            return new User($infosUser);
+        }
     }
 
     public function update() {
