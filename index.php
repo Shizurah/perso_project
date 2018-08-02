@@ -60,7 +60,7 @@ try {
         elseif ($_GET['action'] == 'registration') {
 
             if (isset($_POST['pseudo']) && isset($_POST['password1']) && isset($_POST['password2']) && isset($_POST['email'])) {
-                addNewUser($_POST['pseudo'], $_POST['password1'], $_POST['email']);
+                userRegistration($_POST['pseudo'], $_POST['password1'], $_POST['email']);
                 
                 header('Location: index.php?action=connexionPage');
                 exit;
