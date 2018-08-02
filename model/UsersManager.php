@@ -18,8 +18,13 @@ class UsersManager {
         $req->execute();
     }
 
-    public function getUser($id, $pseudo, $pass, $email, $avatar, $tvShows, $status) {
+    public function getUser($pseudo, $pass) {
+        $req = $this->_db->prepare('SELECT id, pseudo, pass, email, avatar, userStatus FROM users WHERE pseudo = :pseudo AND pass = :pass');
 
+        $req->bindValue('pseudo', $pseudo, PDO::PARAM_STR);
+        $req->bindValue('pass', $pass, PDO::PARAM_STR);
+
+        $req->execute();
     }
 
     public function update() {
