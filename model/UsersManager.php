@@ -30,6 +30,8 @@ class UsersManager {
 
         if (!empty($infosUser)) {
             return new User($infosUser);
+        } else {
+            throw new Exception('Mauvais identifiant ou mot de passe');
         }
     }
 
