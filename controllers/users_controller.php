@@ -13,19 +13,26 @@ function contactPage() {
 }
 
 
-function userRegistration($pseudo, $pass, $email) {
+function userRegistration($formPseudo, $pass1, $pass2, $email) {
     
-    $pass = password_hash($pass, PASSWORD_DEFAULT);
-
-    // ecrire ici une condition pour vérifier : pas de doublon de pseudo 
-    // Si ok : 
     $usersManager = new UsersManager();
-    $usersManager->addUser($pseudo, $pass, $email);
+    $bddPseudo = $usersManager->getPseudo($formPseudo);
 
-    connexionPage();
+    if (empty($bddPseudo)) {
+
+        if ($pass1 == $pass2) {
+            $usersManager->addUser($formPseudo, $pass1, $email);
+            connexionPage();
+        }
+
+        else {
+            throw new Exception ('Les mots de passe ne sont pas identiques');
+        }   
+    } 
     
-    // Sinon :
-    // exception jetée avec msg "Pseudo déjà pris"
+    else {
+        throw new Exception('Ce pseudo est déjà pris');
+    }
 }
 
 
@@ -41,10 +48,14 @@ function userConnexion($pseudo, $formPass) {
     
             session_start();
             $_SESSION['id'] = $user->id();
-            $_SESSION['userStatus'] = $user->status();
+            $_SESSION['userStatus'] = $user->userStatus();
             $_SESSION['pseudo'] = $pseudo;
     
             mySpacePage();
+        }
+
+        else {
+            throw new Exception('Identifiant ou mot de passe incorrect');
         }
     }
 
