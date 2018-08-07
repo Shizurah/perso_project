@@ -12,7 +12,9 @@ function contactPage() {
     require_once('view/contact_view.php');
 }
 
+
 function userRegistration($pseudo, $pass, $email) {
+    
     $pass = password_hash($pass, PASSWORD_DEFAULT);
 
     // ecrire ici une condition pour vérifier : pas de doublon de pseudo 
@@ -28,7 +30,6 @@ function userRegistration($pseudo, $pass, $email) {
 
 
 function userConnexion($pseudo, $formPass) {
-    // $formPass = password_hash($formPass, PASSWORD_DEFAULT);
 
     $usersManager = new UsersManager();
     $bddPass = $usersManager->getPass($pseudo);
@@ -50,11 +51,4 @@ function userConnexion($pseudo, $formPass) {
     else {
         throw new Exception('Identifiant ou mot de passe incorrect');
     }
-
-    // ou faire ttes les verif (empty($user), empty($pass), password_verify dans le controller (et plus dans le model) pour générer une erreur moins précise ?)
 }
-    
-    // else {
-        // afficher msg d'erreur si mauvais mdp ou identifiant
-        // connexionPage();
-    // }
