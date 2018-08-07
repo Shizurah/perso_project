@@ -8,7 +8,7 @@ class User {
     private $_email;
     private $_avatar;
     private $_tvShows;
-    private $_status;
+    private $_userStatus;
 
     public function __construct(array $data) {
         $this->hydrate($data);
@@ -34,10 +34,6 @@ class User {
 
     public function pseudo() {
         return $this->_pseudo;
-    }
-
-    public function pass() {
-        return $this->_pass;
     }
 
     public function email() {
@@ -68,12 +64,6 @@ class User {
     public function setPseudo($pseudo) {
         if (is_string($pseudo)) {
             $this->_pseudo = $pseudo;
-        }
-    }
-
-    public function setPass($pass) {
-        if (is_string($pass)) {
-            $this->_pass = $pass;
         }
     }
 
