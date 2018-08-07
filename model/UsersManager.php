@@ -18,14 +18,24 @@ class UsersManager {
         $req->execute();
     }
 
-    public function getPass($pseudo) {
+    public function getPseudo($formPseudo) { // renommer fonction en 'doesPseudoExist' ?
+        $req = $this->_db->prepare('SELECT pseudo FROM users WHERE pseudo = :pseudo');
+
+        $req->bindValue('pseudo', $formPseudo, PDO::PARAM_STR);
+        $req->execute();
+
+        $bddPseudo = $req->fetch();
+        return $bddPseudo['pseudo'];
+    }
+
+    public function getPass($pseudo) { // renommer fonction en 'doesPassExist' ?
         $req = $this->_db->prepare('SELECT pass FROM users WHERE pseudo = :pseudo');
 
         $req->bindValue('pseudo', $pseudo, PDO::PARAM_STR);
         $req->execute();
 
-        $userPass = $req->fetch();
-        return $userPass['pass'];
+        $bddPass = $req->fetch();
+        return $bddPass['pass'];
     }
 
     public function getUser($pseudo, $pass) {
@@ -36,7 +46,7 @@ class UsersManager {
 
         $req->execute();
 
-        $infosUser = $req->fetch(PDO::FETCH_ASSOC);
+        $infosUser = $req->fetch();
 
         if (!empty($infosUser)) {
             return new User($infosUser);
