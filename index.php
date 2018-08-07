@@ -60,8 +60,12 @@ try {
         elseif ($_GET['action'] == 'registration') {
 
             if (isset($_POST['pseudo']) && isset($_POST['password1']) && isset($_POST['password2']) && isset($_POST['email'])) {
-                userRegistration($_POST['pseudo'], $_POST['password1'], $_POST['email']);
+                userRegistration($_POST['pseudo'], $_POST['password1'], $_POST['password2'], $_POST['email']);
             } 
+            
+            else {
+                throw new Exception('Veuillez remplir tous les champs');
+            }
         }
 
         // Connexion sur le site :
@@ -83,5 +87,49 @@ try {
 
 
 } catch (Exception $e) {
+    // startSession();
 
+    $errorMsg = $e->getMessage();
+    $file = $e->getFile();
+    $path = 'E:\wamp64\www\projet_perso_openclassrooms';
+
+
+    if ($file == $path . '\controllers\users_controller.php') {
+
+        switch($errorMsg) {
+            case 'Ce pseudo est déjà pris' :
+                $errorPseudo = $errorMsg;
+                break;
+
+            case 'Les mots de passe ne sont pas identiques' :
+                $errorPass = $errorMsg;
+                break;
+
+            case 'Identifiant ou mot de passe incorrect' :
+                $errorConnexion = $errorMsg;
+                break;
+        }
+        
+        require_once('view/connexion_view.php');
+    }
+
+    // switch($file) {
+
+    //     case $path . '\controllers\users_controller.php' :
+
+    //         if ($errorMsg == 'Ce pseudo est déjà pris') {
+    //             $errorPseudo = $errorMsg;
+    //         } 
+
+    //         elseif ($errorMsg == 'Identifiant ou mot de passe incorrect')  {
+    //             $errorConnexion = $errorMsg;
+    //         }
+
+    //         else {
+    //             $errorPass = $errorMsg;
+    //         }
+
+    //         require_once('view/connexion_view.php');
+    //         break;
+    // }     
 }
