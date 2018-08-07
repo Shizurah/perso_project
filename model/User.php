@@ -48,8 +48,8 @@ class User {
         return $this->_tvShows;
     }
 
-    public function status() {
-        return $this->_status;
+    public function userStatus() {
+        return $this->_userStatus;
     }
 
     //setters :
@@ -81,10 +81,10 @@ class User {
 
     }
 
-    public function setStatus($status) {
-        if (is_string($status)) {
-            if ($status == 'member' || $status == 'admin') {
-                $this->_status = $status;
+    public function setUserStatus($userStatus) {
+        if (is_string($userStatus)) {
+            if ($userStatus == 'member' || $userStatus == 'admin') {
+                $this->_userStatus = $userStatus;
             }
         }
     }
