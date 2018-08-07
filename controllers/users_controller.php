@@ -1,6 +1,6 @@
 <?php
 
-function mySpacePage($pseudo) {
+function mySpacePage() {
     require_once('view/mySpace_view.php');
 }
 
@@ -15,27 +15,46 @@ function contactPage() {
 function userRegistration($pseudo, $pass, $email) {
     $pass = password_hash($pass, PASSWORD_DEFAULT);
 
+    // ecrire ici une condition pour vérifier : pas de doublon de pseudo 
+    // Si ok : 
     $usersManager = new UsersManager();
     $usersManager->addUser($pseudo, $pass, $email);
+
+    connexionPage();
+    
+    // Sinon :
+    // exception jetée avec msg "Pseudo déjà pris"
 }
 
 
-function userConnexion($pseudo, $pass) {
-    $pass = password_hash($pass, PASSWORD_DEFAULT);
+function userConnexion($pseudo, $formPass) {
+    // $formPass = password_hash($formPass, PASSWORD_DEFAULT);
 
     $usersManager = new UsersManager();
-    $user = $usersManager->getUser($pseudo, $pass);
+    $bddPass = $usersManager->getPass($pseudo);
 
-    if (!empty($user)) {
-        session_start();
+    if (!empty($bddPass)) {
 
-        $_SESSION['id'] = $user->id();
-        $_SESSION['pseudo'] = $pseudo;
-
-        mySpacePage();
-    } 
+        if (password_verify($formPass, $bddPass)) {
+            $user = $usersManager->getUser($pseudo, $bddPass);
     
-    else {
-        connexionPage();
+            session_start();
+            $_SESSION['id'] = $user->id();
+            $_SESSION['userStatus'] = $user->status();
+            $_SESSION['pseudo'] = $pseudo;
+    
+            mySpacePage();
+        }
     }
+
+    else {
+        throw new Exception('Identifiant ou mot de passe incorrect');
+    }
+
+    // ou faire ttes les verif (empty($user), empty($pass), password_verify dans le controller (et plus dans le model) pour générer une erreur moins précise ?)
 }
+    
+    // else {
+        // afficher msg d'erreur si mauvais mdp ou identifiant
+        // connexionPage();
+    // }
