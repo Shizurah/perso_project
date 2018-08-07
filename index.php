@@ -61,11 +61,16 @@ try {
 
             if (isset($_POST['pseudo']) && isset($_POST['password1']) && isset($_POST['password2']) && isset($_POST['email'])) {
                 userRegistration($_POST['pseudo'], $_POST['password1'], $_POST['email']);
-                
-                header('Location: index.php?action=connexionPage');
-                exit;
+            } 
+        }
 
+        // Connexion sur le site :
+        elseif ($_GET['action'] == 'connexion') {
+
+            if (isset($_POST['pseudo']) && isset($_POST['password'])) {
+                userConnexion($_POST['pseudo'], $_POST['password']);
             } else {
+                // afficher message d'erreur si champs non remplis
                 connexionPage();
             }
         }
