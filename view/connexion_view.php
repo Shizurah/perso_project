@@ -14,41 +14,75 @@
 <!-- SECTION -->
 <?php ob_start(); ?>
 
-<br/><br/>
+    <br/><br/>
 
-<p>Ici DEUX formulaires : connexion et création de compte</p>
+    <p>Je me connecte :</p>
 
-<p>Je me connecte :</p>
-<form action="index.php?action=connexion" method="post">
-    <label for="pseudo">Pseudo :</label>
-    <input type="text" name="pseudo" id="pseudo"> <br/><br/>
+    <form action="index.php?action=connexion" method="post">
+        <p>
+            <label for="pseudo">Pseudo :</label>
+            <input type="text" name="pseudo" id="pseudo" required>
 
-    <label for="password">Mot de passe :</label>
-    <input type="password" name="password" id="password"> <br/><br/>
+            <?php
+                if (isset($errorConnexion)) {
+                    echo $errorConnexion;
+                }
+            ?>
+        </p>
+            
+        <p>
+            <label for="password">Mot de passe :</label>
+            <input type="password" name="password" id="password" required>
+        </p>
 
-    <input type="submit" value="Connexion">
-</form>
+        <p>
+            <input type="submit" value="Connexion">
+        </p>
+    </form>
 
-<br/>
+    <br/>
 
-<p>Pas encore de compte ?</p>
-<form action="index.php?action=registration" method="post">
-    <label for="pseudo">Pseudo :</label>
-    <input type="text" name="pseudo" id="pseudo" required><br/><br/>
+    <p>Pas encore de compte ?</p>
 
-    <label for="email">E-mail :</label>
-    <input type="email" name="email" id="email" required><br/><br/>
+    <form action="index.php?action=registration" method="post">
+        <p>
+            <label for="pseudo">Pseudo :</label>
+            <input type="text" name="pseudo" id="pseudo" required>
 
-    <label for="password1">Mot de passe :</label>
-    <input type="password" name="password1" id="password1" required><br/><br/>
+            <?php 
+                if (isset($errorPseudo)) {
+                    echo $errorPseudo;
+                }
+            ?>
+        </p>
 
-    <label for="password2">Confirmation du mot de passe :</label>
-    <input type="password" name="password2" id="password2" required><br/><br/>
+        <p>
+            <label for="email">E-mail :</label>
+            <input type="email" name="email" id="email" required>
+        </p>
+        
+        <p>
+            <label for="password1">Mot de passe :</label>
+            <input type="password" name="password1" id="password1" required>
+            
+            <?php 
+                if (isset($errorPass)) {
+                    echo $errorPass;
+                }
+            ?>
+        </p>
 
-    <input type="submit" value="Créer mon compte">
-</form>
+        <p>
+            <label for="password2">Confirmation du mot de passe :</label>
+            <input type="password" name="password2" id="password2" required>
+        </p>
 
-<br/><br/>
+        <p>
+            <input type="submit" value="Créer mon compte">
+        </p>
+    </form>
+
+    <br/><br/>
 
 <?php $section = ob_get_clean(); ?>
 
