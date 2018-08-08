@@ -53,8 +53,13 @@ class UsersManager {
         } 
     }
 
-    public function update() {
+    public function updateAvatar($id, $newAvatar) {
+        $req = $this->_db->prepare('UPDATE users SET avatar = :avatar WHERE id = :id');
 
+        $req->bindValue('avatar', $newAvatar, PDO::PARAM_STR);
+        $req->bindValue('id', $id, PDO::PARAM_INT);
+        $req->execute();
     }
+
 }
 
