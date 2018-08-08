@@ -74,7 +74,9 @@ class User {
     }
 
     public function setAvatar($avatar) {
-
+        if (is_string($avatar)) {
+            $this->_avatar = $avatar;
+        }
     }
 
     public function setTvShows($tvShows) {
