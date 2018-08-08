@@ -28,14 +28,17 @@ try {
         //AFFICHAGE DES PAGES DU SITE
     
         if ($_GET['action'] == "weLoved") {
+            session_start();
             weLovedPage();
         }
 
         elseif ($_GET['action'] == "tvShows") {
+            session_start();
             tvShowsPage();
         }
 
         elseif ($_GET['action'] == "mySpace") {
+            session_start();
             mySpacePage();
         }
 
@@ -78,10 +81,25 @@ try {
                 connexionPage();
             }
         }
+
+        elseif ($_GET['action'] == 'avatar') {
+            startSession();
+            
+            if (isset($_FILES['avatar']) && !empty($_FILES['avatar'])) {
+                updateAvatar($_FILES['avatar']['name'], $_FILES['avatar']['size'], $_FILES['avatar']['error'], $_FILES['avatar']['tmp_name']);
+            } 
+
+            else {
+                // Veuillez compléter les champs
+                echo 'fail';
+            }
+        }
+
     } 
     
     // Par défaut : affichage de la page d'accueil du site
     else {
+        session_start();
         homePage();
     }
 

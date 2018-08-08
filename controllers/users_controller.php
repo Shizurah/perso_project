@@ -14,13 +14,14 @@ function contactPage() {
 
 
 function userRegistration($formPseudo, $pass1, $pass2, $email) {
-    
+
     $usersManager = new UsersManager();
     $bddPseudo = $usersManager->getPseudo($formPseudo);
 
     if (empty($bddPseudo)) {
 
         if ($pass1 == $pass2) {
+            $pass1 = password_hash($pass1, PASSWORD_DEFAULT);
             $usersManager->addUser($formPseudo, $pass1, $email);
             connexionPage();
         }
@@ -50,6 +51,7 @@ function userConnexion($pseudo, $formPass) {
             $_SESSION['id'] = $user->id();
             $_SESSION['userStatus'] = $user->userStatus();
             $_SESSION['pseudo'] = $pseudo;
+            $_SESSION['avatar'] = $user->avatar();
     
             mySpacePage();
         }
@@ -62,4 +64,51 @@ function userConnexion($pseudo, $formPass) {
     else {
         throw new Exception('Identifiant ou mot de passe incorrect');
     }
+}
+
+function updateAvatar($fileName, $fileSize, $fileError, $fileTmpName) {
+
+    if (isset($_SESSION['id'])) {
+
+        $maxSize = 512000;
+        $valid_expansions = array('jpg', 'jpeg', 'png', 'gif');
+        $uploaded_expansion = strtolower( substr( strrchr($fileName, '.'), 1) );
+
+        if ($fileError == 0) {
+
+            if ($fileSize <= $maxSize) {
+
+                if (in_array($uploaded_expansion, $valid_expansions)) {
+                    $path = 'public/members/avatars/' . $_SESSION['id'] . '.' . $uploaded_expansion;
+                    $moving = move_uploaded_file($fileTmpName, $path);
+
+                    if ($moving) {
+                        $newAvatar = $_SESSION['id'] . '.' . $uploaded_expansion;
+                        // instanciation classe et appel des méthodes :
+                        $usersManager = new UsersManager();
+                        $usersManager->updateAvatar($_SESSION['id'], $newAvatar);
+                        $_SESSION['avatar'] = $newAvatar;
+
+                        mySpacePage();
+                    }
+
+                    else {
+                        //erreur lors de l'importation de votre image
+                    }
+                } 
+                
+                else {
+                    //extension incorrecte
+                }
+            }
+
+            else {
+                // le fichier est trop lourd
+            }  
+        }
+
+        else {
+            //erreur lors du transfert de l'image
+        }
+    } 
 }
