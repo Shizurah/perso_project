@@ -100,8 +100,17 @@ try {
             else {
                 echo 'Impossible d\'ajouter l\'article ';
             }
-            
-            
+        }
+
+        elseif ($_GET['action'] == 'post_and_comments') {
+            startSession();
+
+            if (isset($_GET['postId']) && $_GET['postId'] > 0) {
+                onePostPage($_GET['postId']);
+            }
+            else {
+                echo 'Cet article n\'existe pas';
+            }
         }
 
         // changement d'avatar

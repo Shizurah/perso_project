@@ -28,25 +28,39 @@
             <a href="index.php?action=deconnexion">Déconnexion</a>
         </aside>
 
-        <form action="">
+        <?php
+            if (isset($_GET['action']) && $_GET['action'] == 'postWritten') {
+            echo 'Votre article a bien été publié ! <a href="index.php?action=post_and_comments&postId=' . $newPostId . '">Voir l\'article</a>';
+            }
+        ?>
+
+
+        <form action="index.php?action=postWritten" method="post">
             <p>
                 <label for="postTitle">Titre de l'article : </label>
-                <input type="text" name="postTitle" id="postTitle">
+                <input type="text" name="postTitle" id="postTitle" required>
             </p>
            
             <p>
                 Catégorie de l'article : <br/>
                 <label for="news">Actus</label>
-                <input type="radio" name="postCategory" id="news" value="news">
+                <input type="radio" name="postCategory" value="news" id="news">
                 <br/>
                 <label for="news">On a aimé</label>
-                <input type="radio" name="postCategory" id="weLoved" value="weLoved">
+                <input type="radio" name="postCategory" value="weLoved" id="weLoved">
             </p>
-           
-           <textarea name="postContent" id="postContent" cols="30" rows="10"></textarea>
 
-           <input type="submit" value="Publier">
+            <!-- <p>
+                Affiche de l'article : <br/>
+                <input type="hidden" name="max-file-size" value="204800"> 
+                <input type="file" name="avatar">
+            </p> -->
+
+            <textarea name="postContent" id="postContent" cols="30" rows="10"></textarea>
+
+            <input type="submit" value="Publier">
         </form>
+
     </body>
 
 </html>

@@ -32,10 +32,10 @@ function addNewPost($title, $category, $content) {
         $postCategory = '';
 
         if ($category == 'news') {
-            $postCategory = 'Actus';
+            $postCategory = 'news';
         }
-        elseif ($category == "weLoved") {
-            $postCategory = 'On a aimé';
+        elseif ($category == 'weLoved') {
+            $postCategory = 'we_love';
         }
 
         $postsManager = new PostsManager();
@@ -47,5 +47,11 @@ function addNewPost($title, $category, $content) {
     else {
         echo 'Vous n\'êtes pas autorisé à effectuer cette action';
     }
-    
+}
+
+function onePostPage($postId) {
+    $postsManager = new PostsManager();
+    $post = $postsManager->getPost($postId);
+
+    require_once('view/postAndItsComments_view.php');
 }
