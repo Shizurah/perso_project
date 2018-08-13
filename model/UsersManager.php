@@ -8,12 +8,13 @@ class UsersManager {
         $this->_db = DbManager::dbConnect();
     }
 
-    public function addUser($pseudo, $pass, $email) {
-        $req = $this->_db->prepare('INSERT INTO users(pseudo, pass, email) VALUES(:pseudo, :pass, :email)');
+    public function addUser($pseudo, $pass, $email, $key) {
+        $req = $this->_db->prepare('INSERT INTO users(pseudo, pass, email, controlKey) VALUES(:pseudo, :pass, :email, :controlKey)');
 
         $req->bindValue('pseudo', $pseudo, PDO::PARAM_STR);
         $req->bindValue('pass', $pass, PDO::PARAM_STR);
         $req->bindValue('email', $email, PDO::PARAM_STR);
+        $req->bindValue('controlKey', $key, PDO::PARAM_STR);
 
         $req->execute();
     }
@@ -58,6 +59,14 @@ class UsersManager {
 
         $req->bindValue('avatar', $newAvatar, PDO::PARAM_STR);
         $req->bindValue('id', $id, PDO::PARAM_INT);
+        $req->execute();
+    }
+
+    public function addControlKey($pseudo, $key) {
+        $req = $this->_db->prepare('UPDATE users SET controlKey = :controlKey WHERE pseudo = :pseudo');
+
+        $req->bindParam('controlKey', $key, PDO::PARAM_STR);
+        $req->bindParam('pseudo', $pseudo, PDO::PARAM_STR);
         $req->execute();
     }
 
