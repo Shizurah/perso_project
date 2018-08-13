@@ -1,11 +1,15 @@
 <?php
 
+function connexionPage() {
+    require_once('view/connexion_view.php');
+}
+
 function mySpacePage() {
     require_once('view/mySpace_view.php');
 }
 
-function connexionPage() {
-    require_once('view/connexion_view.php');
+function administrationPage() {
+    require_once('view/administration_view.php');
 }
 
 function contactPage() {
@@ -22,7 +26,28 @@ function userRegistration($formPseudo, $pass1, $pass2, $email) {
 
         if ($pass1 == $pass2) {
             $pass1 = password_hash($pass1, PASSWORD_DEFAULT);
-            $usersManager->addUser($formPseudo, $pass1, $email);
+            $pseudo = $formPseudo;
+            $key = md5(microtime(TRUE)*100000);
+
+            $usersManager->addUser($pseudo, $pass1, $email, $key);
+
+            $subject = 'Activez votre compte';
+            $header = 'From:localhost.com/inscription';
+            $msg = "Bienvenue sur Localhost, \n
+                    Pour activer votre compte, veuillez cliquer sur le lien ci dessous ou le copier/coller dans votre navigateur internet : \n
+                    
+                    http://localhost/projet_perso_openclassrooms/index.php?action=activation&log=" . urlencode($pseudo) . "&key=" . urlencode($key) .
+                    
+                    "\n ----------------------------------------- \n 
+                    Ceci est un mail automatique, merci de ne pas y répondre";
+            
+            mail(
+                $email, 
+                $subject, 
+                $msg, 
+                $header);
+
+            $_SESSION['confirmationMsg'] = "Nous venons de vous envoyer un e-mail afin que vous puissiez confirmer votre inscription";
             connexionPage();
         }
 
@@ -65,6 +90,7 @@ function userConnexion($pseudo, $formPass) {
         throw new Exception('Identifiant ou mot de passe incorrect');
     }
 }
+
 
 function updateAvatar($fileName, $fileSize, $fileError, $fileTmpName) {
 
