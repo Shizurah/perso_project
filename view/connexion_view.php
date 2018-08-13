@@ -14,8 +14,20 @@
 <!-- SECTION -->
 <?php ob_start(); ?>
 
+    <?php
+        if (isset($_SESSION['msgForRegistrationConfirmation'])) {
+            echo $_SESSION['msgForRegistrationConfirmation'];
+        }
+    ?>
+
     <br/><br/>
 
+    <?php
+        if (isset($errorFields)) {
+            echo $errorFields;
+        }
+    ?>
+    
     <p>Je me connecte :</p>
 
     <form action="index.php?action=connexion" method="post">
