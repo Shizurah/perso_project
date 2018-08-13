@@ -15,8 +15,8 @@
 <?php ob_start(); ?>
 
     <?php
-        if (isset($_SESSION['msgForRegistrationConfirmation'])) {
-            echo $_SESSION['msgForRegistrationConfirmation'];
+        if (isset($_SESSION['confirmationMsg'])) {
+            echo $_SESSION['confirmationMsg'];
         }
     ?>
 
