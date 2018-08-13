@@ -65,7 +65,9 @@
 
     <input type="submit" value="Modifier e-mail">
 </form>
+
 <br/><br/>
+
 <?php $section = ob_get_clean(); ?>
 
 
