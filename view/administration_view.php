@@ -25,6 +25,7 @@
 
         <div>
             <p>Votre site possède actuellement NOMBRE utilisateurs inscrits</p>
+            <p>NOMBRE articles publiés</p>
             <p>NOMBRE commentaires signalés</p>
             <p>NOMBRE messages reçus</p>
         </div>
