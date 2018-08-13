@@ -39,7 +39,14 @@ try {
 
         elseif ($_GET['action'] == "mySpace") {
             session_start();
-            mySpacePage();
+
+            if (isset($_SESSION['pseudo'])) {
+                mySpacePage();
+            } 
+
+            else {
+                echo 'FAIL';
+            }
         }
 
         elseif ($_GET['action'] == "connexionPage") {
@@ -76,12 +83,38 @@ try {
 
             if (isset($_POST['pseudo']) && isset($_POST['password'])) {
                 userConnexion($_POST['pseudo'], $_POST['password']);
-            } else {
-                // afficher message d'erreur si champs non remplis
-                connexionPage();
+            } 
+            
+            else {
+                throw new Exception('Veuillez remplir tous les champs');
             }
         }
 
+        elseif ($_GET['action'] == 'administration') {
+            startSession();
+            if (isset($_SESSION['userStatus']) && $_SESSION['userStatus'] == 'admin') {
+                administrationPage();
+            } 
+
+            else {
+                echo 'fail';
+                // throw new Exception('Vous n\'êtes pas autorisé à vous rendre sur cette page');
+            }
+        }
+
+        elseif ($_GET['action'] == 'postWriting') {
+            startSession();
+            if (isset($_SESSION['userStatus']) && $_SESSION['userStatus'] == 'admin') {
+                tinyMcePage();
+            } 
+
+            else {
+                echo 'fail';
+                // throw new Exception('Vous n\'êtes pas autorisé à vous rendre sur cette page');
+            }
+        }
+
+        // changement d'avatar
         elseif ($_GET['action'] == 'avatar') {
             startSession();
             
@@ -101,17 +134,21 @@ try {
     else {
         session_start();
         homePage();
+        // test :
+    //     mail(
+    //         'shizurah@gmail.com',
+    //         'Works!',
+    //         'An email has been generated from your localhost, congratulations!');
     }
 
 
 } catch (Exception $e) {
-    // startSession();
-
+    
     $errorMsg = $e->getMessage();
     $file = $e->getFile();
     $path = 'E:\wamp64\www\projet_perso_openclassrooms';
 
-
+// GERER LES ERREURS AVEC UN CODE -> EX : CODE 0 POUR ERREUR DE CONNEXION ??
     if ($file == $path . '\controllers\users_controller.php') {
 
         switch($errorMsg) {
@@ -131,23 +168,13 @@ try {
         require_once('view/connexion_view.php');
     }
 
-    // switch($file) {
+    elseif ($file == $path . '\index.php') {
 
-    //     case $path . '\controllers\users_controller.php' :
-
-    //         if ($errorMsg == 'Ce pseudo est déjà pris') {
-    //             $errorPseudo = $errorMsg;
-    //         } 
-
-    //         elseif ($errorMsg == 'Identifiant ou mot de passe incorrect')  {
-    //             $errorConnexion = $errorMsg;
-    //         }
-
-    //         else {
-    //             $errorPass = $errorMsg;
-    //         }
-
-    //         require_once('view/connexion_view.php');
-    //         break;
-    // }     
+        switch($errorMsg) {
+            case 'Veuillez remplir tous les champs':
+                $errorFields = $errorMsg;
+                require_once('view/connexion_view.php');
+                break;
+        }
+    }
 }
