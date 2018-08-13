@@ -12,3 +12,7 @@ function tvShowsPage() {
     require_once('view/tvShows_view.php');
 }
 
+function tinyMcePage() {
+    require_once('view/tinyMce_view.php');
+}
+
