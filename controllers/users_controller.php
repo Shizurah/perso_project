@@ -5,11 +5,24 @@ function connexionPage() {
 }
 
 function mySpacePage() {
-    require_once('view/mySpace_view.php');
+
+    if (isset($_SESSION['id'])) {
+        require_once('view/mySpace_view.php');
+    } 
+    else {
+        echo 'FAIL';
+    } 
 }
 
 function administrationPage() {
-    require_once('view/administration_view.php');
+
+    if (isset($_SESSION['userStatus']) && $_SESSION['userStatus'] == 'admin') {
+        require_once('view/administration_view.php');
+    } 
+    else {
+        echo 'fail';
+        // throw new Exception('Vous n\'êtes pas autorisé à vous rendre sur cette page');
+    }
 }
 
 function contactPage() {
