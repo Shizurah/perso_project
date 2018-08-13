@@ -39,14 +39,7 @@ try {
 
         elseif ($_GET['action'] == "mySpace") {
             session_start();
-
-            if (isset($_SESSION['pseudo'])) {
-                mySpacePage();
-            } 
-
-            else {
-                echo 'FAIL';
-            }
+            mySpacePage();
         }
 
         elseif ($_GET['action'] == "connexionPage") {
@@ -72,7 +65,6 @@ try {
             if (isset($_POST['pseudo']) && isset($_POST['password1']) && isset($_POST['password2']) && isset($_POST['email'])) {
                 userRegistration($_POST['pseudo'], $_POST['password1'], $_POST['password2'], $_POST['email']);
             } 
-            
             else {
                 throw new Exception('Veuillez remplir tous les champs');
             }
@@ -84,7 +76,6 @@ try {
             if (isset($_POST['pseudo']) && isset($_POST['password'])) {
                 userConnexion($_POST['pseudo'], $_POST['password']);
             } 
-            
             else {
                 throw new Exception('Veuillez remplir tous les champs');
             }
@@ -92,26 +83,25 @@ try {
 
         elseif ($_GET['action'] == 'administration') {
             startSession();
-            if (isset($_SESSION['userStatus']) && $_SESSION['userStatus'] == 'admin') {
-                administrationPage();
-            } 
-
-            else {
-                echo 'fail';
-                // throw new Exception('Vous n\'êtes pas autorisé à vous rendre sur cette page');
-            }
+            administrationPage();
         }
 
         elseif ($_GET['action'] == 'postWriting') {
             startSession();
-            if (isset($_SESSION['userStatus']) && $_SESSION['userStatus'] == 'admin') {
-                tinyMcePage();
-            } 
+            tinyMcePage();
+        }
 
+        elseif ($_GET['action'] == 'postWritten') {
+            startSession();
+
+            if (isset($_POST['postTitle']) && isset($_POST['postCategory']) && isset($_POST['postContent'])) {
+                addNewPost($_POST['postTitle'], $_POST['postCategory'], $_POST['postContent']);
+            } 
             else {
-                echo 'fail';
-                // throw new Exception('Vous n\'êtes pas autorisé à vous rendre sur cette page');
+                echo 'Impossible d\'ajouter l\'article ';
             }
+            
+            
         }
 
         // changement d'avatar
@@ -121,7 +111,6 @@ try {
             if (isset($_FILES['avatar']) && !empty($_FILES['avatar'])) {
                 updateAvatar($_FILES['avatar']['name'], $_FILES['avatar']['size'], $_FILES['avatar']['error'], $_FILES['avatar']['tmp_name']);
             } 
-
             else {
                 // Veuillez compléter les champs
                 echo 'fail';
