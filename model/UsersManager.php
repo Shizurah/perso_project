@@ -2,7 +2,7 @@
 
 class UsersManager {
 
-    private $db;
+    private $_db;
 
     public function __construct() {
         $this->_db = DbManager::dbConnect();
