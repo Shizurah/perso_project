@@ -23,8 +23,11 @@
         <br/>
         <h3><?= $post->title(); ?></h3>
         <p>
-            <?= $post->content(); ?> 
-            <i>Publié le <?= $post->postDate_fr(); ?></i>
+            <?= $post->content() . ' (...)'; ?>
+            <i><a href="index.php?action=post_and_comments&amp;postId=<?= $post->id(); ?>">Lire la suite</a></i>
+        </p>
+        <p>
+            <i>Publié le <?= $post->postDate_fr(); ?></i><br/><a href="index.php?action=post_and_comments&amp;postId=<?= $post->id() ?>">Commentaires</a>
         </p> 
 <?php    
     }
