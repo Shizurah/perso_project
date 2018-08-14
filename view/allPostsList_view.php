@@ -48,7 +48,7 @@
                     </td>
                     
                     <td>
-                        <a href="">Modifier</a> 
+                        <a href="index.php?action=postUpdating&amp;postId=<?= $post->id(); ?>">Modifier</a> 
                     </td>
 
                     <td>

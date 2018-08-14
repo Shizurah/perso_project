@@ -24,7 +24,7 @@
 
         <?php 
             if (isset($_SESSION['userStatus']) && $_SESSION['userStatus'] == 'admin') {
-                echo '<a href="">Modifier</a>';
+                echo '<a href="index.php?action=postUpdating&postId=' . $post->id() . '">Modifier</a>';
             } 
         ?>
     </p> 
