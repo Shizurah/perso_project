@@ -113,6 +113,11 @@ try {
             }
         }
 
+        elseif ($_GET['action'] == 'allPostsList') {
+            startSession();
+            allPostsPage();
+        }
+
         // changement d'avatar
         elseif ($_GET['action'] == 'avatar') {
             startSession();

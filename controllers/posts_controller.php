@@ -28,6 +28,20 @@ function tinyMcePage() {
     }
 }
 
+function allPostsPage() {
+
+    if (isset($_SESSION['userStatus']) && $_SESSION['userStatus'] == 'admin') {
+        $postsManager = new PostsManager();
+        $posts = $postsManager->getAllPostsList();
+        require_once('view/allPostsList_view.php');
+    } 
+
+    else {
+        echo 'fail';
+        // throw new Exception('Vous n\'êtes pas autorisé à vous rendre sur cette page');
+    }
+}
+
 
 function addNewPost($title, $category, $content) {
 
