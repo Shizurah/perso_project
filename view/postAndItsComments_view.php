@@ -14,17 +14,15 @@
 <!-- SECTION -->
 <?php ob_start(); ?>
 
-<p>
-<?= $post->title(); ?>
-</p>
-
-<p>
-<?= $post->content(); ?>
-</p>
-
-<p>
-<?= $post->postDate_fr() ?>
-</p>
+    <h3><?= $post->title(); ?></h3>
+    <p>
+        <?= $post->content(); ?> 
+        <i>Publié le <?= $post->postDate_fr(); ?></i>
+    </p> 
+    <br/>
+    <p>
+        #NOMBRE COMMENTAIRES :
+    </p>
 
 <?php $section = ob_get_clean(); ?>
 
