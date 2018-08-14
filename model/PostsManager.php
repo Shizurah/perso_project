@@ -20,9 +20,24 @@ class PostsManager {
         return $this->_db->lastInsertId();
     }
 
+    public function getAllPostsList() {
+        $req = $this->_db->prepare('SELECT id, title, category, content, DATE_FORMAT(postDate, \'%d/%m/%Y\') AS postDate_fr FROM posts ORDER BY postDate DESC');
+        $req->execute();
+
+        $posts = [];
+
+        while ($data = $req->fetch()) {
+            $posts[] = new Post($data);
+        }
+
+        return $posts;
+    }
+
     public function getNewsPostsList() {
         $category = 'news';
-        $req = $this->_db->prepare('SELECT id, title, content, DATE_FORMAT(postDate, \'%d/%m/%Y\') AS postDate_fr FROM posts WHERE category = :category ORDER BY postDate DESC');
+        $content = 'content';
+
+        $req = $this->_db->prepare('SELECT id, title, SUBSTR(content, 1, 780) AS content, DATE_FORMAT(postDate, \'%d/%m/%Y\') AS postDate_fr FROM posts WHERE category = :category ORDER BY postDate DESC');
 
         $req->bindParam('category', $category, PDO::PARAM_STR);
         $req->execute();
