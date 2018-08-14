@@ -77,8 +77,15 @@ class PostsManager {
         return new Post($data);
     }
 
-    public function updatePost() {
+    public function updatePost($id, $title, $category, $content) {
+        $req = $this->_db->prepare('UPDATE posts SET title = :title, category = :category, content = :content WHERE id = :id');
 
+        $req->bindParam('id', $id, PDO::PARAM_INT);
+        $req->bindParam('title', $title, PDO::PARAM_STR);
+        $req->bindParam('category', $category, PDO::PARAM_STR);
+        $req->bindParam('content', $content, PDO::PARAM_STR);
+        
+        $req->execute();
     }
 
     public function deletePost() {
