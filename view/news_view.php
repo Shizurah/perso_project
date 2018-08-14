@@ -29,7 +29,7 @@
         <p>
             <i>Publié le <?= $post->postDate_fr(); ?></i><br/><a href="index.php?action=post_and_comments&amp;postId=<?= $post->id() ?>">Commentaires</a>
         </p> 
-<?php    
+<?php   
     }
 ?>
 

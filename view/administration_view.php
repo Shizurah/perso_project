@@ -4,7 +4,7 @@
 <!-- HEADER -->
 <?php 
     ob_start(); 
-    $h2Header = 'Gestion du site';
+    $h2Header = '';
     require('header_template.php'); 
 
     $header = ob_get_clean(); 
@@ -14,7 +14,12 @@
 <!-- SECTION -->
 <?php ob_start(); ?>
 
+    <!-- <h2>Gestion du site</h2> -->
     <?php require_once('asideForAdministration_template.php'); ?>
+
+    <br/>
+    
+    <h3>Informations de votre site</h3>
 
     <div>
         <p>Votre site possède actuellement NOMBRE utilisateurs inscrits</p>

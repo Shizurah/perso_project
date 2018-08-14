@@ -4,7 +4,7 @@
 <?php 
     ob_start(); 
 
-    $h2Header = 'Liste de vos articles';
+    $h2Header = '';
     require('header_template.php'); 
 
     $header = ob_get_clean(); 
@@ -17,8 +17,10 @@
 
     <?php require('asideForAdministration_template.php'); ?>
 
-    <br/><br/>
+    <br/>
 
+    <h3>Vos articles</h3>
+    <br/>
     <table>
         <tr>
             <th>Titre</th>
@@ -34,7 +36,7 @@
         ?>
                 <tr>
                     <td>
-                        <strong><?= $post->title(); ?></strong>
+                        <strong><a href="index.php?action=post_and_comments&amp;postId=<?= $post->id(); ?>"><?= $post->title(); ?></a></strong>
                     </td>
 
                     <td>

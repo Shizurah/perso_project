@@ -20,13 +20,22 @@
 
     <body>
         <?php 
-            require('asideForAdministration_template.php'); 
+            $h2Header = '';
+            require('header_template.php');
 
-            if (isset($_GET['action']) && $_GET['action'] == 'postWritten') {
-            echo 'Votre article a bien été publié ! <a href="index.php?action=post_and_comments&postId=' . $newPostId . '">Voir l\'article</a>';
-            }
+            // echo '<h2>Gestion du site</h2>';
+            require('asideForAdministration_template.php'); 
         ?>
 
+        <br/>
+
+        <h3>Rédiger un article</h3>
+
+        <?php
+            if (isset($_GET['action']) && $_GET['action'] == 'postWritten') {
+                echo 'Votre article a bien été publié ! <a href="index.php?action=post_and_comments&postId=' . $newPostId . '">Voir l\'article</a>';
+            }
+        ?>
 
         <form action="index.php?action=postWritten" method="post">
             <p>

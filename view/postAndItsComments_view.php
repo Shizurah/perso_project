@@ -17,9 +17,20 @@
     <h3><?= $post->title(); ?></h3>
     <p>
         <?= $post->content(); ?> 
-        <i>Publié le <?= $post->postDate_fr(); ?></i>
+    </p>
+
+    <p>
+        <i>Publié le <?= $post->postDate_fr(); ?> </i>
+
+        <?php 
+            if (isset($_SESSION['userStatus']) && $_SESSION['userStatus'] == 'admin') {
+                echo '<a href="">Modifier</a>';
+            } 
+        ?>
     </p> 
+
     <br/>
+
     <p>
         #NOMBRE COMMENTAIRES :
     </p>
