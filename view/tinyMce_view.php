@@ -19,16 +19,9 @@
     </head>
 
     <body>
-        <aside>
-            <a href="index.php?action=infosSite">Infos site</a> <!-- nb utilisateurs inscrits, commentaires signalés, msg envoyés etc -->
-            <a href="index.php?action=postsList">Articles</a> <!-- liens de modification et de suppression pour chaque article -->
-            <a href="index.php?action=postWriting">Rédiger un article</a>
-            <a href="index.php?action=">Commentaires utilisateurs</a> <!-- liens ignorer et supprimer pour chaque commentaire -->
-            <a href="index.php">Retour au site</a>
-            <a href="index.php?action=deconnexion">Déconnexion</a>
-        </aside>
+        <?php 
+            require('asideForAdministration_template.php'); 
 
-        <?php
             if (isset($_GET['action']) && $_GET['action'] == 'postWritten') {
             echo 'Votre article a bien été publié ! <a href="index.php?action=post_and_comments&postId=' . $newPostId . '">Voir l\'article</a>';
             }
