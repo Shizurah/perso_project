@@ -25,11 +25,22 @@ try {
 
     if (isset($_GET['action'])) {
 
-        //AFFICHAGE DES PAGES DU SITE
+        // Pages du site :
     
         if ($_GET['action'] == "weLove") {
             session_start();
             weLovePage();
+        }
+
+        elseif ($_GET['action'] == 'post_and_comments') {
+            startSession();
+
+            if (isset($_GET['postId']) && $_GET['postId'] > 0) {
+                onePostPage($_GET['postId']);
+            }
+            else {
+                echo 'Cet article n\'existe pas';
+            }
         }
 
         elseif ($_GET['action'] == "tvShows") {
@@ -37,26 +48,12 @@ try {
             tvShowsPage();
         }
 
-        elseif ($_GET['action'] == "mySpace") {
-            session_start();
-            mySpacePage();
-        }
-
-        elseif ($_GET['action'] == "connexionPage") {
-            connexionPage();
-        }
-
         elseif ($_GET['action'] == "contact") {
             contactPage();
         }
 
-        elseif ($_GET['action'] == "deconnexion") {
-            startSession();
-            session_unset();
-            session_destroy();
-
-            header('Location: index.php');
-            exit;
+        elseif ($_GET['action'] == "connexionPage") {
+            connexionPage();
         }
 
         // Création de compte : 
@@ -81,6 +78,35 @@ try {
             }
         }
 
+        elseif ($_GET['action'] == "mySpace") {
+            session_start();
+            mySpacePage();
+        }
+
+        // changement d'avatar :
+        elseif ($_GET['action'] == 'avatar') {
+            startSession();
+            
+            if (isset($_FILES['avatar']) && !empty($_FILES['avatar'])) {
+                updateAvatar($_FILES['avatar']['name'], $_FILES['avatar']['size'], $_FILES['avatar']['error'], $_FILES['avatar']['tmp_name']);
+            } 
+            else {
+                // Veuillez compléter les champs
+                echo 'fail';
+            }
+        }
+
+        elseif ($_GET['action'] == "deconnexion") {
+            startSession();
+            session_unset();
+            session_destroy();
+
+            header('Location: index.php');
+            exit;
+        }
+
+        // Administration - gestion des articles :
+
         elseif ($_GET['action'] == 'administration') {
             startSession();
             administrationPage();
@@ -102,35 +128,33 @@ try {
             }
         }
 
-        elseif ($_GET['action'] == 'post_and_comments') {
-            startSession();
-
-            if (isset($_GET['postId']) && $_GET['postId'] > 0) {
-                onePostPage($_GET['postId']);
-            }
-            else {
-                echo 'Cet article n\'existe pas';
-            }
-        }
-
         elseif ($_GET['action'] == 'allPostsList') {
             startSession();
             allPostsPage();
         }
 
-        // changement d'avatar
-        elseif ($_GET['action'] == 'avatar') {
+        elseif ($_GET['action'] == 'postUpdating') {
             startSession();
-            
-            if (isset($_FILES['avatar']) && !empty($_FILES['avatar'])) {
-                updateAvatar($_FILES['avatar']['name'], $_FILES['avatar']['size'], $_FILES['avatar']['error'], $_FILES['avatar']['tmp_name']);
-            } 
+
+            if (isset($_GET['postId']) && $_GET['postId'] > 0) {
+                tinyMceForPostUpdating($_GET['postId']);
+            }
+
             else {
-                // Veuillez compléter les champs
-                echo 'fail';
+                echo 'cet article n existe pas';
             }
         }
 
+        elseif ($_GET['action'] == 'postUpdated') {
+            startSession();
+
+            if (isset($_GET['postId']) && isset($_POST['postTitle']) && isset($_POST['postCategory']) && isset($_POST['postContent'])) {
+                updatePost($_GET['postId'], $_POST['postTitle'], $_POST['postCategory'], $_POST['postContent']);
+            }
+            else {
+                echo 'Impossible de modifier l\'article ';
+            }   
+        }
     } 
     
     // Par défaut : affichage de la page d'accueil du site
