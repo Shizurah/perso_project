@@ -20,8 +20,36 @@ class PostsManager {
         return $this->_db->lastInsertId();
     }
 
-    public function getPostsList() {
+    public function getNewsPostsList() {
+        $category = 'news';
+        $req = $this->_db->prepare('SELECT id, title, content, DATE_FORMAT(postDate, \'%d/%m/%Y\') AS postDate_fr FROM posts WHERE category = :category ORDER BY postDate DESC');
 
+        $req->bindParam('category', $category, PDO::PARAM_STR);
+        $req->execute();
+
+        $newsPosts = [];
+
+        while ($data = $req->fetch()) {
+            $newsPosts[] = new Post($data);
+        }
+
+        return $newsPosts;
+    }
+
+    public function getWeLovePostsList() {
+        $category = 'we_love';
+        $req = $this->_db->prepare('SELECT id, title, content, DATE_FORMAT(postDate, \'%d/%m/%Y\') AS postDate_fr FROM posts WHERE category = :category ORDER BY postDate DESC');
+
+        $req->bindParam('category', $category, PDO::PARAM_STR);
+        $req->execute();
+
+        $weLovePosts = [];
+
+        while ($data = $req->fetch()) {
+            $weLovePosts[] = new Post($data);
+        }
+
+        return $weLovePosts;
     }
 
     public function getPost($id) {
