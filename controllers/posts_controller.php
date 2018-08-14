@@ -1,11 +1,15 @@
 <?php
 
 function homePage() {
+    $postsManager = new PostsManager();
+    $newsPosts = $postsManager->getNewsPostsList();
     require_once('view/news_view.php');
 }
 
-function weLovedPage() {
-    require_once('view/weLoved_view.php');
+function weLovePage() {
+    $postsManager = new PostsManager();
+    $weLovePosts = $postsManager->getWeLovePostsList();
+    require_once('view/weLove_view.php');
 }
 
 function tvShowsPage() {
