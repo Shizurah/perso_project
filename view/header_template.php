@@ -10,7 +10,7 @@
         ?>
 
         <a href="index.php">Actus</a>
-        <a href="index.php?action=weLoved">On a aimé</a>
+        <a href="index.php?action=weLove">On a aimé</a>
         <a href="index.php?action=tvShows">Séries TV</a>
 
         <?php

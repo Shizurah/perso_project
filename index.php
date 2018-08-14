@@ -27,9 +27,9 @@ try {
 
         //AFFICHAGE DES PAGES DU SITE
     
-        if ($_GET['action'] == "weLoved") {
+        if ($_GET['action'] == "weLove") {
             session_start();
-            weLovedPage();
+            weLovePage();
         }
 
         elseif ($_GET['action'] == "tvShows") {
