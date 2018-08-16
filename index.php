@@ -130,8 +130,7 @@ try {
 
         elseif ($_GET['action'] == 'allPostsList') {
             startSession();
-            $path = 'view/allPostsList_view.php';
-            allPostsPage($path);
+            allPostsPage();
         }
 
         elseif ($_GET['action'] == 'postUpdating') {
@@ -159,15 +158,25 @@ try {
 
         elseif ($_GET['action'] == 'postDeleting') {
             startSession();
-            
+
             if (isset($_GET['postId']) && $_GET['postId'] > 0) {
                 deletePost($_GET['postId']);
             }
             else {
                 echo 'Aucun identifiant d\' article renseigné';
             }
+        }
 
+        // Gestion des commentaires :
+        elseif ($_GET['action'] == 'commentAdded') {
+            startSession();
 
+            if (isset($_POST['comment-text']) && isset($_GET['postId']) && isset($_SESSION['id'])) {
+                addComment($_POST['comment-text'], $_GET['postId'], $_SESSION['id']);
+            }
+            else {
+                echo 'Impossible d\'ajouter votre commentaire';
+            }
         }
     } 
     

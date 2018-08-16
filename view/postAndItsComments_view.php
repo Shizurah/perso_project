@@ -32,7 +32,7 @@
 
                 <br/><br/>
 
-                <form action="index.php?action=commentAdded" method="post">
+                <form action="index.php?action=commentAdded&amp;postId=<?= $post->id() ?>" method="post">
                     <img src="public/members/avatars/<?= $_SESSION['avatar'] ?>" width="50" height="50" alt="avatar">
                     <textarea name="comment-text" id="comment-text" placeholder="Votre commentaire..." cols="40" rows="2"></textarea><br/><br/>
                     <input type="submit" value="Publier">
