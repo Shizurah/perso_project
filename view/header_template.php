@@ -15,8 +15,10 @@
 
         <?php
             if (isset($_SESSION['pseudo'])) {
-                echo '<a href="index.php?action=mySpace">Mon espace</a> 
-                      <a href="index.php?action=deconnexion">Déconnexion</a>';
+        ?>
+                <img src="public/members/avatars/<?= $_SESSION['avatar'] ?>" width="25" height="25" alt="avatar"/> <a href="index.php?action=mySpace">Mon espace</a>
+                <a href="index.php?action=deconnexion">Déconnexion</a>
+        <?php
             } else {
                 echo '<a href="index.php?action=connexionPage">Connexion</a>';
             }

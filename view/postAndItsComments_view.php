@@ -14,22 +14,40 @@
 <!-- SECTION -->
 <?php ob_start(); ?>
 
-    <h3><?= $post->title(); ?></h3>
-    <p>
-        <?= $post->content(); ?> 
-    </p>
+    <h3> <?= $post->title(); ?> </h3>
+
+    <p> <?= $post->content(); ?> </p>
 
     <p>
-        <i>Publié le <?= $post->postDate_fr(); ?> </i>
-
+        <i>Publié le <?= $post->postDate_fr(); ?> </i>  
         <?php 
-            if (isset($_SESSION['userStatus']) && $_SESSION['userStatus'] == 'admin') {
-                echo '<a href="index.php?action=postUpdating&postId=' . $post->id() . '">Modifier</a>';
+            if (isset($_SESSION['userStatus'])) {
+
+                if ($_SESSION['userStatus'] == 'admin') {
+                    echo ' - <a href="index.php?action=postUpdating&postId=' . $post->id() . '">Modifier</a>';
+                }
+        ?>
+                <br/>
+                <span><img src="public/images/comment.png" width="25" height="30" alt="icône commentaire"> Commenter </span>
+
+                <br/><br/>
+
+                <form action="index.php?action=commentAdded" method="post">
+                    <img src="public/members/avatars/<?= $_SESSION['avatar'] ?>" width="50" height="50" alt="avatar">
+                    <textarea name="comment-text" id="comment-text" placeholder="Votre commentaire..." cols="40" rows="2"></textarea><br/><br/>
+                    <input type="submit" value="Publier">
+                    <!-- <input type="text" name="comment-text" id="comment-text" placeholder="Votre commentaire..."> -->
+                </form>
+        <?php
             } 
         ?>
     </p> 
 
     <br/>
+
+    
+
+    <br/><br/>
 
     <p>
         #NOMBRE COMMENTAIRES :
