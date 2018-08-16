@@ -40,10 +40,10 @@
             if (isset($_GET['action'])) {
 
                 if ($_GET['action'] == 'postWritten') {
-                    echo 'Votre article a bien été publié ! <a href="index.php?action=post_and_comments&postId=' . $newPostId . '">Voir l\'article</a>';
+                    echo '<p>Votre article a bien été publié ! <a href="index.php?action=post_and_comments&postId=' . $newPostId . '">Voir l\'article</a></p>';
                 }
                 elseif ($_GET['action'] == 'postUpdated' && isset($_GET['postId'])) {
-                    echo 'Votre article a bien été modifié ! <a href="index.php?action=post_and_comments&postId=' . $_GET['postId'] . '">Voir l\'article</a>';
+                    echo '<p>Votre article a bien été modifié ! <a href="index.php?action=post_and_comments&postId=' . $_GET['postId'] . '">Voir l\'article</a></p>';
                 } 
 
 

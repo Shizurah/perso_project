@@ -82,6 +82,15 @@ function updatePost($id, $title, $category, $content) {
     }
 }
 
+function deletePost($id) {
+    if (isset($_SESSION['userStatus']) && $_SESSION['userStatus'] == 'admin') {
+        $postsManager = new PostsManager();
+        $postsManager->deletePost($id);
+
+        allPostsPage();
+    }
+}
+
 function onePostPage($postId) {
     $postsManager = new PostsManager();
     $post = $postsManager->getPost($postId);

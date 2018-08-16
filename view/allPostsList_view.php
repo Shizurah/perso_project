@@ -30,6 +30,11 @@
             <th>Supprimer l'article</th>
         </tr>
         
+        <?php 
+            if (isset($_GET['action']) && $_GET['action'] == 'postDeleting' && isset($_GET['postId']) && $_GET['postId']) {
+                echo '<p>Article supprimé</p>';
+            }
+        ?>
 
         <?php
             foreach ($posts as $post) {
@@ -52,8 +57,10 @@
                     </td>
 
                     <td>
-                        <input type="radio" name="action" value="Supprimer" id="Supprimer">
-                        <input type="submit" value="Supprimer">
+                        <form action="index.php?action=postDeleting&amp;postId=<?= $post->id(); ?>" method="post">
+                            <input type="radio" name="action" value="postDeleting">
+                            <input type="submit" value="Supprimer">
+                        </form>  
                     </td>
                     
                 </tr>

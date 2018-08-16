@@ -88,7 +88,10 @@ class PostsManager {
         $req->execute();
     }
 
-    public function deletePost() {
+    public function deletePost($id) {
+        $req = $this->_db->prepare('DELETE FROM posts WHERE id = :id');
 
+        $req->bindParam('id', $id, PDO::PARAM_INT);
+        $req->execute();
     }
 }

@@ -130,7 +130,8 @@ try {
 
         elseif ($_GET['action'] == 'allPostsList') {
             startSession();
-            allPostsPage();
+            $path = 'view/allPostsList_view.php';
+            allPostsPage($path);
         }
 
         elseif ($_GET['action'] == 'postUpdating') {
@@ -154,6 +155,19 @@ try {
             else {
                 echo 'Impossible de modifier l\'article ';
             }   
+        }
+
+        elseif ($_GET['action'] == 'postDeleting') {
+            startSession();
+            
+            if (isset($_GET['postId']) && $_GET['postId'] > 0) {
+                deletePost($_GET['postId']);
+            }
+            else {
+                echo 'Aucun identifiant d\' article renseigné';
+            }
+
+
         }
     } 
     
