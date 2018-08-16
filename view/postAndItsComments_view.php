@@ -43,15 +43,22 @@
         ?>
     </p> 
 
-    <br/>
-
-    
-
     <br/><br/>
 
-    <p>
-        #NOMBRE COMMENTAIRES :
-    </p>
+    <p>#NOMBRE COMMENTAIRES :</p>
+
+        <?php
+            foreach($comments as $comment) {
+        ?>
+                <p>
+                    <?= $comment->author(); ?>, <i>le <?= $comment->comment_date_fr(); ?></i><br/>
+                    <?= $comment->content(); ?><br/>   
+                </p>
+                
+        <?php
+            }
+        ?>
+    
 
 <?php $section = ob_get_clean(); ?>
 

@@ -94,6 +94,8 @@ function deletePost($id) {
 function onePostPage($postId) {
     $postsManager = new PostsManager();
     $post = $postsManager->getPost($postId);
+    $commentsManager = new CommentsManager();
+    $comments = $commentsManager->getCommentsList($postId);
 
     require_once('view/postAndItsComments_view.php');
 }

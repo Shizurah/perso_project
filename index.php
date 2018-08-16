@@ -171,8 +171,8 @@ try {
         elseif ($_GET['action'] == 'commentAdded') {
             startSession();
 
-            if (isset($_POST['comment-text']) && isset($_GET['postId']) && isset($_SESSION['id'])) {
-                addComment($_POST['comment-text'], $_GET['postId'], $_SESSION['id']);
+            if (isset($_POST['comment-text']) && isset($_GET['postId']) && isset($_SESSION['pseudo'])) {
+                addComment($_POST['comment-text'], $_GET['postId'], $_SESSION['pseudo']);
             }
             else {
                 echo 'Impossible d\'ajouter votre commentaire';
