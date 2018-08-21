@@ -160,6 +160,7 @@ try {
             startSession();
 
             if (isset($_GET['postId']) && $_GET['postId'] > 0) {
+                deleteCommentsRelatedToAPost($_GET['postId']);
                 deletePost($_GET['postId']);
             }
             else {

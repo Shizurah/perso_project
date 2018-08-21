@@ -58,7 +58,7 @@
 
                     <td>
                         <form action="index.php?action=postDeleting&amp;postId=<?= $post->id(); ?>" method="post">
-                            <input type="radio" name="action" value="postDeleting">
+                            <input type="radio" name="action" value="postDeleting" required>
                             <input type="submit" value="Supprimer">
                         </form>  
                     </td>

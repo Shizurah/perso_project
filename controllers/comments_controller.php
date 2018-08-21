@@ -24,6 +24,11 @@ function deleteComment($id) {
     $commentsManager->deleteComment($id);
 }
 
+function deleteCommentsRelatedToAPost($postId) {
+    $commentsManager = new CommentsManager();
+    $commentsManager->deleteComments($postId);
+}
+
 // function getAllComments($postId) {
 //     $commentsManager = new CommentsManager();
 //     $comments = $commentsManager->getCommentsList($postId);
