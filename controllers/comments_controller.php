@@ -19,6 +19,11 @@ function updateComment($id, $content) {
     $commentsManager->updateComment($id, $content);
 }
 
+function deleteComment($id) {
+    $commentsManager = new CommentsManager();
+    $commentsManager->deleteComment($id);
+}
+
 // function getAllComments($postId) {
 //     $commentsManager = new CommentsManager();
 //     $comments = $commentsManager->getCommentsList($postId);

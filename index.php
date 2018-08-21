@@ -211,8 +211,21 @@ try {
             }
         }
 
-        elseif ($_GET['action'] == 'commentDeleting') {
-            
+        elseif ($_GET['action'] == 'commentDeleted') {
+            startSession();
+
+            if (isset($_GET['commentId']) && $_GET['commentId'] > 0) {
+                deleteComment($_GET['commentId']);
+
+                if (isset($_GET['postId'])) {
+                    onePostPage(NULL, $_GET['postId'], NULL);
+                }  
+            }
+
+            else {
+                // Ce commentaire n'existe pas
+                echo 'fail';
+            }
         }
 
         elseif ($_GET['action'] == 'commentReporting') {

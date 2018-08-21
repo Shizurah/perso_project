@@ -49,4 +49,10 @@ class CommentsManager {
         $req->bindParam('content', $content, PDO::PARAM_STR);
         $req->execute();
     }
+
+    public function deleteComment($id) {
+        $req = $this->_db->prepare('DELETE FROM comments WHERE id = :id');
+        $req->bindParam('id', $id, PDO::PARAM_INT);
+        $req->execute();
+    }
 }
