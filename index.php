@@ -36,7 +36,7 @@ try {
             startSession();
 
             if (isset($_GET['postId']) && $_GET['postId'] > 0) {
-                onePostPage($_GET['postId']);
+                onePostPage(NULL, $_GET['postId'], NULL);
             }
             else {
                 echo 'Cet article n\'existe pas';
@@ -168,18 +168,59 @@ try {
         }
 
         // Gestion des commentaires :
+    
         elseif ($_GET['action'] == 'commentAdded') {
             startSession();
 
             if (isset($_POST['comment-text']) && isset($_GET['postId']) && isset($_SESSION['pseudo'])) {
                 addComment($_POST['comment-text'], $_GET['postId'], $_SESSION['pseudo']);
+                
             }
             else {
                 echo 'Impossible d\'ajouter votre commentaire';
             }
         }
+
+        elseif ($_GET['action'] == 'commentUpdating') {
+            startSession();
+
+            if (isset($_GET['postId']) && isset($_GET['commentId']) && $_GET['postId'] > 0 && $_GET['commentId'] > 0) {
+                onePostPage($_GET['action'], $_GET['postId'], $_GET['commentId']);
+            }
+
+            else {
+                // Ce commentaire n'existe pas
+                echo 'fail';
+            }
+        }
+
+        elseif ($_GET['action'] == 'commentUpdated') {
+            startSession();
+
+            if (isset($_GET['commentId']) && isset($_POST['comment-text']) && $_GET['commentId'] > 0) {
+                updateComment($_GET['commentId'], $_POST['comment-text']);
+
+                if (isset($_GET['postId'])) {
+                    onePostPage(NULL, $_GET['postId'], NULL);
+                }   
+            }
+
+            else {
+                // Ce commentaire n'existe pas
+                echo 'fail';
+            }
+        }
+
+        elseif ($_GET['action'] == 'commentDeleting') {
+            
+        }
+
+        elseif ($_GET['action'] == 'commentReporting') {
+            
+        }
     } 
     
+
     // Par défaut : affichage de la page d'accueil du site
     else {
         session_start();

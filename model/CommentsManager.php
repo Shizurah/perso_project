@@ -32,4 +32,21 @@ class CommentsManager {
 
         return $commentsList;
     }
+
+    public function getOneComment($id) {
+        $req = $this->_db->prepare('SELECT content FROM comments WHERE id = :id');
+        $req->bindParam('id', $id, PDO::PARAM_INT);
+        $req->execute();
+
+        $data = $req->fetch();
+        return new Comment($data);
+    }
+
+    public function updateComment($id, $content) {
+        $req = $this->_db->prepare('UPDATE comments SET content = :content WHERE id = :id');
+
+        $req->bindParam('id', $id, PDO::PARAM_INT);
+        $req->bindParam('content', $content, PDO::PARAM_STR);
+        $req->execute();
+    }
 }

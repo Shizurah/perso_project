@@ -8,6 +8,17 @@ function addComment($content, $postId, $userPseudo) {
     exit;
 }
 
+function getCommentToUpdate($commentId) {
+    $commentsManager = new CommentsManager();
+    $comment = $commentsManager->getOneComment($commentId);
+    return $comment;
+}
+
+function updateComment($id, $content) {
+    $commentsManager = new CommentsManager();
+    $commentsManager->updateComment($id, $content);
+}
+
 // function getAllComments($postId) {
 //     $commentsManager = new CommentsManager();
 //     $comments = $commentsManager->getCommentsList($postId);

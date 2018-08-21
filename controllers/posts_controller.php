@@ -91,11 +91,17 @@ function deletePost($id) {
     }
 }
 
-function onePostPage($postId) {
+function onePostPage($action, $postId, $commentId) {
+    $comment = '';
+
     $postsManager = new PostsManager();
     $post = $postsManager->getPost($postId);
     $commentsManager = new CommentsManager();
     $comments = $commentsManager->getCommentsList($postId);
+
+    if (isset($action) && $action == 'commentUpdating') {
+        $comment = getCommentToUpdate($commentId);
+    }
 
     require_once('view/postAndItsComments_view.php');
 }
