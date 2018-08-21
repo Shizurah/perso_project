@@ -37,12 +37,14 @@
                         $formActionAttribute = 'index.php?action=commentUpdated&postId=' .$post->id(). '&commentId=' .$_GET['commentId']. '#comment' .$_GET['commentId'];
                         $placeholderAttribute = '';
                         $textareaContent = $comment->content();
+                        $autofocus = 'autofocus';
                     } 
                     
                     else {
                         $formActionAttribute = 'index.php?action=commentAdded&postId=' .$post->id();
                         $placeholderAttribute = 'Votre commentaire...';
                         $textareaContent = '';
+                        $autofocus = '';
                     }
 
                     require_once('view/commentsForm_template.php');
@@ -67,19 +69,19 @@
 
                             // possibilité pour chaque membre connecté de modifier/supprimer son commentaire :
                             if ($_SESSION['pseudo'] == $comment->author()) {
-                                echo '<a href="index.php?action=commentUpdating&postId=' .$post->id(). '&commentId=' .$comment->id(). '#form">Modifier</a> - 
+                                echo '<a href="index.php?action=commentUpdating&commentId=' .$comment->id(). '&postId=' .$post->id(). '#form">Modifier</a> - 
                                       <a href="index.php?action=commentDeleted&commentId=' .$comment->id(). '&postId=' .$post->id(). '" 
                                          onclick="return confirm(\'Êtes-vous sûr de vouloir supprimer votre commentaire ?\')">Supprimer</a>';
                                 
                             }
 
                             else {
-                                echo '<a href="index.php?action=commentReporting">Signaler</a> - ';
+                                echo '<a href="index.php?action=commentReporting&commentId=' .$comment->id(). '&postId=' .$post->id(). '">Signaler</a>';
                             }
 
                             // les admin du site doivent pouvoir supprimer chacun des commentaires :
                             if ($_SESSION['userStatus'] == 'admin' && $_SESSION['pseudo'] != $comment->author()) {
-                                echo '<a href="index.php?action=commentDeleted&commentId=' .$comment->id(). '&postId=' .$post->id(). '"
+                                echo ' - <a href="index.php?action=commentDeleted&commentId=' .$comment->id(). '&postId=' .$post->id(). '"
                                 onclick="return confirm(\'Êtes-vous sûr de vouloir supprimer ce commentaire ?\')">Supprimer</a>';
                             }
                         }   
