@@ -220,7 +220,11 @@ try {
 
                 if (isset($_GET['postId'])) {
                     onePostPage(NULL, $_GET['postId'], NULL);
-                }  
+                } 
+
+                else {
+                    getReportedComments();
+                }
             }
 
             else {
@@ -240,6 +244,12 @@ try {
                 }  
             }
         }
+
+        elseif ($_GET['action'] == 'reportedComments') {
+            startSession();
+            getReportedComments();    
+        }
+
     } 
     
 

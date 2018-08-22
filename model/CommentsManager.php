@@ -74,9 +74,17 @@ class CommentsManager {
 
     public function getReportedComments() {
         $reports = 5;
-        $req = $this->_db->prepare('SELECT id, author, content, post_id, comment_date FROM comments WHERE reports >= :reports ORDER BY reports DESC');
-        $req->bindParam('reports', $reports, PDO::PARAM_INT);
 
+        $req = $this->_db->prepare('SELECT id, author, content, reports, post_id, DATE_FORMAT(comment_date, \'%d/%m/%Y\') AS comment_date_fr FROM comments WHERE reports >= :reports ORDER BY reports DESC');
+        $req->bindParam('reports', $reports, PDO::PARAM_INT);
         $req->execute();
+
+        $reportedComments = [];
+
+        while ($data = $req->fetch()) {
+            $reportedComments[] = new Comment($data);
+        }
+
+        return $reportedComments;
     }
 }

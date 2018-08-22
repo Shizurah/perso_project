@@ -34,6 +34,16 @@ function reportComment($id) {
     $commentsManager->reportComment($id);
 }
 
+function getReportedComments() {
+
+    if (isset($_SESSION['userStatus']) && $_SESSION['userStatus'] == 'admin') {
+        $commentsManager = new CommentsManager(); 
+        $reportedComments = $commentsManager->getReportedComments();
+
+        require_once('view/reportedComments_view.php');
+    }
+}
+
 // function getAllComments($postId) {
 //     $commentsManager = new CommentsManager();
 //     $comments = $commentsManager->getCommentsList($postId);
