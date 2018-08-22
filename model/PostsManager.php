@@ -94,4 +94,12 @@ class PostsManager {
         $req->bindParam('id', $id, PDO::PARAM_INT);
         $req->execute();
     }
+
+    public function countPosts() {
+        $req = $this->_db->query('SELECT COUNT(*) AS posts FROM posts');
+        $data = $req->fetch();
+        $nbOfPosts = $data['posts'];
+        
+        return $nbOfPosts;
+    }
 }
