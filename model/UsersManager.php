@@ -70,5 +70,12 @@ class UsersManager {
         $req->execute();
     }
 
+    public function countUsers() {
+        $req = $this->_db->query('SELECT COUNT(*) AS users FROM users');
+        $data = $req->fetch();
+        $nbOfUsers = $data['users'];
+        
+        return $nbOfUsers;
+    }
 }
 
