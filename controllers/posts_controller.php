@@ -6,15 +6,18 @@ function homePage() {
     require_once('view/news_view.php');
 }
 
+
 function weLovePage() {
     $postsManager = new PostsManager();
     $weLovePosts = $postsManager->getWeLovePostsList();
     require_once('view/weLove_view.php');
 }
 
+
 function tvShowsPage() {
     require_once('view/tvShows_view.php');
 }
+
 
 function tinyMcePage() {
 
@@ -46,7 +49,6 @@ function addNewPost($title, $category, $content) {
 
         require_once('view/tinyMce_view.php');
     }
-
     else {
         echo 'Vous n\'êtes pas autorisé à effectuer cette action';
     }
@@ -82,7 +84,9 @@ function updatePost($id, $title, $category, $content) {
     }
 }
 
+
 function deletePost($id) {
+
     if (isset($_SESSION['userStatus']) && $_SESSION['userStatus'] == 'admin') {
         $postsManager = new PostsManager();
         $postsManager->deletePost($id);
@@ -91,11 +95,13 @@ function deletePost($id) {
     }
 }
 
+
 function onePostPage($action, $postId, $commentId) {
     $comment = '';
 
     $postsManager = new PostsManager();
     $post = $postsManager->getPost($postId);
+
     $commentsManager = new CommentsManager();
     $comments = $commentsManager->getCommentsList($postId);
 
@@ -110,11 +116,11 @@ function onePostPage($action, $postId, $commentId) {
 function allPostsPage() {
 
     if (isset($_SESSION['userStatus']) && $_SESSION['userStatus'] == 'admin') {
+
         $postsManager = new PostsManager();
         $posts = $postsManager->getAllPostsList();
         require_once('view/allPostsList_view.php');
     } 
-
     else {
         echo 'fail';
         // throw new Exception('Vous n\'êtes pas autorisé à vous rendre sur cette page');
