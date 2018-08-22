@@ -7,6 +7,7 @@ class Comment {
     private $_comment_date_fr;
     private $_post_id;
     private $_author;
+    private $_reports;
 
     public function __construct(array $data) {
         $this->hydrate($data);
@@ -45,6 +46,10 @@ class Comment {
         return $this->_author;
     }
 
+    public function reports() {
+        return $this->_reports;
+    }
+
     //setters :
     public function setId($id) {
         $id = (int) $id;
@@ -75,6 +80,14 @@ class Comment {
     public function setAuthor($userPseudo) {
         if (is_string($userPseudo)) {
             $this->_author = $userPseudo;
+        }
+    }
+
+    public function setReports($reports) {
+        $reports = (int) $reports;
+
+        if (is_int($reports)) {
+            $this->_reports = $reports;
         }
     }
 }

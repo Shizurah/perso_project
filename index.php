@@ -168,7 +168,7 @@ try {
             }
         }
 
-        // Gestion des commentaires :
+        // GESTION DES COMMENTAIRES :
     
         elseif ($_GET['action'] == 'commentAdded') {
             startSession();
@@ -230,7 +230,15 @@ try {
         }
 
         elseif ($_GET['action'] == 'commentReporting') {
-            
+            startSession();
+
+            if (isset($_GET['commentId']) && $_GET['commentId'] > 0) {
+                reportComment($_GET['commentId']);
+
+                if (isset($_GET['postId'])) {
+                    onePostPage(NULL, $_GET['postId'], NULL);
+                }  
+            }
         }
     } 
     
