@@ -250,6 +250,19 @@ try {
             getReportedComments();    
         }
 
+        elseif ($_GET['action'] == 'commentIgnored') {
+            startSession();
+
+            if (isset($_GET['commentId']) && $_GET['commentId'] > 0) {
+                ignoreReportedComment($_GET['commentId']);
+                getReportedComments();
+            }
+            else {
+                // Ce commentaire n'existe pas
+                echo 'fail';
+            }
+        }
+
     } 
     
 

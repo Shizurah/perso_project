@@ -51,6 +51,7 @@ class CommentsManager {
         $req->execute();
     }
 
+    // Supprimer un commentaire :
     public function deleteComment($id) {
         $req = $this->_db->prepare('DELETE FROM comments WHERE id = :id');
         $req->bindParam('id', $id, PDO::PARAM_INT);
@@ -58,6 +59,7 @@ class CommentsManager {
         $req->execute();
     }
 
+    // Supprimer les commentaires associés à un article lors de sa suppression :
     public function deleteComments($postId) {
         $req = $this->_db->prepare('DELETE FROM comments WHERE post_id = :postId');
         $req->bindParam('postId', $postId, PDO::PARAM_INT);
@@ -94,5 +96,11 @@ class CommentsManager {
         $nbOfReportedComments = $data['reportedComments'];
         
         return $nbOfReportedComments;
+    }
+
+    public function ignoreReportedComment($id) {
+        $req = $this->_db->prepare('UPDATE comments SET reports = 0 WHERE id = :id');
+        $req->bindParam('id', $id, PDO::PARAM_INT);
+        $req->execute();
     }
 }
