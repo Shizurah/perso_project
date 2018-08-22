@@ -17,6 +17,12 @@ function mySpacePage() {
 function administrationPage() {
 
     if (isset($_SESSION['userStatus']) && $_SESSION['userStatus'] == 'admin') {
+        $usersManager = new UsersManager();
+        $nbOfUsers = $usersManager->countUsers();
+        
+        $postsManager = new PostsManager();
+        $nbOfPosts = $postsManager->countPosts();
+
         $commentsManager = new CommentsManager;
         $nbOfReportedComments = $commentsManager->countReportedComments();
         

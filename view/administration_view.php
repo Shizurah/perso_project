@@ -22,10 +22,9 @@
     <h3>Informations de votre site</h3>
 
     <div>
-        <p>Votre site possède actuellement NOMBRE utilisateurs inscrits</p>
-        <p>NOMBRE articles publiés</p>
-        <p><?= $nbOfReportedComments ?> commentaires signalés</p>
-        <p>NOMBRE messages reçus</p>
+        <p>Votre site compte actuellement <?= $nbOfUsers ?> utilisateurs inscrits</p>
+        <p> <?= $nbOfPosts ?> articles publiés</p>
+        <p> <?= $nbOfReportedComments ?> commentaires signalés</p>
     </div>
 
 <?php $section = ob_get_clean(); ?>
