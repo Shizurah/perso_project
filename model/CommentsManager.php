@@ -73,7 +73,7 @@ class CommentsManager {
     }
 
     public function getReportedComments() {
-        $reports = 5;
+        $reports = 1;
 
         $req = $this->_db->prepare('SELECT id, author, content, reports, post_id, DATE_FORMAT(comment_date, \'%d/%m/%Y\') AS comment_date_fr FROM comments WHERE reports >= :reports ORDER BY reports DESC');
         $req->bindParam('reports', $reports, PDO::PARAM_INT);
@@ -86,5 +86,13 @@ class CommentsManager {
         }
 
         return $reportedComments;
+    }
+
+    public function countReportedComments() {
+        $req = $this->_db->query('SELECT COUNT(*) AS reportedComments FROM comments WHERE reports >= 1');
+        $data = $req->fetch();
+        $nbOfReportedComments = $data['reportedComments'];
+        
+        return $nbOfReportedComments;
     }
 }

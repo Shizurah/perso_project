@@ -17,6 +17,9 @@ function mySpacePage() {
 function administrationPage() {
 
     if (isset($_SESSION['userStatus']) && $_SESSION['userStatus'] == 'admin') {
+        $commentsManager = new CommentsManager;
+        $nbOfReportedComments = $commentsManager->countReportedComments();
+        
         require_once('view/administration_view.php');
     } 
     else {
