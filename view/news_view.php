@@ -4,7 +4,7 @@
 <?php 
     ob_start(); 
 
-    $h2Header = 'Bienvenue sur notre page d\'actus ciné !';
+    $h2Header = '<img id="banner-img" src="public/images/logo2.png" alt="logo"/>';
     require('header_template.php'); 
 
     $header = ob_get_clean(); 
@@ -15,20 +15,26 @@
 <!-- SECTION -->
 <?php ob_start(); ?>
 
-<p>Ici des articles</p>
-
 <?php
     foreach ($newsPosts as $post) {
 ?>
         <br/>
-        <h3><?= $post->title(); ?></h3>
-        <p>
-            <?= $post->content(). ' (...)'; ?>
-            <i><a href="index.php?action=post_and_comments&amp;postId=<?= $post->id(); ?>"> Lire la suite</a></i>
-        </p>
-        <p>
-            <i>Publié le <?= $post->postDate_fr(); ?></i><br/><a href="index.php?action=post_and_comments&amp;postId=<?= $post->id() ?>">Commentaires</a>
-        </p> 
+
+        <div class="comments">
+            <h3><?= $post->title(); ?></h3>
+
+            <p>
+                <?= $post->content(). ' (...)'; ?>
+                <i><a href="index.php?action=post_and_comments&amp;postId=<?= $post->id(); ?>"> Lire la suite</a></i>
+            </p>
+
+            <p>
+                <i>Publié le <?= $post->postDate_fr(); ?></i><br/><a href="index.php?action=post_and_comments&amp;postId=<?= $post->id() ?>">Commentaires</a>
+            </p> 
+        </div>
+
+        <br/>
+        <hr/>
 <?php   
     }
 ?>

@@ -3,10 +3,13 @@
 <!-- HEADER -->
 <?php 
     ob_start(); 
-
     $h2Header = 'Liste des séries auxquelles vous pouvez vous abonner !';
-    require('header_template.php'); 
+?>
 
+    <!-- <img src="public/images/banniere.jpg" alt="bannière du site"> -->
+
+<?php
+    require('header_template.php'); 
     $header = ob_get_clean(); 
 ?>
 
