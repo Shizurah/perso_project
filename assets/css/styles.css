@@ -1,0 +1,101 @@
+body {
+    background-color: rgb(37, 36, 36);
+    background: url("../../public/images/got1.png") repeat top;
+}
+
+header {
+
+}
+
+#main-wrap {
+    margin-top: 150px;
+    background-color: white;
+}
+
+/* ========================= */
+/* MENU DE NAVIGATION */
+nav {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+nav a {
+    padding: 15px;
+    color: black;
+    text-transform: uppercase;
+}
+
+
+/* ========================= */
+/* LOGO SITE : */
+#banner-img {
+    width: 100%;
+}
+
+
+/* ========================= */
+/* BOUTONS RESEAUX SOCIAUX : */
+
+#actions-btns {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.network-logo {
+    
+    padding-left: 0;
+    width: 150px;
+}
+
+.network-logo img {
+    width: 100%;
+    /* border: 1px solid black; */
+}
+
+#following-redirection-btn {
+    display: flex;
+    padding: 0;
+    border: 5px solid rgb(35, 35, 35);
+    /* text-decoration: underline; */
+    text-decoration-color: red;
+}
+
+#following-redirection-btn a {
+    display: block;
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+    font-family: 'Monoton', sans-serif;
+    font-size: 2.5em;
+    font-weight: bold;
+    box-shadow: 2px 8px 8px rgb(35, 35, 35);
+    color: red;
+    text-decoration: none;
+    border: 3px solid rgb(35, 35, 35);
+    margin: auto;
+    width: 95%;
+    height: 82%;
+}
+
+#following-redirection-btn a:hover {
+    background-color: rgb(35, 35, 35);
+    color: rgb(255, 242, 0);
+    /* text-decoration-color: rgb(255, 242, 0); */
+    border: hidden;
+}
+
+
+
+
+
+/* ========================= */
+a {
+    /* color: rgb(238, 43, 43); */
+}
+
+hr {
+    border-color: rgb(175, 170, 170);
+}
