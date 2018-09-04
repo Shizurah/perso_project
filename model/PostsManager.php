@@ -37,7 +37,7 @@ class PostsManager {
     public function getNewsPostsList() {
         $category = 'news';
 
-        $req = $this->_db->prepare('SELECT id, poster, title, SUBSTR(content, 1, 780) AS content, DATE_FORMAT(postDate, \'%d/%m/%Y\') AS postDate_fr FROM posts WHERE category = :category ORDER BY postDate DESC');
+        $req = $this->_db->prepare('SELECT id, poster, title, SUBSTR(content, 1, 190) AS content, DATE_FORMAT(postDate, \'%d/%m/%Y\') AS postDate_fr FROM posts WHERE category = :category ORDER BY postDate DESC');
 
         $req->bindParam('category', $category, PDO::PARAM_STR);
         $req->execute();
@@ -51,20 +51,20 @@ class PostsManager {
         return $newsPosts;
     }
 
-    public function getWeLovePostsList() {
-        $category = 'we_love';
-        $req = $this->_db->prepare('SELECT id, title, content, DATE_FORMAT(postDate, \'%d/%m/%Y\') AS postDate_fr FROM posts WHERE category = :category ORDER BY postDate DESC');
+    public function getNextReleasesPostsList() {
+        $category = 'next_releases';
+        $req = $this->_db->prepare('SELECT id, poster, title, content, DATE_FORMAT(postDate, \'%d/%m/%Y\') AS postDate_fr FROM posts WHERE category = :category ORDER BY postDate DESC');
 
         $req->bindParam('category', $category, PDO::PARAM_STR);
         $req->execute();
 
-        $weLovePosts = [];
+        $nextReleasesPosts = [];
 
         while ($data = $req->fetch()) {
-            $weLovePosts[] = new Post($data);
+            $nextReleasesPosts[] = new Post($data);
         }
 
-        return $weLovePosts;
+        return $nextReleasesPosts;
     }
 
     public function getPost($id) {

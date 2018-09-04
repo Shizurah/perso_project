@@ -3,6 +3,8 @@
 function homePage() {
     $postsManager = new PostsManager();
     $newsPosts = $postsManager->getNewsPostsList();
+    $nextReleasesPosts = $postsManager->getNextReleasesPostsList();
+
     require_once('view/news_view.php');
 }
 
@@ -40,8 +42,8 @@ function addNewPost($title, $category, $content) {
         if ($category == 'news') {
             $postCategory = 'news';
         }
-        elseif ($category == 'weLove') {
-            $postCategory = 'we_love';
+        elseif ($category == 'next-releases') {
+            $postCategory = 'next_releases';
         }
 
         $postsManager = new PostsManager();
