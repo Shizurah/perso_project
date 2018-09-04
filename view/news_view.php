@@ -20,17 +20,27 @@
 ?>
         <br/>
 
-        <div class="comments">
-            <h3><?= $post->title(); ?></h3>
+        <div class="row comments">
 
-            <p>
-                <?= $post->content(). ' (...)'; ?>
-                <i><a href="index.php?action=post_and_comments&amp;postId=<?= $post->id(); ?>"> Lire la suite</a></i>
-            </p>
+            <div class="col-lg-6">
+                <a href="index.php?action=post_and_comments&postId=<?= $post->id(); ?>">
+                    <img class="posters" src="public/posts/<?= $post->poster(); ?>" alt="Affiche"/>
+                </a>
+            </div>
 
-            <p>
-                <i>Publié le <?= $post->postDate_fr(); ?></i><br/><a href="index.php?action=post_and_comments&amp;postId=<?= $post->id() ?>">Commentaires</a>
-            </p> 
+            <div class="col-lg-6">
+                <h3><?= $post->title(); ?></h3>
+
+                <p>
+                    <?= $post->content(). ' (...)'; ?>
+                    <i><a href="index.php?action=post_and_comments&amp;postId=<?= $post->id(); ?>"> Lire la suite</a></i>
+                </p>
+
+                <p>
+                    <i>Publié le <?= $post->postDate_fr(); ?></i><br/><a href="index.php?action=post_and_comments&amp;postId=<?= $post->id() ?>">Commentaires</a>
+                </p> 
+            </div>
+            
         </div>
 
         <br/>
