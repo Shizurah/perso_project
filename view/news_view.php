@@ -15,40 +15,106 @@
 <!-- SECTION -->
 <?php ob_start(); ?>
 
-<?php
-    foreach ($newsPosts as $post) {
-?>
-        <br/>
+    <div class="row">
 
-        <div class="row comments">
+        <!-- AFFICHAGE DES ACTUS -->
+        <div id="news-posts-container" class="col-lg-7 col-md-7">
 
-            <div class="col-lg-6">
-                <a href="index.php?action=post_and_comments&postId=<?= $post->id(); ?>">
-                    <img class="posters" src="public/posts/<?= $post->poster(); ?>" alt="Affiche"/>
-                </a>
+            <div class="row">
+                <h2 class="col-lg-12">ACTUS</h2>
             </div>
 
-            <div class="col-lg-6">
-                <h3><?= $post->title(); ?></h3>
+            <?php
+                foreach ($newsPosts as $post) {
+            ?>
+                    <br/>
 
-                <p>
-                    <?= $post->content(). ' (...)'; ?>
-                    <i><a href="index.php?action=post_and_comments&amp;postId=<?= $post->id(); ?>"> Lire la suite</a></i>
-                </p>
+                    <div class="news-posts">
 
-                <p>
-                    <i>Publié le <?= $post->postDate_fr(); ?></i><br/><a href="index.php?action=post_and_comments&amp;postId=<?= $post->id() ?>">Commentaires</a>
-                </p> 
-            </div>
-            
+                        <div class="row">
+                            <!-- titre post -->
+                            <h3 class="col-lg-12">
+                                <a href="index.php?action=post_and_comments&amp;postId=<?= $post->id(); ?>"> 
+                                    <?= $post->title(); ?>
+                                </a>
+                            </h3>
+                        </div>
+                        
+                        <div class="row">
+                            <!-- affiche post -->
+                            <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5">
+                                <a href="index.php?action=post_and_comments&postId=<?= $post->id(); ?>">
+                                    <img class="posters" src="public/posts/<?= $post->poster(); ?>" alt="affiche série"/>
+                                </a>
+                            </div>
+
+                            <!-- contenu post -->
+                            <div class="col-lg-7 col-md-7 col-sm-7 col-xs-7 news-posts-content">
+                                <p>
+                                    <?= $post->content(). '... '; ?>
+                                    <i>
+                                        <a href="index.php?action=post_and_comments&amp;postId=<?= $post->id(); ?>">
+                                            Lire la suite (...)
+                                        </a>
+                                    </i>
+                                </p>
+
+                                <p>
+                                    <i>
+                                        Publié le <?= $post->postDate_fr(); ?>
+                                    </i>
+                                    <br/>
+                                </p> 
+                            </div>   
+                        </div>
+
+                    </div>
+                    <br/>
+                    <hr/>
+            <?php   
+                }
+            ?>
         </div>
 
-        <br/>
-        <hr/>
-<?php   
-    }
-?>
+        <!-- AFFICHAGE DES PROCHAINES SORTIES -->
+        <div id="next-releases-posts-container" class="col-lg-5 col-md-5">
 
+            <div class="row">
+                <h2 class="col-lg-12">
+                    PROCHAINES SORTIES 
+                </h2>
+            </div>
+
+            <?php
+                foreach ($nextReleasesPosts as $post) {
+            ?>
+                    <div class="row"> 
+                        <h2 class="col-lg-12">
+                            <a href="index.php?action=post_and_comments&amp;postId=<?= $post->id(); ?>">
+                                <?= $post->title(); ?>
+                            </a>
+                        </h2>
+                    </div>
+
+                    <div class="col-lg-12">
+                        <a href="index.php?action=post_and_comments&amp;postId=<?= $post->id(); ?>">
+                            <img class="posters" src="public/posts/<?= $post->poster(); ?>" alt="affiche série"/>
+                        </a>
+                    </div>
+
+                    <div class="col-lg-12">
+                        <p>
+                            <?= $post->content(); ?>
+                        </p>
+                    </div>
+            <?php
+                }
+            ?>
+
+        </div>
+
+    </div>
+    
 <?php $section = ob_get_clean(); ?>
 
 
