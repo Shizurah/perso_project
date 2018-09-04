@@ -7,10 +7,10 @@
     <p>
         Catégorie de l'article : <br/>
         <label for="news">Actus</label>
-        <input type="radio" name="postCategory" value="news" id="news" <?= $isNewsChecked ?>>
+        <input type="radio" name="postCategory" value="news" id="news" <?= $isNewsCategoryChecked ?>>
         <br/>
-        <label for="weLove">On a aimé</label>
-        <input type="radio" name="postCategory" value="weLove" id="weLove" <?= $isWeLoveChecked ?>>
+        <label for="next-releases">Prochaines sorties</label>
+        <input type="radio" name="postCategory" value="next-releases" id="next-releases" <?= $isNextReleasesCategoryChecked ?>>
     </p>
 
     <textarea name="postContent" id="postContent" cols="30" rows="10"><?= $postContent ?></textarea>
