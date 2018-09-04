@@ -3,6 +3,7 @@
 class Post {
 
     private $_id;
+    private $_poster;
     private $_title;
     private $_category;
     private $_content;
@@ -27,6 +28,10 @@ class Post {
         return $this->_id;
     }
 
+    public function poster() {
+        return $this->_poster;
+    }
+
     public function title() {
         return $this->_title;
     }
@@ -49,6 +54,12 @@ class Post {
 
         if (is_int($id) && $id > 0) {
             $this->_id = $id;
+        }
+    }
+
+    public function setPoster($poster) {
+        if (is_string($poster)) {
+            $this->_poster = $poster;
         }
     }
 
