@@ -8,13 +8,14 @@ class PostsManager {
         $this->_db = DbManager::dbConnect();
     }
 
-    public function addPost($title, $category, $content) {
-        $req = $this->_db->prepare('INSERT INTO posts(title, category, content, postDate) VALUES(:title, :category, :content, NOW())');
+    public function addPost($poster, $title, $category, $content) {
+        $req = $this->_db->prepare('INSERT INTO posts(poster, title, category, content, postDate) VALUES(:poster, :title, :category, :content, NOW())');
 
+        $req->bindParam('poster', $poster, PDO::PARAM_STR);
         $req->bindParam('title', $title, PDO::PARAM_STR);
         $req->bindParam('category', $category, PDO::PARAM_STR);
         $req->bindParam('content', $content, PDO::PARAM_STR);
-        // $req->bindParam('poster', $poster, PDO::PARAM_STR);
+        
         $req->execute();
 
         return $this->_db->lastInsertId();
@@ -35,9 +36,8 @@ class PostsManager {
 
     public function getNewsPostsList() {
         $category = 'news';
-        $content = 'content';
 
-        $req = $this->_db->prepare('SELECT id, title, SUBSTR(content, 1, 780) AS content, DATE_FORMAT(postDate, \'%d/%m/%Y\') AS postDate_fr FROM posts WHERE category = :category ORDER BY postDate DESC');
+        $req = $this->_db->prepare('SELECT id, poster, title, SUBSTR(content, 1, 780) AS content, DATE_FORMAT(postDate, \'%d/%m/%Y\') AS postDate_fr FROM posts WHERE category = :category ORDER BY postDate DESC');
 
         $req->bindParam('category', $category, PDO::PARAM_STR);
         $req->execute();
@@ -68,7 +68,7 @@ class PostsManager {
     }
 
     public function getPost($id) {
-        $req = $this->_db->prepare('SELECT id, title, category, content, DATE_FORMAT(postDate, \'%d/%m/%Y\') AS postDate_fr FROM posts WHERE id = :id');
+        $req = $this->_db->prepare('SELECT id, poster, title, category, content, DATE_FORMAT(postDate, \'%d/%m/%Y\') AS postDate_fr FROM posts WHERE id = :id');
 
         $req->bindParam('id', $id, PDO::PARAM_INT);
         $req->execute();
