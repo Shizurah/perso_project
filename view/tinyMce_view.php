@@ -54,12 +54,12 @@
                         $titleValue = $post->title();
 
                         if ($post->category() == 'news') {
-                            $isNewsChecked = 'checked';
-                            $isWeLoveChecked = NULL;
+                            $isNewsCategoryChecked = 'checked';
+                            $isNextReleasesCategoryChecked = NULL;
                         }
-                        elseif ($post->category() == 'we_love') {
-                            $isWeLoveChecked = 'checked';
-                            $isNewsChecked = NULL;
+                        elseif ($post->category() == 'next_releases') {
+                            $isNextReleasesCategoryChecked = 'checked';
+                            $isNewsCategoryChecked = NULL;
                         }
                         
                         $postContent = $post->content();
@@ -67,8 +67,8 @@
                     else {
                         $formActionAttribute = 'index.php?action=postWritten';
                         $titleValue = NULL;
-                        $isNewsChecked = NULL;
-                        $isWeLoveChecked = NULL;
+                        $isNewsCategoryChecked = NULL;
+                        $isNextReleasesCategoryChecked = NULL;
                         $postContent = NULL;
                     }
 
