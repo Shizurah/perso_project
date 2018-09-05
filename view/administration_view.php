@@ -4,7 +4,7 @@
 <!-- HEADER -->
 <?php 
     ob_start(); 
-    $h2Header = '';
+
     require('header_template.php'); 
 
     $header = ob_get_clean(); 
@@ -32,6 +32,9 @@
 
 <!-- FOOTER -->
 <?php ob_start(); ?>
-<?php $footer = ob_get_clean(); ?>
+    <?php $footer = ob_get_clean(); ?>
 
 <?php require('template.php'); ?>
+
+<script src="assets/js/file.js"></script>
+

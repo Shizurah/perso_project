@@ -48,7 +48,7 @@
                     } 
 
 
-                    // FORMULAIRE :
+                    // FORMULAIRE (fichier postForm_template.php) :
                     if ($_GET['action'] == 'postUpdating' && isset($_GET['postId'])) {
                         $formActionAttribute = 'index.php?action=postUpdated&postId=' . $post->id();
                         $titleValue = $post->title();
@@ -75,28 +75,9 @@
                     require_once('postsForm_template.php');
                 }         
             ?>
-
-            
-            <!-- <form action="index.php?action=postWritten" method="post">
-                <p>
-                    <label for="postTitle">Titre de l'article : </label>
-                    <input type="text" name="postTitle" id="postTitle" required>
-                </p>
-            
-                <p>
-                    Catégorie de l'article : <br/>
-                    <label for="news">Actus</label>
-                    <input type="radio" name="postCategory" value="news" id="news">
-                    <br/>
-                    <label for="news">On a aimé</label>
-                    <input type="radio" name="postCategory" value="weLoved" id="weLoved">
-                </p>
-
-                <textarea name="postContent" id="postContent" cols="30" rows="10"></textarea>
-
-                <input type="submit" value="Publier">
-            </form> -->
         </div>
+
+        <script src="assets/js/file.js"></script>
     </body>
 
 </html>

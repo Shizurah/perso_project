@@ -66,3 +66,5 @@
 <?php $footer = ob_get_clean(); ?>
 
 <?php require('template.php'); ?>
+
+<script src="assets/js/file.js"></script>
