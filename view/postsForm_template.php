@@ -1,11 +1,18 @@
-<form action="<?= $formActionAttribute ?>" method="post">
+<form action="<?= $formActionAttribute ?>" method="post" enctype="multipart/form-data">
     <p>
-        <label for="postTitle">Titre de l'article : </label>
+        <label for="postTitle">Titre : </label>
         <input type="text" name="postTitle" id="postTitle" value="<?= $titleValue ?>" required>
+    </p>
+
+    <p>
+        <input type="hidden" name="max-file-size" value="204800">
+
+        <label for="postPoster">Affiche : </label>
+        <input type="file" name="postPoster" id="postPoster">
     </p>
     
     <p>
-        Catégorie de l'article : <br/>
+        Catégorie : <br/>
         <label for="news">Actus</label>
         <input type="radio" name="postCategory" value="news" id="news" <?= $isNewsCategoryChecked ?>>
         <br/>
