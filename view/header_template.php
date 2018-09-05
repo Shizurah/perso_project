@@ -66,7 +66,7 @@
             </div> -->
 
             <div id="following-redirection-btn" class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                <!-- <p> -->
+                <!-- <p> --> 
                     <!-- <img src="public/images/arrow.png" alt="arrow icon"/> -->
                     <a href="index.php?action=tvShows">Suivre les séries !</a>
                     <!-- <img src="public/images/reversed-arrow.png" alt="arrow icon"/> -->

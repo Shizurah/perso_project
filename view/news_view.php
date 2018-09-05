@@ -24,11 +24,11 @@
                 <h2 class="col-lg-12">ACTUS</h2>
             </div>
 
+            <br/>
+
             <?php
                 foreach ($newsPosts as $post) {
             ?>
-                    <br/>
-
                     <div class="news-posts">
 
                         <div class="row">
@@ -69,7 +69,7 @@
                         </div>
 
                     </div>
-                    <br/>
+             
                     <hr/>
             <?php   
                 }
@@ -85,34 +85,41 @@
                 </h2>
             </div>
 
+            <br/>
+
             <?php
                 foreach ($nextReleasesPosts as $post) {
             ?>
-                    <div class="row"> 
-                        <h2 class="col-lg-12">
-                            <a href="index.php?action=post_and_comments&amp;postId=<?= $post->id(); ?>">
-                                <?= $post->title(); ?>
+
+                    <div class="next-releases-posts">
+
+                        <div class="row"> 
+                            <h3 class="col-lg-12">
+                                <a href="index.php?action=post_and_comments&amp;postId=<?= $post->id(); ?>">
+                                    <?= $post->title(); ?>
+                                </a>
+                            </h3>
+                        </div>
+
+                        <div class="col-lg-12">
+                            <a class="posters-frames" href="index.php?action=post_and_comments&amp;postId=<?= $post->id(); ?>">
+                                <img class="posters" src="public/posts/<?= $post->poster(); ?>" alt="affiche série"/>
                             </a>
-                        </h2>
+                        </div>
+
+                        <div class="col-lg-12">
+                            <p>
+                                <?= $post->content(); ?>
+                            </p>
+                        </div>
+
                     </div>
 
-                    <div class="col-lg-12">
-                        <a href="index.php?action=post_and_comments&amp;postId=<?= $post->id(); ?>">
-                            <img class="posters" src="public/posts/<?= $post->poster(); ?>" alt="affiche série"/>
-                        </a>
-                    </div>
-
-                    <div class="col-lg-12">
-                        <p>
-                            <?= $post->content(); ?>
-                        </p>
-                    </div>
+                    <hr/>
             <?php
                 }
             ?>
-
         </div>
-
     </div>
     
 <?php $section = ob_get_clean(); ?>

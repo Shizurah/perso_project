@@ -49,13 +49,14 @@ nav a {
 }
 
 .network-logo {
-    
     padding-left: 0;
     width: 150px;
+    height: 100px;
 }
 
 .network-logo img {
     width: 100%;
+    height: 100%;
 }
 
 #following-redirection-btn {
@@ -74,8 +75,8 @@ nav a {
     color: rgb(226, 4, 4);
     text-decoration: underline;
     border: 3px solid rgb(226, 4, 4);
-    border-left: 10px solid rgb(226, 4, 4);
-    border-bottom: 10px solid rgb(226, 4, 4);
+    /* border-left: 10px solid rgb(226, 4, 4); */
+    /* border-bottom: 10px solid rgb(226, 4, 4); */
     margin: auto;
     width: 100%;
     height: 100%;
@@ -93,24 +94,54 @@ nav a {
 
 
 /* ========================= */
-a {
-    /* color: rgb(238, 43, 43); */
+a:hover {
+    color: rgb(44, 144, 168);
 }
 
-hr {
-    border-color: rgb(175, 170, 170);
-}
 
 /* ========================= */
 /* MISE EN PAGE DES ARTICLES */
 
 #news-posts-container {
-    border-right: 1px solid grey;
+    border-right: 1px solid  rgb(175, 170, 170);
+}
+
+#news-posts-container,
+#next-releases-posts-container {
+    padding: 25px;
+    padding-top: 0;
+    padding-bottom: 0;
 }
 
 h2 {
+    font-size: 1.4em;
+    color: rgb(131, 128, 128);
+}
+
+h3 {
     font-size: 1.3em;
-    color: rgb(107, 106, 106);
+    line-height: 1em;
+}
+
+#next-releases-posts-container h3 {
+    margin-top: 20px;
+    text-transform: uppercase;
+    text-align: center;
+    color: red;
+}
+
+.posters {
+    width: 100%;
+}
+
+.next-releases-posts .posters {
+    /* border: 15px solid white; */
+}
+
+.posters-frames {
+    /* display: block;
+    width: 100%;
+    border: 1px solid black; */
 }
 
 .news-posts-content {
@@ -120,9 +151,38 @@ h2 {
 
 .news-posts-content p:last-child {
     font-size: 0.9em;
-    color: rgb(107, 106, 106);
+    color: rgb(131, 128, 128);
 }
 
-.posters {
-    width: 100%;
+#news-posts-container h3 a {
+    color: rgb(60, 87, 114);
+}
+
+.news-posts-content a:last-child {
+    font-size: 0.9em;
+    color: rgb(211, 2, 2);
+}
+
+#next-releases-posts-container a {
+    color: rgb(90, 185, 209);
+}
+
+#next-releases-posts-container p {
+    /* font-size: 1.2em; */
+    text-align: center;
+}
+
+hr {
+    position: relative;
+    margin-top: 0;
+    border-color: rgb(175, 170, 170);
+}
+
+#news-posts-container hr {
+    top: -8px;
+}
+
+#news-posts-container hr:last-child,
+#next-releases-posts-container hr:last-child {
+    visibility: hidden;
 }
