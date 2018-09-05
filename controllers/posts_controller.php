@@ -33,23 +33,65 @@ function tinyMcePage() {
 }
 
 
-function addNewPost($title, $category, $content) {
+function addNewPost($title, $poster, $category, $content) {
 
     if (isset($_SESSION['userStatus']) && $_SESSION['userStatus'] == 'admin') {
 
-        $postCategory = '';
+        // $postCategory = '';
 
         if ($category == 'news') {
-            $postCategory = 'news';
+            $category = 'news';
         }
         elseif ($category == 'next-releases') {
-            $postCategory = 'next_releases';
+            $category = 'next_releases';
         }
 
-        $postsManager = new PostsManager();
-        $newPostId = $postsManager->addPost($title, $postCategory, $content);
+        //
 
-        require_once('view/tinyMce_view.php');
+        $maxSize = 512000;
+        $valid_expansions = array('jpg', 'jpeg', 'png', 'gif');
+        $uploaded_expansion = strtolower( substr( strrchr($poster['name'], '.'), 1) );
+
+        if ($poster['error'] == 0) {
+
+            if ($poster['size'] <= $maxSize) {
+
+                if (in_array($uploaded_expansion, $valid_expansions)) {
+                    $uniqId = uniqid();
+
+                    $path = 'public/posts/' . $uniqId . '.' . $uploaded_expansion;
+                    $moving = move_uploaded_file($poster['tmp_name'], $path);
+
+                    if ($moving) {
+                        $newPosterName = $uniqId . '.' . $uploaded_expansion;
+                        // instanciation classe et appel des méthodes :
+                        $postsManager = new PostsManager();
+                        $newPostId = $postsManager->addPost($title, $newPosterName, $category, $content);
+
+                        require_once('view/tinyMce_view.php');
+                    }
+
+                    else {
+                        //erreur lors de l'importation de votre image
+                    }
+                } 
+                
+                else {
+                    //extension incorrecte
+                }
+            }
+
+            else {
+                // le fichier est trop lourd
+            }  
+        }
+
+        else {
+            //erreur lors du transfert de l'image
+        }
+
+        //
+
     }
     else {
         echo 'Vous n\'êtes pas autorisé à effectuer cette action';

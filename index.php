@@ -120,8 +120,8 @@ try {
         elseif ($_GET['action'] == 'postWritten') {
             startSession();
 
-            if (isset($_POST['postTitle']) && isset($_POST['postCategory']) && isset($_POST['postContent'])) {
-                addNewPost($_POST['postTitle'], $_POST['postCategory'], $_POST['postContent']);
+            if (isset($_POST['postTitle']) && isset($_FILES['postPoster']) && isset($_POST['postCategory']) && isset($_POST['postContent'])) {
+                addNewPost($_POST['postTitle'], $_FILES['postPoster'], $_POST['postCategory'], $_POST['postContent']);
             } 
             else {
                 echo 'Impossible d\'ajouter l\'article ';
