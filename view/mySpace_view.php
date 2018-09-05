@@ -1,10 +1,13 @@
-<?php $title = 'Mon espace'; ?>
+<?php 
+    $title = 'Mon espace'; 
+    $other = NULL;
+?>
 
 <!-- HEADER -->
 <?php 
     ob_start(); 
 
-    $h2Header = 'Vous pouvez ici gérer votre compte : avatar, infos persos, séries suivies ...';
+    echo '<div id="main-wrap" class="container">';
     require('header_template.php'); 
 
     $header = ob_get_clean(); 
@@ -76,8 +79,10 @@
     <br/><br/>
     <p>Ici des infos en bas de page</p>
     <a href="index.php?action=contact">Contact</a>
-
+    </div>
 <?php $footer = ob_get_clean(); ?>
 
 
 <?php require('template.php'); ?>
+
+<script src="assets/js/file.js"></script>

@@ -1,8 +1,13 @@
-<?php $title = 'Actus'; ?>
+<?php 
+    $title = 'Actus'; 
+    $other = NULL;
+?>
+
 
 <!-- HEADER -->
 <?php 
     ob_start(); 
+    echo '<div id="main-wrap" class="container">';
 
     $h1Header = '<img id="banner-img" src="public/images/logo2.png" alt="logo"/>';
     require('header_template.php'); 
@@ -130,8 +135,8 @@
 
 <p>Ici des infos en bas de page</p>
 <a href="index.php?action=contact">Contact</a>
-
+</div>
 <?php $footer = ob_get_clean(); ?>
-
+            
 
 <?php require('template.php'); ?>

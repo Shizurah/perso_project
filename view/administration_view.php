@@ -1,4 +1,7 @@
-<?php $title = 'Administration du site'; ?>
+<?php 
+    $title = 'Administration du site'; 
+    $other = '<link href="assets/css/administration_style.css" rel="stylesheet"';
+?>
 
 
 <!-- HEADER -->
@@ -32,7 +35,7 @@
 
 <!-- FOOTER -->
 <?php ob_start(); ?>
-    <?php $footer = ob_get_clean(); ?>
+<?php $footer = ob_get_clean(); ?>
 
 <?php require('template.php'); ?>
 
