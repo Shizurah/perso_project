@@ -40,4 +40,5 @@
 
 <script>
     document.getElementById('actions-btns').style.display = "none";
+    document.getElementById('nav-line').style.display = 'none';
 </script>

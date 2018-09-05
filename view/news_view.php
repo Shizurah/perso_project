@@ -132,11 +132,14 @@
 
 <!-- FOOTER -->
 <?php ob_start(); ?>
-
-<p>Ici des infos en bas de page</p>
-<a href="index.php?action=contact">Contact</a>
-</div>
+    <p>Ici des infos en bas de page</p>
+    <a href="index.php?action=contact">Contact</a>
+    </div>
 <?php $footer = ob_get_clean(); ?>
             
-
 <?php require('template.php'); ?>
+
+<script>
+    document.getElementById('main-wrap').style.marginTop = '150px';
+    document.getElementById('nav-line').style.display = 'none';
+</script>

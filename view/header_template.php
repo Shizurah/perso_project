@@ -24,6 +24,8 @@
         ?>      
     </nav>
 
+    <hr id="nav-line"/>
+    
     <!-- BANNIERE : LOGO SITE ET BOUTONS RESEAUX SOCIAUX -->
     <div id="banner">
         
