@@ -4,7 +4,7 @@
 <?php 
     ob_start(); 
 
-    $h2Header = '<img id="banner-img" src="public/images/logo2.png" alt="logo"/>';
+    $h1Header = '<img id="banner-img" src="public/images/logo2.png" alt="logo"/>';
     require('header_template.php'); 
 
     $header = ob_get_clean(); 

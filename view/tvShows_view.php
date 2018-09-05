@@ -3,7 +3,7 @@
 <!-- HEADER -->
 <?php 
     ob_start(); 
-    $h2Header = 'Liste des séries auxquelles vous pouvez vous abonner !';
+    $h1Header = 'Liste des séries auxquelles vous pouvez vous abonner !';
 ?>
 
     <!-- <img src="public/images/banniere.jpg" alt="bannière du site"> -->
