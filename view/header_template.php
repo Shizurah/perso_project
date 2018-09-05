@@ -29,7 +29,7 @@
         
         <!-- LOGO SITE -->
         <div class="row">
-            <h1 class="col-lg-12"><?= $h2Header ?></h1>
+            <h1 class="col-lg-12"><?= $h1Header ?></h1>
         </div>
 
         <!-- BOUTONS RESEAUX SOCIAUX -->
@@ -47,30 +47,8 @@
                 <a href="#"><img src="public/images/logo_instagram1.png" alt="logo Instagram"/></a>
             </div> 
         
-               <!-- <div class="network-logos col-lg-6 col-md-6 col-sm-6 col-xs-6">
-
-                <div class="row">
-                    <div class="network-logo col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                        <a href="#"><img src="public/images/logo_fb.png" alt="logo Facebook"/></a>
-                    </div>
-
-                    <div class="network-logo col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                        <a href="#"><img src="public/images/logo_twitter.png" alt="logo Twitter"/></a>
-                    </div>
-
-                    <div class="network-logo col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                        <a href="#"><img src="public/images/logo_instagram.png" alt="logo Instagram"/></a>
-                    </div> 
-                </div>
-
-            </div> -->
-
             <div id="following-redirection-btn" class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                <!-- <p> --> 
-                    <!-- <img src="public/images/arrow.png" alt="arrow icon"/> -->
-                    <a href="index.php?action=tvShows">Suivre les séries !</a>
-                    <!-- <img src="public/images/reversed-arrow.png" alt="arrow icon"/> -->
-                <!-- </p> -->
+                <a href="index.php?action=tvShows">Suivre les séries !</a> 
             </div>
               
         </div>
