@@ -1,12 +1,14 @@
 <?php
 
+// namespace eloise\projet5;
+
 class Comment {
 
     private $_id;
     private $_content;
     private $_comment_date_fr;
     private $_post_id;
-    private $_author;
+    private $_author_id;
     private $_reports;
 
     public function __construct(array $data) {
@@ -42,8 +44,8 @@ class Comment {
         return $this->_post_id;
     }
 
-    public function author() {
-        return $this->_author;
+    public function author_id() {
+        return $this->_author_id;
     }
 
     public function reports() {
@@ -77,9 +79,9 @@ class Comment {
         }
     }
 
-    public function setAuthor($userPseudo) {
-        if (is_string($userPseudo)) {
-            $this->_author = $userPseudo;
+    public function setAuthor_id($userId) {
+        if (is_string($userId)) {
+            $this->_author_id = $userId;
         }
     }
 

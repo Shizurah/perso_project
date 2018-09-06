@@ -1,5 +1,7 @@
 <?php
 
+// namespace eloise\projet5;
+
 class CommentsManager {
 
     private $_db;
@@ -8,20 +10,23 @@ class CommentsManager {
         $this->_db = DbManager::dbConnect();
     }
 
-    public function addComment($content, $postId, $userPseudo) {
-        $req = $this->_db->prepare('INSERT INTO comments(content, comment_date, post_id, author) VALUES(:content, NOW(), :postId, :author)');
+    public function addComment($content, $postId, $userId) {
+        $req = $this->_db->prepare('INSERT INTO comments(content, comment_date, post_id, author_id) VALUES(:content, NOW(), :postId, :authorId)');
+
         $req->bindParam('content', $content, PDO::PARAM_STR);
         $req->bindParam('postId', $postId, PDO::PARAM_INT);
-        $req->bindParam('author', $userPseudo, PDO::PARAM_STR);
+        $req->bindParam('authorId', $userId, PDO::PARAM_STR);
 
         $req->execute();
     }
 
     public function getCommentsList($postId) {
-        $req = $this->_db->prepare('SELECT id, content, DATE_FORMAT(comment_date, \'%d/%m/%Y\') AS comment_date_fr, post_id, author 
-                                    FROM comments WHERE post_id = :postId ORDER BY comment_date DESC');
+        $req = $this->_db->prepare('SELECT id, content, DATE_FORMAT(comment_date, \'%d/%m/%Y\') AS comment_date_fr, post_id, author_id 
+                                    FROM comments 
+                                    WHERE post_id = :postId 
+                                    ORDER BY comment_date DESC');
+
         $req->bindParam('postId', $postId, PDO::PARAM_INT);
-        
         $req->execute();
 
         $commentsList = [];
@@ -31,6 +36,20 @@ class CommentsManager {
         }
 
         return $commentsList;
+    }
+
+    public function getUserInfosRelatedToAComment($commentId) {
+        $req = $this->_db->prepare('SELECT users.id, pseudo, avatar
+                                    FROM users
+                                    INNER JOIN comments
+                                    ON comments.author_id = users.id
+                                    WHERE comments.id = :commentId');
+
+        $req->bindParam('commentId', $commentId, PDO::PARAM_INT);
+        $req->execute();
+
+        $data = $req->fetch();
+        return new User($data);
     }
 
     public function getOneComment($id) {
@@ -77,7 +96,10 @@ class CommentsManager {
     public function getReportedComments() {
         $reports = 1;
 
-        $req = $this->_db->prepare('SELECT id, author, content, reports, post_id, DATE_FORMAT(comment_date, \'%d/%m/%Y\') AS comment_date_fr FROM comments WHERE reports >= :reports ORDER BY reports DESC');
+        $req = $this->_db->prepare('SELECT id, author, content, reports, post_id, DATE_FORMAT(comment_date, \'%d/%m/%Y\') AS comment_date_fr 
+                                    FROM comments WHERE reports >= :reports 
+                                    ORDER BY reports DESC');
+
         $req->bindParam('reports', $reports, PDO::PARAM_INT);
         $req->execute();
 
