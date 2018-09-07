@@ -1,8 +1,12 @@
 <?php
 
-function addComment($content, $postId, $userPseudo) {
+// use \eloise\projet5\CommentsManager;
+
+function addComment($content, $postId, $userId) {
+    $content = nl2br($content);
+
     $commentsManager = new CommentsManager();
-    $commentsManager->addComment($content, $postId, $userPseudo);
+    $commentsManager->addComment($content, $postId, $userId);
 
     header('Location:index.php?action=post_and_comments&postId=' . $postId);
     exit;
