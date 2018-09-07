@@ -7,7 +7,7 @@
 <?php 
     ob_start(); 
 
-    echo '<div id="main-wrap" class="container">';
+    echo '<div id="main-wrap" class="container">'; // --> DEBUT MAIN-WRAP
     $h1Header = NULL;
     require('header_template.php'); 
 
@@ -45,122 +45,129 @@
             }
         ?>
         <hr/>
+
+        <div class="row" id="post-actions-container">
+            <?php 
+                if (isset($_SESSION['userStatus'])) {
+            ?>
+                    <div class="post-actions-btn col-lg-4">
+                        <?= $nbOfComments; ?> commentaires
+                    </div>
+
+                    <!-- pour tous les membres connectés : -->
+                    <div id="comment-btn" class="post-actions-btn col-lg-4">
+                        <img src="public/images/comment.png" width="25" height="30" alt="icône commentaire"> 
+                        Commenter 
+                    </div>
+
+                    <div id="sharing-btn" class="post-actions-btn col-lg-4">
+                        <div class="row">
+                            <img class="col-log-4" src="public/images/logo_fb1.png" alt="" width="20px"/>
+                            <img class="col-log-4" src="public/images/logo_twitter1.png" alt=""/>
+                            <img class="col-log-4" src="public/images/logo_instagram1.png" alt=""/>
+                        </div> 
+                    </div>
+            <?php
+                } 
+            ?>
+        </div>
+
     </div>
     
-    <div id="post-actions">
-        <?php 
-            if (isset($_SESSION['userStatus'])) {
-        ?>
-                <!-- pour tous les membres connectés : -->
-                <button id="comment-btn">
-                    <img src="public/images/comment.png" width="25" height="30" alt="icône commentaire"> 
-                    Commenter 
-                </button>
-        <?php
-            } 
-        ?>
-    </div>
-  
-    <br/><br/>
-
 
     <!-- Affichage des commentaires : -->
-
     <div id="comments-container">
 
-        <p>#NOMBRE COMMENTAIRES :</p>
-
-        <!-- Adaptation du formulaire selon action de l'utilisateur : -->
-        <?php
-            // modification commentaire :
-            if (isset($_GET['action']) && isset($_GET['commentId']) && $_GET['action'] == 'commentUpdating') {
-                $formActionAttribute = 'index.php?action=commentUpdated&postId=' .$post->id(). '&commentId=' .$_GET['commentId']. '#comment' .$_GET['commentId'];
-                $placeholderAttribute = '';
-                $textareaContent = $comment->content();
-                $autofocus = 'autofocus';
-            } 
-            // ajout commentaire :
-            else {
-                $formActionAttribute = 'index.php?action=commentAdded&postId=' .$post->id();
-                $placeholderAttribute = 'Votre commentaire...';
-                $textareaContent = '';
-                $autofocus = '';
-            }
-            require_once('view/commentsForm_template.php');
-        ?>
+        <p><?= $nbOfComments; ?> COMMENTAIRES</p>
 
         <?php
-        foreach($comments as $comment) {
+            foreach($commentsAndUsersInfos as $commentAndUserInfos) {
         ?>
-            <div class="comments" id="comment<?= $comment->id() ?>">
+            <!-- id pour ancre : -->
+            <div class="comments" id="comment<?= $commentAndUserInfos->comment_id() ?>"> 
 
                 <div class="author-and-content">
-                    <span class="authors">
-                        <?= $comment->author(); ?>
-                    </span>
-                    <?= $comment->content(); ?>
-                </div>
+                    
+                    <!-- avatar membre -->
+                    <div>
+                        <img class="user-avatar-for-comments" src="public/members/avatars/<?= $commentAndUserInfos->author_avatar(); ?>" alt="avatar membre"/>
+                    </div>
+                    
+
+                    <div>
+                         <!-- pseudo membre -->
+                        <span class="authors">
+                            <?= $commentAndUserInfos->author_pseudo(); ?>
+                        </span>
+                        
+                        <!-- texte commentaire -->
+                        <?= $commentAndUserInfos->comment_content(); ?>
+                        </div>
+                    </div>
                 
-                
-            <div>
+                <div class="comments-date-and-actions">
+                    <!-- date commentaire -->
+                    <i><?= $commentAndUserInfos->comment_date_fr(); ?></i>
+                    
+                    <!-- Actions possibles sur les commentaires publiés : -->
+                    <?php
+                        // pour chaque membre connecté :
+                        if (isset($_SESSION['pseudo']) && isset($_SESSION['userStatus'])) {
 
-                <i>Le <?= $comment->comment_date_fr(); ?></i>
-                   
+                            // 1. possibilité de modifier/supprimer son commentaire :
+                            if ($_SESSION['id'] == $commentAndUserInfos->author_id()) {
 
-                <!-- Actions possibles sur les commentaires publiés : -->
-                <?php
-                    // pour chaque membre connecté :
-                    if (isset($_SESSION['pseudo']) && isset($_SESSION['userStatus'])) {
+                                echo '<a href="index.php?action=commentUpdating&commentId=' .$commentAndUserInfos->comment_id(). 
+                                     '&postId=' .$commentAndUserInfos->post_id(). '#form">
+                                         Modifier
+                                     </a> - 
 
-                        // 1. possibilité de modifier/supprimer son commentaire :
-                        if ($_SESSION['pseudo'] == $comment->author()) {
+                                     <a href="index.php?action=commentDeleted&commentId=' .$commentAndUserInfos->comment_id(). 
+                                     '&postId=' .$commentAndUserInfos->post_id(). '" 
+                                         onclick="return confirm(\'Êtes-vous sûr de vouloir supprimer votre commentaire ?\')">
+                                         Supprimer
+                                     </a>';   
+                            }
 
-                            echo '<a href="index.php?action=commentUpdating&commentId=' .$comment->id(). '&postId=' .$post->id(). '#form">
-                                    Modifier
-                                </a> - 
+                            // 2. possibilité de signaler les commentaires :
+                            else {
+                                echo '<a href="index.php?action=commentReporting&commentId=' .$commentAndUserInfos->comment_id(). 
+                                     '&postId=' .$commentAndUserInfos->post_id(). '"
+                                         onclick="return confirm(\'Êtes-vous sûr de vouloir signaler ce commentaire ?\')">
+                                         Signaler
+                                     </a>';
+                            }
 
-                                <a href="index.php?action=commentDeleted&commentId=' .$comment->id(). '&postId=' .$post->id(). '" 
-                                    onclick="return confirm(\'Êtes-vous sûr de vouloir supprimer votre commentaire ?\')">
-                                    Supprimer
-                                </a>';   
-                        }
+                            // 3. Pour les admin, possibilité de supprimer chacun des commentaires directement depuis la page :
+                            if ($_SESSION['userStatus'] == 'admin' && $_SESSION['id'] != $commentAndUserInfos->author_id()) {
 
-                        // 2. possibilité de signaler les commentaires :
-                        else {
-                            echo '<a href="index.php?action=commentReporting&commentId=' .$comment->id(). '&postId=' .$post->id(). '"
-                                    onclick="return confirm(\'Êtes-vous sûr de vouloir signaler ce commentaire ?\')">
-                                    Signaler
-                                </a>';
-                        }
+                                echo ' - <a href="index.php?action=commentDeleted&commentId=' .$commentAndUserInfos->comment_id(). 
+                                     '&postId=' .$commentAndUserInfos->post_id(). '"
+                                         onclick="return confirm(\'Êtes-vous sûr de vouloir supprimer ce commentaire ?\')">
+                                         Supprimer
+                                     </a>';
+                            }
+                        }   
+                    ?>
+                    </div>
 
-                        // 3. Pour les admin, possibilité de supprimer chacun des commentaires directement depuis la page :
-                        if ($_SESSION['userStatus'] == 'admin' && $_SESSION['pseudo'] != $comment->author()) {
-
-                            echo ' - <a href="index.php?action=commentDeleted&commentId=' .$comment->id(). '&postId=' .$post->id(). '"
-                                        onclick="return confirm(\'Êtes-vous sûr de vouloir supprimer ce commentaire ?\')">
-                                        Supprimer
-                                    </a>';
-                        }
-                    }   
-                ?>
-                </div>
             </div>    
         <?php
         }
         ?>
     </div>
-    
+</div> <!-- FIN MAIN-WRAP -->
 <?php $section = ob_get_clean(); ?>
 
 
 <!-- FOOTER -->
-<?php ob_start(); ?>
-    <p>Ici des infos en bas de page</p>
-    <a href="index.php?action=contact">Contact</a>
-    </div>
-<?php $footer = ob_get_clean(); ?>
+<?php 
+    ob_start(); 
+    require_once('footer_template.php');
+    $footer = ob_get_clean(); 
 
-<?php require('template.php'); ?>
+    require('template.php'); 
+?>
 
 <script>
     document.getElementById('actions-btns').style.display = "none";
