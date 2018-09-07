@@ -3,16 +3,18 @@ body {
     background: url("../../public/images/got1.png") fixed repeat top;
 }
 
+#main-wrap {
+    background-color: white;
+    padding-bottom: 150px;
+}
+
 header {
 
 }
 
 section {
     margin-top: 50px;
-}
-
-#main-wrap {
-    background-color: white;
+   
 }
 
 /* ========================= */
@@ -135,7 +137,8 @@ h3 {
     top: -18px;
 }
 
-.news-posts-content p:last-child {
+.news-posts-content p:last-child,
+.comments-date-and-actions {
     font-size: 0.9em;
     color: rgb(131, 128, 128);
 }
@@ -183,13 +186,11 @@ hr {
     top: -100px;
     margin: 0 100px;
     padding: 20px 20px 0 20px;
-    /* border: 1px solid grey; */
 }
 
 #post-container h3 {
     font-size: 1.6em;
     padding: 30px;
-    /* background-color: yellow; */
 }
 
 #post-container h3,
@@ -199,24 +200,55 @@ hr {
 }
 
 #post-poster img {
-    width: 60%;
-    margin: 20px;
+    width: 80%;
+    margin-bottom: 10px;
 }
 
 #post-container p:last-child {
     margin-top: 50px;
 }
 
-#post-actions {
-    text-align: center;
+#post-content img {
+    width:45%;
 }
+
+/* actions possibles concernant les articles : */
+#post-actions-container {
+    text-align: center;
+    font-size: 1.1em;
+    font-weight: bold;
+}
+
+#sharing-btn div {
+    display: flex;
+}
+
+#sharing-btn div img {
+    margin: auto;
+    width: 50px;
+    border-radius: 50%;
+}
+
+#comment-btn {
+    border: none;
+    background-color: white;
+
+}
+
+#comments-form {
+    display: none;
+}
+
+/* ========================= */
+/* MISE EN PAGE DES COMMENTAIRES DE L'ARTICLE SELECTIONNE */
 
 #comments-container {
     margin: 0 150px;
 }
 
-#comments-form {
-    display: none;
+#comments-container p:first-child {
+    font-weight: bold;
+    font-size: 1.1em;
 }
 
 .comments {
@@ -228,7 +260,9 @@ hr {
 }
 
 .author-and-content {
-    padding: 15px 20px;
+    display: flex;
+    align-items: center;
+    padding: 10px 12px;
     border-radius: 50px;
     background-color: rgb(35, 35, 35);
     color: white;
@@ -236,4 +270,64 @@ hr {
 
 .authors {
     font-weight: bold;
+}
+
+.user-avatar-for-comments {
+    width: 60px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+
+/* ========================= */
+/* FOOTER */
+
+footer {
+    position: relative;
+    z-index: 10;
+    background-color: rgb(35, 35, 35);
+    height: 100px;
+    padding: -15px;
+}
+
+footer a {
+    color: white;
+}
+
+
+/* ========================= */
+/* MEDIA QUERIES */
+
+@media (max-width: 768px) {
+
+    #post-container {
+        margin: 0;
+        padding: 0 5px;
+    }
+
+    #post-poster img {
+        width: 100%;
+    }
+
+    #comments-container {
+        margin: 0 5px;
+    }
+
+    .comments i {
+        padding-left: 6px;
+    }
+
+    .author-and-content {
+        word-break: break-all;
+        padding: 10px 10px;
+    }
+
+    .user-avatar-for-comments {
+        width: 40px;
+        margin-right: 5px;
+    }
+
+    .comments-date-and-actions {
+        font-size: 0.8em;
+    }
 }
