@@ -1,4 +1,7 @@
-<?php $title = 'Articles'; ?>
+<?php 
+$title = 'Articles'; 
+$other = '<link href="assets/css/administration_style.css" rel="stylesheet"';
+?>
 
 <!-- HEADER -->
 <?php 

@@ -7,7 +7,8 @@
 <?php 
     ob_start(); 
 
-    echo '<div id="main-wrap" class="container">';
+    echo '<div id="main-wrap" class="container">'; // --> DEBUT MAIN-WRAP
+    $h1Header = NULL;
     require('header_template.php'); 
 
     $header = ob_get_clean(); 
@@ -69,20 +70,17 @@
         <input type="submit" value="Modifier e-mail">
     </form>
 
-    <br/><br/>
-
+</div> <!-- FIN MAIN-WRAP -->
 <?php $section = ob_get_clean(); ?>
 
 
 <!-- FOOTER -->
-<?php ob_start(); ?>
-    <br/><br/>
-    <p>Ici des infos en bas de page</p>
-    <a href="index.php?action=contact">Contact</a>
-    </div>
-<?php $footer = ob_get_clean(); ?>
+<?php 
+    ob_start(); 
+    require_once('footer_template.php');
+    $footer = ob_get_clean(); 
 
-
-<?php require('template.php'); ?>
+    require('template.php'); 
+?>
 
 <script src="assets/js/file.js"></script>

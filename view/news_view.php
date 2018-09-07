@@ -7,7 +7,7 @@
 <!-- HEADER -->
 <?php 
     ob_start(); 
-    echo '<div id="main-wrap" class="container">';
+    echo '<div id="main-wrap" class="container">'; // --> DEBUT MAIN-WRAP
 
     $h1Header = '<img id="banner-img" src="public/images/logo2.png" alt="logo"/>';
     require('header_template.php'); 
@@ -126,18 +126,18 @@
             ?>
         </div>
     </div>
-    
+    </div> <!-- FIN MAIN-WRAP -->
 <?php $section = ob_get_clean(); ?>
 
 
 <!-- FOOTER -->
-<?php ob_start(); ?>
-    <p>Ici des infos en bas de page</p>
-    <a href="index.php?action=contact">Contact</a>
-    </div>
-<?php $footer = ob_get_clean(); ?>
-            
-<?php require('template.php'); ?>
+<?php 
+    ob_start(); 
+    require_once('footer_template.php');
+    $footer = ob_get_clean(); 
+
+    require('template.php'); 
+?>
 
 <script>
     document.getElementById('main-wrap').style.marginTop = '150px';

@@ -6,37 +6,42 @@
 <!-- HEADER -->
 <?php 
     ob_start(); 
-    echo '<div id="main-wrap" class="container">';
+
+    echo '<div id="main-wrap" class="container">'; // --> DEBUT MAIN-WRAP
     $h1Header = '<img id="banner-img" src="public/images/logo2.png" alt="logo"/>';
-?>
-
-    <!-- <img src="public/images/banniere.jpg" alt="bannière du site"> -->
-
-<?php
     require('header_template.php'); 
+
     $header = ob_get_clean(); 
 ?>
 
 
 <!-- SECTION -->
 <?php ob_start(); ?>
-
-    <p>Ici des séries</p>
-
+    <p>Ici des séries ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+    Ici des séries ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+    Ici des séries ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+    Ici des séries ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+    Ici des séries ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+    Ici des séries ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+    Ici des séries ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+    Ici des séries ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+    Ici des séries ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+    Ici des séries ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+    Ici des séries ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+    Ici des séries ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+    </p>
+    </div> <!-- FIN MAIN-WRAP -->
 <?php $section = ob_get_clean(); ?>
 
 
 <!-- FOOTER -->
-<?php ob_start(); ?>
+<?php 
+    ob_start(); 
+    require_once('footer_template.php');
+    $footer = ob_get_clean(); 
 
-    <p>Ici des infos en bas de page</p>
-    <a href="index.php?action=contact">Contact</a>
-    </div>
-
-<?php $footer = ob_get_clean(); ?>
-
-
-<?php require('template.php'); ?>
+    require('template.php'); 
+?>
 
 <script>
     document.getElementById('actions-btns').style.display = "none";
