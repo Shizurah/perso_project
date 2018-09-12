@@ -107,13 +107,7 @@
                         <!-- texte commentaire -->
                         <span id="<?= $commentAndUserInfos->comment_id() ?>">
                             <?= $commentAndUserInfos->comment_content(); ?>
-                        </span>
-
-                        <!-- <form id="updating-comment-form" action="index.php?action=commentUpdated&amp;commentId=<?= $commentAndUserInfos->comment_id(); ?>" method="post">
-                            <textarea name="updating-comment-text" id="updating-comment-text" cols="30" rows="10"></textarea>
-                            <input type="submit" value="modifier">
-                        </form> -->
-                        
+                        </span>                        
                     </div>
 
                 </div>
