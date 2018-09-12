@@ -30,7 +30,9 @@
             <img src="public/posts/<?= $post->poster(); ?>" alt="affiche article">
         </p>
 
-        <div id="post-content"> <?= $post->content(); ?> </div>
+        <div id="post-content"> 
+            <?= $post->content(); ?> 
+        </div>
 
         <?php 
             if (isset($_SESSION['userStatus'])) {
@@ -42,40 +44,43 @@
                              Modifier
                           </a>';          
                 }
-            }
         ?>
-        <hr/>
+                <hr/>
+                <div id="post-actions-container">
 
-        <div class="row" id="post-actions-container">
-            <?php 
-                if (isset($_SESSION['userStatus'])) {
-            ?>
-                    <div class="post-actions-btn col-lg-4">
-                        <?= $nbOfComments; ?> commentaires
-                    </div>
+                    <div id="reading-comments-btn" class="post-actions-btn">
+                        <a href="#">
+                            <?= $nbOfComments; ?> commentaires
+                        </a>
+                    </div> 
 
                     <!-- pour tous les membres connectés : -->
-                    <div id="comment-btn" class="post-actions-btn col-lg-4">
-                        <img src="public/images/comment.png" width="25" height="30" alt="icône commentaire"> 
+                    <!-- 1. commenter -->
+                    <div id="comment-btn" class="post-actions-btn">
+                        <!-- <img src="public/images/comment.png" width="25" height="30" alt="icône commentaire">  -->
                         Commenter 
                     </div>
 
-                    <div id="sharing-btn" class="post-actions-btn col-lg-4">
-                        <div class="row">
-                            <img class="col-log-4" src="public/images/logo_fb1.png" alt="" width="20px"/>
-                            <img class="col-log-4" src="public/images/logo_twitter1.png" alt=""/>
-                            <img class="col-log-4" src="public/images/logo_instagram1.png" alt=""/>
-                        </div> 
+                    <!-- 2. partager -->
+                    <div id="sharing-btns-container" class="post-actions-btn">
+                        <img id="logo-fb" class="sharing-btn" src="public/images/logo_fb1.png" alt=""/>
+                        <img class="sharing-btn" src="public/images/logo_twitter1.png" alt=""/>
+                        <img class="sharing-btn" src="public/images/logo_instagram1.png" alt=""/>
                     </div>
-            <?php
-                } 
-            ?>
-        </div>
 
-    </div>
+                </div>
+
+        <?php                    
+                require_once('view/commentsForm_template.php');
+            } else {
+                echo '<hr/>';
+            }
+                // echo '</div>';
+        ?>
+    </div>   
     
 
-    <!-- Affichage des commentaires : -->
+    <!-- AFFICHAGE DES COMMENTAIRES -->
     <div id="comments-container">
 
         <p><?= $nbOfComments; ?> COMMENTAIRES</p>
@@ -84,7 +89,7 @@
             foreach($commentsAndUsersInfos as $commentAndUserInfos) {
         ?>
             <!-- id pour ancre : -->
-            <div class="comments" id="comment<?= $commentAndUserInfos->comment_id() ?>"> 
+            <div class="comments"> 
 
                 <div class="author-and-content">
                     
@@ -93,7 +98,6 @@
                         <img class="user-avatar-for-comments" src="public/members/avatars/<?= $commentAndUserInfos->author_avatar(); ?>" alt="avatar membre"/>
                     </div>
                     
-
                     <div>
                          <!-- pseudo membre -->
                         <span class="authors">
@@ -101,9 +105,18 @@
                         </span>
                         
                         <!-- texte commentaire -->
-                        <?= $commentAndUserInfos->comment_content(); ?>
-                        </div>
+                        <span id="<?= $commentAndUserInfos->comment_id() ?>">
+                            <?= $commentAndUserInfos->comment_content(); ?>
+                        </span>
+
+                        <!-- <form id="updating-comment-form" action="index.php?action=commentUpdated&amp;commentId=<?= $commentAndUserInfos->comment_id(); ?>" method="post">
+                            <textarea name="updating-comment-text" id="updating-comment-text" cols="30" rows="10"></textarea>
+                            <input type="submit" value="modifier">
+                        </form> -->
+                        
                     </div>
+
+                </div>
                 
                 <div class="comments-date-and-actions">
                     <!-- date commentaire -->
@@ -116,9 +129,8 @@
 
                             // 1. possibilité de modifier/supprimer son commentaire :
                             if ($_SESSION['id'] == $commentAndUserInfos->author_id()) {
-
-                                echo '<a href="index.php?action=commentUpdating&commentId=' .$commentAndUserInfos->comment_id(). 
-                                     '&postId=' .$commentAndUserInfos->post_id(). '#form">
+                            
+                                echo '<a class="updating-comment-btn" href="' .$commentAndUserInfos->comment_id(). '">
                                          Modifier
                                      </a> - 
 
@@ -166,13 +178,14 @@
     require_once('footer_template.php');
     $footer = ob_get_clean(); 
 
+    // SCRIPTS JS :
+    ob_start();
+        echo '<script src="assets/js/postAndItsComments.js"></script>';
+    $scripts = ob_get_clean();
+
     require('template.php'); 
 ?>
 
-<script>
-    document.getElementById('actions-btns').style.display = "none";
 
-    document.getElementById('comment-btn').addEventListener('click', function() {
-        document.getElementById('comments-form').style.display = 'block';
-    });
-</script>
+
+
