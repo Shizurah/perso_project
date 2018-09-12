@@ -1,4 +1,7 @@
-<?php $title = 'Administration du site'; ?>
+<?php 
+$title = 'Administration du site'; 
+$other = '<link href="assets/css/administration_style.css" rel="stylesheet"';
+?>
 
 
 <!-- HEADER -->
@@ -35,7 +38,7 @@
         foreach ($reportedComments as $comment) {
     ?>
             <tr>
-                <td><?= $comment->author() ?></td>
+                <td><?= $comment->author_id() ?></td>
                 <td><?= $comment->content() ?></td>
                 <td><?= $comment->comment_date_fr() ?></td>
                 <td><?= $comment->reports() ?></td>
