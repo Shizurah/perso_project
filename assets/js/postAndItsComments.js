@@ -3,16 +3,50 @@ $('#actions-btns').css('display', 'none');
 
 $(function() {
 
+    // AJOUT DE COMMENTAIRES :
     var commentForm  = $('#comment-form');
 
     $('#comment-btn').click(function() {
         commentForm.css('display', 'block');
-        $('#comment-text').val('');
         $('#comment-text').focus();
     });
 
+    $('#comment-form').on('submit', function() {
+        // event.preventDefault();
 
-    $('.comments-date-and-actions').on('click', '.updating-comment-btn', function(event) {
+        var that = $(this),
+            url = that.attr('action'),
+            type = that.attr('method'),
+            data = {};
+
+        that.find('[name]').each(function(index, value) {
+            var that = $(this),
+                name = that.attr('name'),
+                value = that.val();
+
+            data[name] = value;
+        });
+
+        $.ajax({
+            url: url,
+            type: type,
+            data: data,
+            
+            success: function(response) {
+                $('#comment-text').val('');
+                commentForm.css('display', 'none');
+                $('#comments-container p:first-child').after(response);
+            }
+        });
+
+        return false;
+    });
+    // FIN ajout de commentaires
+
+
+    // MODIFICATION DES COMMENTAIRES :
+    // $('.comments-date-and-actions').on('click', '.updating-comment-btn', function(event) {
+    $('#comments-container').on('click', '.updating-comment-btn', function(event) {
         event.preventDefault();
 
         var aElt = $(this),
@@ -72,7 +106,7 @@ $(function() {
                     name = that.attr('name'),
                     value = that.val();
     
-                    data[name] = value;
+                data[name] = value;
             });
     
             $.ajax({
@@ -91,63 +125,6 @@ $(function() {
         // 
 
     });
-
-
-    // AJAX :
-    // $('.updating-comment-form').on('submit', function() {
-    //     var that = $(this),
-    //         url = that.attr('action'),
-    //         type = that.attr('method'),
-    //         data = {};
-
-    //     that.find('[name]').each(function(index, value) {
-    //         var that = $(this),
-    //             name = that.attr('name'),
-    //             value = that.val();
-
-    //             data[name] = value;
-    //     });
-
-    //     $.ajax({
-    //         url: url,
-    //         type: type,
-    //         data: data,
-
-    //         success: function(response) {
-    //             console.log(response);
-    //         }            
-    //     });
-
-    //     return false;
-    // });
-
-    // FORMULAIRE AJOUT COMM :
-    // $('form #comment-form').on('submit', function() {
-    //     var that = $(this),
-    //         url = that.attr('action'),
-    //         type = that.attr('method'),
-    //         data = {};
-
-    //     that.find('[name]').each(function(index, value) {
-    //         var that = $(this),
-    //             name = that.attr('name'),
-    //             value = that.val();
-
-    //             data[name] = value;
-    //     });
-
-    //     $.ajax({
-    //         url: url,
-    //         type: type,
-    //         data: data,
-
-    //         success: function(response) {
-    //             console.log(response);
-    //         }            
-    //     });
-
-    //     return false;
-    // });
-
 });
+
 
