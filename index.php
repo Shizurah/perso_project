@@ -173,8 +173,8 @@ try {
         elseif ($_GET['action'] == 'commentAdded') {
             startSession();
 
-            if (isset($_POST['comment-text']) && isset($_GET['postId']) && isset($_SESSION['pseudo'])) {
-                addComment($_POST['comment-text'], $_GET['postId'], $_SESSION['pseudo']);
+            if (isset($_POST['comment-text']) && isset($_GET['postId']) && isset($_SESSION['id'])) {
+                addComment($_POST['comment-text'], $_GET['postId'], $_SESSION['id']);
                 
             }
             else {
@@ -198,12 +198,8 @@ try {
         elseif ($_GET['action'] == 'commentUpdated') {
             startSession();
 
-            if (isset($_GET['commentId']) && isset($_POST['comment-text']) && $_GET['commentId'] > 0) {
-                updateComment($_GET['commentId'], $_POST['comment-text']);
-
-                if (isset($_GET['postId'])) {
-                    onePostPage(NULL, $_GET['postId'], NULL);
-                }   
+            if (isset($_GET['commentId']) && isset($_POST['updated-comment']) && $_GET['commentId'] > 0) {
+                updateComment($_GET['commentId'], $_POST['updated-comment']);  
             }
 
             else {

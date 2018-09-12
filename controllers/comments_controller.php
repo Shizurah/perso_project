@@ -23,6 +23,8 @@ function getCommentToUpdate($commentId) {
 function updateComment($id, $content) {
     $commentsManager = new CommentsManager();
     $commentsManager->updateComment($id, $content);
+
+    echo '<span id="' .$id. '">' .$content. '</span>';
 }
 
 
@@ -62,9 +64,3 @@ function ignoreReportedComment($id) {
         $commentsManager->ignoreReportedComment($id);
     }
 }
-
-// function getAllComments($postId) {
-//     $commentsManager = new CommentsManager();
-//     $comments = $commentsManager->getCommentsList($postId);
-//     return $comments;
-// }
