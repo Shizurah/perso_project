@@ -16,6 +16,8 @@ class CommentsManager {
         $req->bindParam('authorId', $userId, PDO::PARAM_STR);
 
         $req->execute();
+
+        return $this->_db->lastInsertId();
     }
 
     public function getCommentsListAndUsersInfos($postId) {
@@ -42,7 +44,9 @@ class CommentsManager {
     }
 
     public function getOneComment($id) {
-        $req = $this->_db->prepare('SELECT content FROM comments WHERE id = :id');
+        $req = $this->_db->prepare('SELECT id, content, author_id, post_id, DATE_FORMAT(comment_date, \'%d/%m/%Y à %Hh%i\') AS comment_date_fr 
+                                    FROM comments 
+                                    WHERE id = :id');
         $req->bindParam('id', $id, PDO::PARAM_INT);
 
         $req->execute();
@@ -85,7 +89,7 @@ class CommentsManager {
     public function getReportedComments() {
         $reports = 1;
 
-        $req = $this->_db->prepare('SELECT id, author, content, reports, post_id, DATE_FORMAT(comment_date, \'%d/%m/%Y\') AS comment_date_fr 
+        $req = $this->_db->prepare('SELECT id, author_id, content, reports, post_id, DATE_FORMAT(comment_date, \'%d/%m/%Y\') AS comment_date_fr 
                                     FROM comments WHERE reports >= :reports 
                                     ORDER BY reports DESC');
 
