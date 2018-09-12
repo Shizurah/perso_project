@@ -1,9 +1,17 @@
-<form id="comments-form" action="<?= $formActionAttribute ?>" method="post">
-    <img src="public/members/avatars/<?= $_SESSION['avatar'] ?>" width="50" height="50" alt="avatar">
+<form id="comment-form" action="index.php?action=commentAdded&amp;postId=<?= $_GET['postId']; ?>" method="post">
+<hr/>
 
-    <textarea name="comment-text" id="comment-text" placeholder="<?= $placeholderAttribute ?>" cols="40" rows="2" <?= $autofocus ?>><?= $textareaContent ?></textarea>
+    <div id="comment-form-fields-container">
+      
+        <div id="comment-form-author-and-textarea">
+            <img src="public/members/avatars/<?= $_SESSION['avatar'] ?>" alt="avatar">
+            <textarea name="comment-text" id="comment-text" placeholder="Votre commentaire..." cols="40" rows="2"></textarea>  
+        </div>
         
-    <br/><br/>
+        <div id="comment-form-submit-btn">
+            <input type="submit" value="Publier">
+        </div>
+        
+   </div>
 
-    <input type="submit" value="Publier">
 </form>
