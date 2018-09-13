@@ -1,5 +1,7 @@
-<?php $title = 'Administration du site'; ?>
-
+<?php 
+    $title = 'Administration du site'; 
+    $other = '<link href="assets/css/administration_style.css" rel="stylesheet"';
+?>
 
 <!-- HEADER -->
 <?php 
@@ -35,7 +37,7 @@
         foreach ($reportedComments as $comment) {
     ?>
             <tr>
-                <td><?= $comment->author() ?></td>
+                <td><?= $comment->author_id() ?></td>
                 <td><?= $comment->content() ?></td>
                 <td><?= $comment->comment_date_fr() ?></td>
                 <td><?= $comment->reports() ?></td>
@@ -62,9 +64,16 @@
 
 
 <!-- FOOTER -->
-<?php ob_start(); ?>
-<?php $footer = ob_get_clean(); ?>
+<?php 
+    ob_start(); 
+    $footer = ob_get_clean(); 
 
-<?php require('template.php'); ?>
+    // SCRIPTS JS :
+    ob_start();
+        echo 
+            '<script src="assets/js/file.js"></script>';
+    $scripts = ob_get_clean();
 
-<script src="assets/js/file.js"></script>
+    require_once('template.php'); 
+?>
+

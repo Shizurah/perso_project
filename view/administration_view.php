@@ -34,10 +34,18 @@
 
 
 <!-- FOOTER -->
-<?php ob_start(); ?>
-<?php $footer = ob_get_clean(); ?>
+<?php 
+    ob_start(); 
+    $footer = ob_get_clean(); 
 
-<?php require('template.php'); ?>
+    // SCRIPTS JS :
+    ob_start();
+        echo 
+            '<script src="assets/js/file.js"></script>';
+    $scripts = ob_get_clean();
 
-<script src="assets/js/file.js"></script>
+    require('template.php'); 
+?>
+
+
 
