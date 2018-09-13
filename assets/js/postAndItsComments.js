@@ -131,10 +131,10 @@ $(function() {
         event.preventDefault();
 
         var that = $(this),
-            btnHrefAttr = that.attr('href'),
-            commentId = 'comment' + btnHrefAttr,
+            id = that.attr('href'),
+            commentId = 'comment' + id,
 
-            url = 'index.php?action=commentDeleted&commentId=' + btnHrefAttr;
+            url = 'index.php?action=commentDeleted&commentId=' + id;
 
         $.ajax({
             url: url,
@@ -152,6 +152,28 @@ $(function() {
                         $('.success-msg').remove();
                     }, 2500);
                 });
+            }
+        });
+    }); ////// FIN suppression des commentaires
+
+
+    // SIGNALEMENT DES COMMENTAIRES :
+    $('#comments-container').on('click', '.reporting-comment-btn', function(event) {
+        event.preventDefault();
+
+        var that = $(this),
+            id = that.attr('href'),
+            commentId = 'comment' + id,
+
+            url = 'index.php?action=commentReporting&commentId=' + id;
+
+        $.ajax({
+            url: url,
+            type: 'post',
+            data: '',
+
+            success: function(response) {
+                that.replaceWith(response);
             }
         });
     });
