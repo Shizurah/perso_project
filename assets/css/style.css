@@ -389,6 +389,15 @@ hr {
     cursor: pointer;
 }
 
+.success-msg {
+    padding: 20px;
+    text-align: center;
+    border-radius: 10px;
+    font-weight: bold;
+    color: rgb(50, 100, 100);
+    border:1px solid rgb(190, 233, 233);
+    background-color: rgb(233, 241, 241);
+}
 
 /* ========================= */
 /* FOOTER */
