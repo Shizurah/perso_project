@@ -39,11 +39,11 @@ function addComment($content, $postId, $userId) {
                     if ($_SESSION['id'] == $comment->author_id()) {
                     
                         echo 
-                            '<a class="updating-comment-btn" href="' .$comment->id(). '">
+                            ' <a class="updating-comment-btn" href="' .$comment->id(). '">
                                     Modifier
                             </a> - 
 
-                            <a href="index.php?action=commentDeleted&commentId=' .$comment->id(). '&postId=' .$comment->post_id(). '" 
+                            <a class="deleting-comment-btn" href="' .$comment->id(). '" 
                             onclick="return confirm(\'Êtes-vous sûr de vouloir supprimer votre commentaire ?\')">
                                     Supprimer
                             </a>';   
