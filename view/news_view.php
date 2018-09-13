@@ -136,10 +136,14 @@
     require_once('footer_template.php');
     $footer = ob_get_clean(); 
 
+    // SCRIPTS JS :
+    ob_start();
+        echo 
+            '<script>
+                document.getElementById("main-wrap").style.marginTop = "150px";
+                document.getElementById("nav-line").style.display = "none";
+            </script>';
+    $scripts = ob_get_clean();
+
     require('template.php'); 
 ?>
-
-<script>
-    document.getElementById('main-wrap').style.marginTop = '150px';
-    document.getElementById('nav-line').style.display = 'none';
-</script>
