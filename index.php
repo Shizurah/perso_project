@@ -213,14 +213,6 @@ try {
 
             if (isset($_GET['commentId']) && $_GET['commentId'] > 0) {
                 deleteComment($_GET['commentId']);
-
-                if (isset($_GET['postId'])) {
-                    onePostPage(NULL, $_GET['postId'], NULL);
-                } 
-
-                else {
-                    getReportedComments();
-                }
             }
 
             else {
