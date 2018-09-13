@@ -92,20 +92,17 @@ function updateComment($id, $content) {
 function deleteComment($id) {
 
     if (isset($_SESSION['id'])) {
-        $successMsg = '<p class="success-msg">';
         $commentsManager = new CommentsManager();
         $comment = $commentsManager->getOneComment($id);
 
         if ($_SESSION['userStatus'] == 'admin' && $_SESSION['id'] != $comment->author_id()) {
-            $successMsg = $successMsg. 'Le commentaire a bien été supprimé !</p>';
+            echo '<p class="success-msg">Le commentaire a bien été supprimé !</p>';
         }
         else {
-            $successMsg = $successMsg .'Votre commentaire a bien été supprimé !</p>';
+            echo '<p class="success-msg">Votre commentaire a bien été supprimé !</p>';
         }
 
         $commentsManager->deleteComment($id);
-
-        echo $successMsg;
     }
 }
 
