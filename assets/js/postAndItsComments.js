@@ -12,8 +12,6 @@ $(function() {
     });
 
     $('#comment-form').on('submit', function() {
-        // event.preventDefault();
-
         var that = $(this),
             url = that.attr('action'),
             type = that.attr('method'),
@@ -45,12 +43,10 @@ $(function() {
         });
 
         return false;
-    });
-    // FIN ajout de commentaires
-
+    }); ////// FIN ajout de commentaires
+    
 
     // MODIFICATION DES COMMENTAIRES :
-    // $('.comments-date-and-actions').on('click', '.updating-comment-btn', function(event) {
     $('#comments-container').on('click', '.updating-comment-btn', function(event) {
         event.preventDefault();
 
@@ -127,8 +123,7 @@ $(function() {
     
             return false;
         });
-        // 
-    });
+    }); ////// FIN modification des commentaires
 
 
     // SUPPRESSION DES COMMENTAIRES :
@@ -159,9 +154,8 @@ $(function() {
                 });
             }
         });
-
-
     });
+    
 });
 
 
