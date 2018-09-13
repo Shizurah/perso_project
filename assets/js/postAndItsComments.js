@@ -35,6 +35,11 @@ $(function() {
             success: function(response) {
                 $('#comment-text').val('');
                 commentForm.css('display', 'none');
+
+                $('.nb-of-comments').each(function() {
+                    $(this).text(parseInt(Number($(this).text())) + 1);
+                });
+
                 $('#comments-container p:first-child').after(response);
             }
         });
@@ -123,6 +128,35 @@ $(function() {
             return false;
         });
         // 
+    });
+
+
+    // SUPPRESSION DES COMMENTAIRES :
+    $('#comments-container').on('click', '.deleting-comment-btn', function(event) {
+        event.preventDefault();
+
+        var that = $(this),
+            btnHrefAttr = that.attr('href'),
+            commentId = 'comment' + btnHrefAttr,
+
+            url = 'index.php?action=commentDeleted&commentId=' + btnHrefAttr;
+
+        $.ajax({
+            url: url,
+            type: 'post',
+            data: '',
+
+            success: function(response) {
+                $('#' + commentId).fadeOut(600, function() { 
+                    $(this).replaceWith(response);
+
+                    setTimeout(function() {
+                        $('.success-msg').remove();
+                    }, 2500);
+                });
+            }
+        });
+
 
     });
 });

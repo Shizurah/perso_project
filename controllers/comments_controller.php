@@ -11,7 +11,8 @@ function addComment($content, $postId, $userId) {
     $comment = $commentsManager->getOneComment($lastCommentId);
     
     echo 
-        '<div class="comments"> 
+
+        '<div class="comments" id="comment' .$comment->id(). '"> 
 
             <div class="author-and-content">
                 <div>
@@ -91,6 +92,8 @@ function updateComment($id, $content) {
 function deleteComment($id) {
     $commentsManager = new CommentsManager();
     $commentsManager->deleteComment($id);
+
+    echo '<p class="success-msg">Votre commentaire a bien été supprimé !</p>';
 }
 
 
