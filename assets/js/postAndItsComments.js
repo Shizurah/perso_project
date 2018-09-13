@@ -147,9 +147,12 @@ $(function() {
             data: '',
 
             success: function(response) {
-                $('#' + commentId).fadeOut(600, function() { 
-                    $(this).replaceWith(response);
+                $('.nb-of-comments').each(function() {
+                    $(this).text(parseInt(Number($(this).text())) - 1);
+                });
 
+                $('#' + commentId).fadeOut(700, function() { 
+                    $(this).replaceWith(response);
                     setTimeout(function() {
                         $('.success-msg').remove();
                     }, 2500);
