@@ -50,7 +50,7 @@
 
                     <div id="reading-comments-btn" class="post-actions-btn">
                         <a href="#">
-                            <?= $nbOfComments; ?> commentaires
+                            <span class="nb-of-comments"><?= $nbOfComments; ?></span> commentaires
                         </a>
                     </div> 
 
@@ -83,13 +83,15 @@
     <!-- AFFICHAGE DES COMMENTAIRES -->
     <div id="comments-container">
 
-        <p><?= $nbOfComments; ?> COMMENTAIRES</p>
+        <p>
+            <span class="nb-of-comments"><?= $nbOfComments; ?></span> COMMENTAIRES
+        </p>
 
         <?php
             foreach($commentsAndUsersInfos as $commentAndUserInfos) {
         ?>
             <!-- id pour ancre : -->
-            <div class="comments"> 
+            <div class="comments" id="comment<?= $commentAndUserInfos->comment_id(); ?>"> 
 
                 <div class="author-and-content">
                     
@@ -124,15 +126,15 @@
                             // 1. possibilité de modifier/supprimer son commentaire :
                             if ($_SESSION['id'] == $commentAndUserInfos->author_id()) {
                             
-                                echo '<a class="updating-comment-btn" href="' .$commentAndUserInfos->comment_id(). '">
-                                         Modifier
-                                     </a> - 
+                                echo 
+                                    '<a class="updating-comment-btn" href="' .$commentAndUserInfos->comment_id(). '">
+                                        Modifier
+                                    </a> - 
 
-                                     <a href="index.php?action=commentDeleted&commentId=' .$commentAndUserInfos->comment_id(). 
-                                     '&postId=' .$commentAndUserInfos->post_id(). '" 
-                                         onclick="return confirm(\'Êtes-vous sûr de vouloir supprimer votre commentaire ?\')">
-                                         Supprimer
-                                     </a>';   
+                                    <a class="deleting-comment-btn" href="' .$commentAndUserInfos->comment_id(). '" 
+                                    onclick="return confirm(\'Êtes-vous sûr de vouloir supprimer votre commentaire ?\')">
+                                        Supprimer
+                                    </a>';   
                             }
 
                             // 2. possibilité de signaler les commentaires :
@@ -155,7 +157,7 @@
                             }
                         }   
                     ?>
-                    </div>
+                </div>
 
             </div>    
         <?php
