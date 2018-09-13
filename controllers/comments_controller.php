@@ -117,8 +117,13 @@ function deleteCommentsRelatedToAPost($postId) {
 
 
 function reportComment($id) {
-    $commentsManager = new CommentsManager(); 
-    $commentsManager->reportComment($id);
+    
+    if (isset($_SESSION['userStatus'])) {
+        $commentsManager = new CommentsManager(); 
+        $commentsManager->reportComment($id);
+
+        echo '<p class="success-msg-for-reporting-comment">Le commentaire a bien été signalé</p>';
+    }
 }
 
 
