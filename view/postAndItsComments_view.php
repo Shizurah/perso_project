@@ -129,7 +129,9 @@
                                 echo 
                                     '<a class="updating-comment-btn" href="' .$commentAndUserInfos->comment_id(). '">
                                         Modifier
-                                    </a> - 
+                                    </a>
+                                    
+                                    - 
 
                                     <a class="deleting-comment-btn" href="' .$commentAndUserInfos->comment_id(). '" 
                                     onclick="return confirm(\'Êtes-vous sûr de vouloir supprimer votre commentaire ?\')">
@@ -140,7 +142,7 @@
                             // 2. possibilité de signaler les commentaires :
                             else {
                                 echo 
-                                    '<a class="reporting-comment-btn" href="index.php?action=commentReporting&commentId=' .$commentAndUserInfos->comment_id(). '&postId=' .$commentAndUserInfos->post_id(). '"
+                                    '<a class="reporting-comment-btn" href="' .$commentAndUserInfos->comment_id(). '"
                                     onclick="return confirm(\'Êtes-vous sûr de vouloir signaler ce commentaire ?\')">
                                         Signaler
                                     </a>';
@@ -176,7 +178,8 @@
 
     // SCRIPTS JS :
     ob_start();
-        echo '<script src="assets/js/postAndItsComments.js"></script>';
+        echo 
+            '<script src="assets/js/postAndItsComments.js"></script>';
     $scripts = ob_get_clean();
 
     require('template.php'); 
