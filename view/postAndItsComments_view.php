@@ -139,21 +139,21 @@
 
                             // 2. possibilité de signaler les commentaires :
                             else {
-                                echo '<a href="index.php?action=commentReporting&commentId=' .$commentAndUserInfos->comment_id(). 
-                                     '&postId=' .$commentAndUserInfos->post_id(). '"
-                                         onclick="return confirm(\'Êtes-vous sûr de vouloir signaler ce commentaire ?\')">
-                                         Signaler
-                                     </a>';
+                                echo 
+                                    '<a class="reporting-comment-btn" href="index.php?action=commentReporting&commentId=' .$commentAndUserInfos->comment_id(). '&postId=' .$commentAndUserInfos->post_id(). '"
+                                    onclick="return confirm(\'Êtes-vous sûr de vouloir signaler ce commentaire ?\')">
+                                        Signaler
+                                    </a>';
                             }
 
                             // 3. Pour les admin, possibilité de supprimer chacun des commentaires directement depuis la page :
                             if ($_SESSION['userStatus'] == 'admin' && $_SESSION['id'] != $commentAndUserInfos->author_id()) {
 
-                                echo ' - <a href="index.php?action=commentDeleted&commentId=' .$commentAndUserInfos->comment_id(). 
-                                     '&postId=' .$commentAndUserInfos->post_id(). '"
-                                         onclick="return confirm(\'Êtes-vous sûr de vouloir supprimer ce commentaire ?\')">
-                                         Supprimer
-                                     </a>';
+                                echo 
+                                    ' - <a class="deleting-comment-btn" href="' .$commentAndUserInfos->comment_id(). '"
+                                    onclick="return confirm(\'Êtes-vous sûr de vouloir supprimer ce commentaire ?\')">
+                                        Supprimer
+                                    </a>';
                             }
                         }   
                     ?>
