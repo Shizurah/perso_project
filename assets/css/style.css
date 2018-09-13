@@ -308,8 +308,6 @@ hr {
 /* MISE EN PAGE DES COMMENTAIRES DE L'ARTICLE SELECTIONNE */
 
 #comments-container {
-    position: relative;
-    top: 50px;
     margin: 0 200px;
 }
 
