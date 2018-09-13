@@ -48,12 +48,6 @@
                 <hr/>
                 <div id="post-actions-container">
 
-                    <div id="reading-comments-btn" class="post-actions-btn">
-                        <a href="#">
-                            <span class="nb-of-comments"><?= $nbOfComments; ?></span> commentaires
-                        </a>
-                    </div> 
-
                     <!-- pour tous les membres connectés : -->
                     <!-- 1. commenter -->
                     <div id="comment-btn" class="post-actions-btn">
