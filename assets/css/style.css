@@ -360,6 +360,22 @@ hr {
     word-break: break-all;
 }
 
+.comments-date-and-actions {
+    display: flex;
+}
+
+.comments-date-and-actions i, a, p {
+    margin-right: 5px;
+}
+
+.comments-date-and-actions a:last-child {
+    margin-left: 5px;
+}
+
+.success-msg-for-reporting-comment {
+    font-weight: bold;
+}
+
 .updating-comment-form {
     display: relative;
     display: flex;
