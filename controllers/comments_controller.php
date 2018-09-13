@@ -74,9 +74,9 @@ function addComment($content, $postId, $userId) {
 }
 
 
-function getCommentToUpdate($commentId) {
+function getCommentToUpdate($id) {
     $commentsManager = new CommentsManager();
-    $comment = $commentsManager->getOneComment($commentId);
+    $comment = $commentsManager->getOneComment($id);
     return $comment;
 }
 
@@ -90,16 +90,32 @@ function updateComment($id, $content) {
 
 
 function deleteComment($id) {
-    $commentsManager = new CommentsManager();
-    $commentsManager->deleteComment($id);
 
-    echo '<p class="success-msg">Votre commentaire a bien été supprimé !</p>';
+    if (isset($_SESSION['id'])) {
+        $successMsg = '<p class="success-msg">';
+        $commentsManager = new CommentsManager();
+        $comment = $commentsManager->getOneComment($id);
+
+        if ($_SESSION['userStatus'] == 'admin' && $_SESSION['id'] != $comment->author_id()) {
+            $successMsg = $successMsg. 'Le commentaire a bien été supprimé !</p>';
+        }
+        else {
+            $successMsg = $successMsg .'Votre commentaire a bien été supprimé !</p>';
+        }
+
+        $commentsManager->deleteComment($id);
+
+        echo $successMsg;
+    }
 }
 
 
 function deleteCommentsRelatedToAPost($postId) {
-    $commentsManager = new CommentsManager();
-    $commentsManager->deleteComments($postId);
+
+    if (isset($_SESSION['userStatus']) && $_SESSION['userStatus'] == 'admin') {
+        $commentsManager = new CommentsManager();
+        $commentsManager->deleteComments($postId);
+    }   
 }
 
 
