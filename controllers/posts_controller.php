@@ -1,4 +1,5 @@
 <?php
+require_once('controllers/comments_pagination.php');
 
 function homePage() {
     $postsManager = new PostsManager();
@@ -7,14 +8,6 @@ function homePage() {
 
     require_once('view/news_view.php');
 }
-
-
-function weLovePage() {
-    $postsManager = new PostsManager();
-    $weLovePosts = $postsManager->getWeLovePostsList();
-    require_once('view/weLove_view.php');
-}
-
 
 function tvShowsPage() {
     require_once('view/tvShows_view.php');
@@ -33,19 +26,29 @@ function tinyMcePage() {
 }
 
 
+// Page d'un article et de ses commentaires :
+function onePostPage($postId) {
+    $postsManager = new PostsManager();
+    $post = $postsManager->getPost($postId);
+
+    $commentsManager = new CommentsManager();
+    $nbOfComments = $commentsManager->countNumberOfComments($postId);
+
+    require_once('view/postAndItsComments_view.php');
+}
+
+
 function addNewPost($title, $poster, $category, $content) {
 
     if (isset($_SESSION['userStatus']) && $_SESSION['userStatus'] == 'admin') {
 
-        // $postCategory = '';
-
-        if ($category == 'news') {
-            $category = 'news';
-        }
-        elseif ($category == 'next-releases') {
-            $category = 'next_releases';
-        }
-
+        // changer ces lignes :
+        // if ($category == 'news') {
+        //     $category = 'news';
+        // }
+        // elseif ($category == 'next-releases') {
+        //     $category = 'next_releases';
+        // }
         //
 
         $maxSize = 512000;
@@ -137,23 +140,6 @@ function deletePost($id) {
 
         allPostsPage();
     }
-}
-
-
-function onePostPage($action, $postId, $commentId) {
-    $comment = '';
-
-    $postsManager = new PostsManager();
-    $post = $postsManager->getPost($postId);
-
-    $commentsManager = new CommentsManager();
-    $comments = $commentsManager->getCommentsList($postId);
-
-    if (isset($action) && $action == 'commentUpdating') {
-        $comment = getCommentToUpdate($commentId);
-    }
-
-    require_once('view/postAndItsComments_view.php');
 }
 
 

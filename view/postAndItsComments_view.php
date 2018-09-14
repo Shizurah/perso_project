@@ -81,84 +81,11 @@
             <span class="nb-of-comments"><?= $nbOfComments; ?></span> COMMENTAIRES
         </p>
 
-        <?php
-            foreach($commentsAndUsersInfos as $commentAndUserInfos) {
-        ?>
-            <!-- id pour ancre : -->
-            <div class="comments" id="comment<?= $commentAndUserInfos->comment_id(); ?>"> 
+     
+    </div>
 
-                <div class="author-and-content">
-                    
-                    <!-- avatar membre -->
-                    <div>
-                        <img class="user-avatar-for-comments" src="public/members/avatars/<?= $commentAndUserInfos->author_avatar(); ?>" alt="avatar membre"/>
-                    </div>
-                    
-                    <div>
-                         <!-- pseudo membre -->
-                        <span class="authors">
-                            <?= $commentAndUserInfos->author_pseudo(); ?>
-                        </span>
-                        
-                        <!-- texte commentaire -->
-                        <span id="<?= $commentAndUserInfos->comment_id() ?>">
-                            <?= $commentAndUserInfos->comment_content(); ?>
-                        </span>                        
-                    </div>
-
-                </div>
-                
-                <div class="comments-date-and-actions">
-                    <!-- date commentaire -->
-                    <i><?= $commentAndUserInfos->comment_date_fr(); ?></i>
-                    
-                    <!-- Actions possibles sur les commentaires publiés : -->
-                    <?php
-                        // pour chaque membre connecté :
-                        if (isset($_SESSION['pseudo']) && isset($_SESSION['userStatus'])) {
-
-                            // 1. possibilité de modifier/supprimer son commentaire :
-                            if ($_SESSION['id'] == $commentAndUserInfos->author_id()) {
-                            
-                                echo 
-                                    '<a class="updating-comment-btn" href="' .$commentAndUserInfos->comment_id(). '">
-                                        Modifier
-                                    </a>
-                                    
-                                    - 
-
-                                    <a class="deleting-comment-btn" href="' .$commentAndUserInfos->comment_id(). '" 
-                                    onclick="return confirm(\'Êtes-vous sûr de vouloir supprimer votre commentaire ?\')">
-                                        Supprimer
-                                    </a>';   
-                            }
-
-                            // 2. possibilité de signaler les commentaires :
-                            else {
-                                echo 
-                                    '<a class="reporting-comment-btn" href="' .$commentAndUserInfos->comment_id(). '"
-                                    onclick="return confirm(\'Êtes-vous sûr de vouloir signaler ce commentaire ?\')">
-                                        Signaler
-                                    </a>';
-                            }
-
-                            // 3. Pour les admin, possibilité de supprimer chacun des commentaires directement depuis la page :
-                            if ($_SESSION['userStatus'] == 'admin' && $_SESSION['id'] != $commentAndUserInfos->author_id()) {
-
-                                echo 
-                                    ' - <a class="deleting-comment-btn" href="' .$commentAndUserInfos->comment_id(). '"
-                                    onclick="return confirm(\'Êtes-vous sûr de vouloir supprimer ce commentaire ?\')">
-                                        Supprimer
-                                    </a>';
-                            }
-                        }   
-                    ?>
-                </div>
-
-            </div>    
-        <?php
-        }
-        ?>
+    <div id="pagination">
+        <a href="index.php?action=display_comments&amp;postId=<?= $_GET['postId']; ?>" id="1"></a>
     </div>
 </div> <!-- FIN MAIN-WRAP -->
 <?php $section = ob_get_clean(); ?>

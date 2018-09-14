@@ -4,6 +4,7 @@
 require_once('controllers/posts_controller.php');
 require_once('controllers/comments_controller.php');
 require_once('controllers/users_controller.php');
+require_once('controllers/comments_pagination.php');
 
 function autoloading($class) {
     require 'model/' . $class . '.php';
@@ -36,10 +37,19 @@ try {
             startSession();
 
             if (isset($_GET['postId']) && $_GET['postId'] > 0) {
-                onePostPage(NULL, $_GET['postId'], NULL);
+                // 1: affichage de l'article
+                onePostPage($_GET['postId']);                 
             }
             else {
                 echo 'Cet article n\'existe pas';
+            }
+        }
+
+        elseif ($_GET['action'] == 'display_comments') {
+            startSession();
+
+            if (isset($_GET['postId']) && isset($_GET['pageId']) && isset($_GET['commentsPerPage'])){
+                displayComments($_GET['postId'], $_GET['pageId'], $_GET['commentsPerPage']);
             }
         }
 
@@ -301,4 +311,6 @@ try {
                 break;
         }
     }
+
+    throw e;
 }
