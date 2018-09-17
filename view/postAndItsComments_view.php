@@ -69,24 +69,24 @@
             } else {
                 echo '<hr/>';
             }
-                // echo '</div>';
         ?>
     </div>   
-    
+    <!---->
 
     <!-- AFFICHAGE DES COMMENTAIRES -->
     <div id="comments-container">
-
         <p>
-            <span class="nb-of-comments"><?= $nbOfComments; ?></span> COMMENTAIRES
+            <span class="nb-of-comments"><?= $nbOfComments; ?></span> 
+            COMMENTAIRES
         </p>
-
      
     </div>
 
     <div id="pagination">
         <a href="index.php?action=display_comments&amp;postId=<?= $_GET['postId']; ?>" id="1"></a>
     </div>
+    <!---->
+
 </div> <!-- FIN MAIN-WRAP -->
 <?php $section = ob_get_clean(); ?>
 
