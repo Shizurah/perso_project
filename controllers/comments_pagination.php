@@ -74,7 +74,9 @@ function displayComments($postId, $page, $commentsPerPage) {
         $comments .= '</div></div>';              
     }
 
-    echo $comments;  
-}
+    $dataBack = array('nbOfPages' => $nbOfPages, 'commentsList' => $comments);
+    $dataBack = json_encode($dataBack);
 
+    echo $dataBack;  
+}
 
