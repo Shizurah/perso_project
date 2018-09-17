@@ -1,7 +1,34 @@
 $('#actions-btns').css('display', 'none');
 
-
+// AFFICHAGE DES COMMENTAIRES EN AJAX :
 $(function() {
+    $('#pagination a').trigger('click');
+});
+
+    $('#pagination').on('click', 'a', function(event) {
+        event.preventDefault();
+
+        var that = $(this),
+            url = that.attr('href'),
+            pageId = that.attr('id'),
+            data = {
+                pageId: pageId,
+                commentsPerPage: 10
+            };
+
+        $.ajax({
+            type: 'GET',
+            url: url,
+            data: data,
+            dataType: 'html',
+
+            success: function(response) {
+                $('#comments-container p:first-child').after(response);
+            }
+
+            // error:
+        });
+    });
 
     // AJOUT DE COMMENTAIRES :
     var commentForm  = $('#comment-form');
@@ -39,6 +66,10 @@ $(function() {
                 });
 
                 $('#comments-container p:first-child').after(response);
+
+                if ($('#comments-container .comments').length > 10) {
+                    $('#comments-container .comments').last().remove();
+                }  
             }
         });
 
@@ -178,6 +209,6 @@ $(function() {
         });
     });
     
-});
-
+// });
+// });
 
