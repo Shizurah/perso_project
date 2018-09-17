@@ -8,6 +8,7 @@ class CommentsManager {
         $this->_db = DbManager::dbConnect();
     }
 
+
     public function addComment($content, $postId, $userId) {
         $req = $this->_db->prepare('INSERT INTO comments(content, comment_date, post_id, author_id) VALUES(:content, NOW(), :postId, :authorId)');
 
@@ -20,8 +21,8 @@ class CommentsManager {
         return $this->_db->lastInsertId();
     }
 
-    public function getCommentsListAndUsersInfos($postId) {
-
+    
+    public function getCommentsToDisplay($postId, $firstComment, $commentsPerPage) {
         $req = $this->_db->prepare('SELECT comments.id AS comment_id, post_id, author_id, content as comment_content,
                                            DATE_FORMAT(comment_date, \'%d/%m/%Y à %Hh%i\') AS comment_date_fr,
                                            pseudo AS author_pseudo, avatar AS author_avatar
@@ -29,9 +30,13 @@ class CommentsManager {
                                     INNER JOIN users
                                     ON comments.author_id = users.id
                                     WHERE post_id = :postId
-                                    ORDER BY comment_date DESC');
+                                    ORDER BY comment_date DESC
+                                    LIMIT :firstComment, :commentsPerPage');
 
         $req->bindParam('postId', $postId, PDO::PARAM_INT);
+        $req->bindParam('firstComment', $firstComment, PDO::PARAM_INT);
+        $req->bindParam('commentsPerPage', $commentsPerPage, PDO::PARAM_INT);
+
         $req->execute();
 
         $commentsAndUsersInfos = [];
@@ -42,6 +47,7 @@ class CommentsManager {
 
         return $commentsAndUsersInfos;
     }
+
 
     public function getOneComment($id) {
         $req = $this->_db->prepare('SELECT id, content, author_id, post_id, DATE_FORMAT(comment_date, \'%d/%m/%Y à %Hh%i\') AS comment_date_fr 
@@ -55,6 +61,7 @@ class CommentsManager {
         return new Comment($data);
     }
 
+
     public function updateComment($id, $content) {
         $req = $this->_db->prepare('UPDATE comments SET content = :content WHERE id = :id');
         $req->bindParam('id', $id, PDO::PARAM_INT);
@@ -62,6 +69,7 @@ class CommentsManager {
 
         $req->execute();
     }
+
 
     // Supprimer un commentaire :
     public function deleteComment($id) {
@@ -79,12 +87,14 @@ class CommentsManager {
         $req->execute();
     }
 
+
     public function reportComment($id) {
         $req = $this->_db->prepare('UPDATE comments SET reports = reports + 1 WHERE id = :id');
         $req->bindParam('id', $id, PDO::PARAM_INT);
 
         $req->execute();
     }
+
 
     public function getReportedComments() {
         $reports = 1;
@@ -105,6 +115,7 @@ class CommentsManager {
         return $reportedComments;
     }
 
+
     public function countReportedComments() {
         $req = $this->_db->query('SELECT COUNT(*) AS reportedComments FROM comments WHERE reports >= 1');
         $data = $req->fetch();
@@ -113,11 +124,13 @@ class CommentsManager {
         return $nbOfReportedComments;
     }
 
+
     public function ignoreReportedComment($id) {
         $req = $this->_db->prepare('UPDATE comments SET reports = 0 WHERE id = :id');
         $req->bindParam('id', $id, PDO::PARAM_INT);
         $req->execute();
     }
+
 
     public function countNumberOfComments($postId) {
         $req = $this->_db->prepare('SELECT COUNT(*) AS numberOfComments FROM comments WHERE post_id = :postId');
