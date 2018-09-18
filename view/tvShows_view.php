@@ -17,19 +17,10 @@
 
 <!-- SECTION -->
 <?php ob_start(); ?>
-    <p>Ici des séries ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
-    Ici des séries ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
-    Ici des séries ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
-    Ici des séries ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
-    Ici des séries ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
-    Ici des séries ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
-    Ici des séries ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
-    Ici des séries ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
-    Ici des séries ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
-    Ici des séries ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
-    Ici des séries ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
-    Ici des séries ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
-    </p>
+
+    <h3>SERIES DU MOMENT</h3>
+    <div id="tv-shows-container"></div>
+
     </div> <!-- FIN MAIN-WRAP -->
 <?php $section = ob_get_clean(); ?>
 
@@ -40,10 +31,8 @@
     require_once('footer_template.php');
     $footer = ob_get_clean(); 
 
+    // SCRIPTS JS :
+    $scripts = '<script src="assets/js/tvShows.js"></script>';
+
     require('template.php'); 
 ?>
-
-<script>
-    document.getElementById('actions-btns').style.display = "none";
-    document.getElementById('nav-line').style.display = 'none';
-</script>
