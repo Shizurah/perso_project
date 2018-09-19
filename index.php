@@ -5,6 +5,7 @@ require_once('controllers/posts_controller.php');
 require_once('controllers/comments_controller.php');
 require_once('controllers/users_controller.php');
 require_once('controllers/comments_pagination.php');
+require_once('controllers/tvShows_controller.php');
 
 function autoloading($class) {
     require 'model/' . $class . '.php';
@@ -53,9 +54,17 @@ try {
             }
         }
 
-        elseif ($_GET['action'] == "tvShows") {
+        elseif ($_GET['action'] == 'tvShows') {
             session_start();
             tvShowsPage();
+        }
+
+        elseif ($_GET['action'] == 'tvShow') {
+            session_start();
+
+            if (isset($_GET['tvShowId']) && $_GET['tvShowId'] > 0) {
+                tvShowDetailsPage($_GET['tvShowId']);
+            }
         }
 
         elseif ($_GET['action'] == "contact") {
