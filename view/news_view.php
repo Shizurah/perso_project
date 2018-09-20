@@ -28,6 +28,7 @@
             <div class="row">
                 <h2 class="col-lg-12">ACTUS</h2>
             </div>
+            <hr class="title-separations"/>
 
             <br/>
 
@@ -89,7 +90,7 @@
                     PROCHAINES SORTIES 
                 </h2>
             </div>
-
+            <hr class="title-separations"/>
             <br/>
 
             <?php
