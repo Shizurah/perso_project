@@ -19,6 +19,7 @@
 <?php ob_start(); ?>
 
     <h3>SERIES DU MOMENT</h3>
+    <hr class="title-separations"/>
     <div id="tv-shows-container"></div>
 
     </div> <!-- FIN MAIN-WRAP -->
@@ -27,9 +28,9 @@
 
 <!-- FOOTER -->
 <?php 
-    ob_start(); 
-    require_once('footer_template.php');
-    $footer = ob_get_clean(); 
+    // ob_start(); 
+    // require_once('footer_template.php');
+    $footer = '';
 
     // SCRIPTS JS :
     $scripts = '<script src="assets/js/tvShows.js"></script>';
