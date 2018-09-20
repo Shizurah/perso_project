@@ -51,9 +51,16 @@
 
         <hr/>
 
-        <p id="tv-show-nb-of-episodes-and-seasons">
-            <?= $phpResponse->{'number_of_seasons'}; ?> saisons et <?= $phpResponse->{'number_of_episodes'}; ?> épisodes
-        </p>
+        <div id="second-intro-container">
+            <p id="tv-show-nb-of-episodes-and-seasons">
+                <?= $phpResponse->{'number_of_seasons'}; ?> saisons et <?= $phpResponse->{'number_of_episodes'}; ?> épisodes
+            </p>
+                    
+            <div>
+                <button>Recevoir les notifications</button>
+                <p>(bientôt disponible)</p>
+            </div>
+        </div>
     </div>
 
     <div id="tv-show-details">
@@ -70,7 +77,7 @@
         $productionCompanies = '<span>Compagnies de production</span>: ';
         
         for ($i = 0; $i < count($phpResponse->{'created_by'}); $i++) {
-            $creators .= $phpResponse->{'created_by'}[$i]->{'name'}. ', ';
+            $creators .= '<a href="https://www.themoviedb.org/person/' .$phpResponse->{'created_by'}[$i]->{'id'}. '">' .$phpResponse->{'created_by'}[$i]->{'name'}. '</a>, ';
         }
 
         for ($i = 0; $i < count($phpResponse->{'genres'}); $i++) {
@@ -88,7 +95,7 @@
             <!-- <p id="tv-show-genres"><?= substr($genres, 0, -2) ?></p> -->
             <p id="tv-show-production-companies"><?= substr($productionCompanies, 0, -2) ?></p>
             
-            <p id="tv-show-first-release">Première diffusion: <?= $phpResponse->{'first_air_date'}; ?></p>
+            <p id="tv-show-first-release"><span>Première diffusion</span>: <?= $phpResponse->{'first_air_date'}; ?></p>
 
             <!-- <p id="tv-show-nb-of-episodes-and-seasons">
                 <?= $phpResponse->{'number_of_seasons'}; ?> saisons et <?= $phpResponse->{'number_of_episodes'}; ?> épisodes
@@ -132,10 +139,11 @@
                     diffusion le <?= $phpResponse->{'next_episode_to_air'}->{'air_date'}; ?>
                 </p>
             </div>
+            <hr/>
         <?php
         }
         ?>
-
+        
         <!-- Dernier épisode : -->
         <?php
         $lastEpisodeId = $phpResponse->{'last_episode_to_air'}->{'episode_number'};

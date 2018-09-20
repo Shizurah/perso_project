@@ -471,9 +471,6 @@ hr {
 
 #tv-shows-container div {
     position: relative;
-    width: 200px;
-    height: 291px;
-    padding: 10px;
 }
 
 .img-containers img {
@@ -483,6 +480,8 @@ hr {
 
 #tv-shows-container a {
     position: absolute;
+    top: 0;
+    left: 0;
     z-index: 5;
     display: block;
     width: 100%;
@@ -497,12 +496,9 @@ hr {
 
 /* détails série sélectionnée */
 #tv-show-container {
-    box-shadow: 12px 0 15px -4px rgba(49, 50, 51, 0.8), -12px 0 8px -4px rgba(49, 50, 51, 0.8);
-}
-
-#tv-show-container {
     position: relative;
     top: -85px;
+    box-shadow: 12px 0 15px -4px rgba(49, 50, 51, 0.8), -12px 0 8px -4px rgba(49, 50, 51, 0.8);
 }
 
 #tv-show-intro {
@@ -511,10 +507,72 @@ hr {
     color: grey;
 }
 
-#tv-show-intro div:first-child {
+#tv-show-intro div:first-child,
+#second-intro-container {
     display: flex;
+    position: relative;
+}
+
+#tv-show-intro div:first-child {
     padding: 10px 20px 0px 20px;
 }
+
+#second-intro-container {
+    align-items: center;
+    height: 70px;
+}
+
+#tv-show-note,
+#second-intro-container div {
+    position: absolute;
+    right: 30px;
+}
+
+#second-intro-container div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    top: 10px;
+}
+
+#second-intro-container div p {
+    margin-bottom: 0;
+    margin-top: 5px;
+}
+
+#second-intro-container button {
+    border: none;
+    padding: 5px 15px;
+    border-radius: 5px;
+    background-color: rgb(255, 230, 0);
+    /* border: 2px solid grey; */
+    color: rgb(68, 68, 68);
+    font-weight: bold;
+}
+
+/* note de la série : */
+#tv-show-note {
+    display: flex;
+    align-items: baseline;
+    margin: 0;
+    top: 15px;
+}
+
+#tv-show-note span:first-child {
+    position: relative;
+    top: -3px;
+}
+
+#tv-show-note span {
+    font-size: 2em;
+    color: white;
+}
+
+#tv-show-note img {
+    width: 30px;
+    margin-right: 3px;
+}
+/* // */
 
 #tv-show-intro hr {
     margin-bottom: 10px;
@@ -539,35 +597,14 @@ hr {
 }
 
 #tv-show-genres,
-#tv-show-nb-of-episodes-and-seasons {
+#tv-show-nb-of-episodes-and-seasons,
+#second-intro-container div p {
     font-size: 0.9em;
 }
 
 #tv-show-nb-of-episodes-and-seasons {
     margin-bottom: 0;
     padding: 0 73px;
-}
-
-#tv-show-note {
-    display: flex;
-    align-items: baseline;
-    margin: 0;
-}
-
-#tv-show-note span:first-child {
-    position: relative;
-    top: -3px;
-}
-
-#tv-show-note span {
-    font-weight: bold;
-    font-size: 1.2em;
-    color: white;
-}
-
-#tv-show-note img {
-    width: 25px;
-    margin-right: 3px;
 }
 
 #tv-show-details {
@@ -579,8 +616,12 @@ hr {
 }
 
 #tv-show-episodes {
-    padding: 50px;
+    padding: 40px;
     background-color: rgb(245, 245, 245);
+}
+
+#tv-show-last-episode p {
+    margin-bottom: 0px;
 }
 
 #tv-show-overview,
@@ -593,6 +634,11 @@ hr {
     font-size: 0.95em;
     margin: 0;
 } 
+
+#tv-show-infos span {
+    font-weight: bold;
+    color: #4f5050;
+}
 
 #tv-show-overview p {
     font-size: 1em;  
