@@ -1,7 +1,5 @@
 <?php
 
-// use \eloise\projet5\CommentsManager;
-
 function addComment($content, $postId, $userId) {
     $content = nl2br($content);
 
