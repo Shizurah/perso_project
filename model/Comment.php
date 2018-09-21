@@ -1,7 +1,5 @@
 <?php
 
-// namespace eloise\projet5;
-
 class Comment {
 
     private $_id;
