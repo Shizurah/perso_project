@@ -1,7 +1,7 @@
 <header>
 
     <!-- MENU  -->
-    <nav>
+    <nav id="nav">
         <?php 
             if (isset($_SESSION['userStatus']) && $_SESSION['userStatus'] == 'admin') {
                 echo '<a href="index.php?action=administration">Administration</a>';
@@ -35,7 +35,7 @@
         </div>
 
         <!-- BOUTONS RESEAUX SOCIAUX -->
-        <div id="actions-btns" class="row">
+        <!-- <div id="actions-btns" class="row">
 
             <div class="network-logo col-lg-2 col-md-2 col-sm-2 col-xs-2">
                 <a href="#"><img src="public/images/logo_fb1.png" alt="logo Facebook"/></a>
@@ -53,7 +53,7 @@
                 <a href="index.php?action=tvShows">Suivre les séries !</a> 
             </div>
               
-        </div>
+        </div> -->
         
     </div>   
     
