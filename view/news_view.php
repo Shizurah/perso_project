@@ -60,7 +60,7 @@
                                     <?= $post->content(). '... '; ?>
                                     <i>
                                         <a href="index.php?action=post_and_comments&amp;postId=<?= $post->id(); ?>">
-                                            Lire la suite (...)
+                                            Lire l'article 
                                         </a>
                                     </i>
                                 </p>
