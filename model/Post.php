@@ -70,7 +70,7 @@ class Post {
     }
 
     public function setCategory($category) {
-        $valid_categories = array('news', 'we_love');
+        $valid_categories = array('news', 'next_releases');
 
         if (is_string($category)) {
             if (in_array($category, $valid_categories)) {
