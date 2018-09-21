@@ -182,7 +182,7 @@
     $footer = ob_get_clean(); 
 
     // SCRIPTS JS :
-    $scripts = '<script src="assets/js/tvShows.js"></script>';
+    $scripts = '<script src="assets/js/tvShow.js"></script>';
 
     require('template.php'); 
 ?>
