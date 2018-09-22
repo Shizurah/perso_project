@@ -26,15 +26,32 @@ $.ajax({
     }
 });
 
-// FAIRE UNE VERIF DES PARAMETRES (if 'query')
-// Recherche de séries par mots-clé:
+// récuperation des genres disponibles pour les séries
+$.ajax({
+    url: 'https://api.themoviedb.org/3/genre/tv/list?api_key=' + key + '&language=fr',
+    type: 'GET',
+    dataType: 'json',
+
+    success: function(genresList) {
+        console.log(genresList);
+        
+        genresList.genres.forEach(function(genre) {
+            $('#genres-selection').append('<option value="' + genre.id + '">' + genre.name + '</option>');
+        });
+
+        $('#genres-selection').selectpicker('refresh');
+    }
+});
+
+
 $(function() {
     $('#search-input').on('focus', function() {
         $('#search-input').css('border-radius', '4px');
     });
 
-    $('form').on('submit', function(event) {
-        keywords = $('#search-input').val();
+    // Recherche de séries par MOTS-CLE:
+    $('#search-form').on('submit', function(event) {
+        var keywords = $('#search-input').val(); // changement ici
 
         $.ajax({
             url: 'https://api.themoviedb.org/3/search/tv',
@@ -69,6 +86,46 @@ $(function() {
 
         return false;
     });
+
+    // Recherche de séries par FILTRES :
+    $('#discover-form').on('submit', function(event) {
+        var that = $(this),
+        
+
+        $.ajax({
+            url: 'https://api.themoviedb.org/3/discover/tv',
+            type: 'GET',
+            data: {
+                api_key: key,
+                language: 'fr',
+                sort_by: sortBy,
+                genres: genres
+            },
+            dataType: 'json',
+        
+            success: function(tvShows) {
+                // $('#search-input').val('');
+                $('#tv-shows-container div').remove();
+
+                console.log(tvShows);
+
+                tvShows.results.forEach(function(tvShow) {
+                    if (tvShow.poster_path != null) {
+                        $('#tv-shows-container').append('<div><a class="tv-shows-links" id="' + tvShow.id 
+                                                            + '" href="index.php?action=tvShow&amp;tvShowId=' + tvShow.id 
+                                                            + '"></a><div id="' + tvShow.name + '" class="img-containers"><img src="https://image.tmdb.org/t/p/w200' 
+                                                            + tvShow.poster_path + '"/></div></div>');
+                    }
+                });
+
+                pageId = 1;
+                url = 'https://api.themoviedb.org/3/search/tv?&api_key=' + key + '&language=fr&genres=' + genres + '&sortBy=' + sortBy;
+                totalOfPages = tvShows.total_pages;
+            }
+        });
+
+        return false;
+    });
 });
 
 // chargement d'autres séries :
@@ -79,7 +136,6 @@ $(window).scroll(function() {
         if ($(window).scrollTop() + $(window).height() > $(document).height() - 30) {
             
             pageId += 1;
-
             $.ajax({
                 url: url,
                 type: 'GET',
