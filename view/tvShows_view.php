@@ -23,7 +23,7 @@
 
     <hr class="title-separations"/>
 
-    <h4>Par mots-clé</h4>
+    <h5>Par mots-clé</h4>
 
     <hr/>
 
@@ -34,24 +34,23 @@
         </p>
     </form>
 
-    <h4>Par filtres</h4>
+    <h5>Par filtres</h4>
 
     <hr/>
 
     <form id="discover-form">
         <p>
             Genres :
-            <select name="genres-selection" id="genres-selection" class="selectpicker" data-live-search="true" multiple>
+            <select name="with_genres" id="genres-selection" class="selectpicker" data-live-search="true" multiple>
             </select>
         </p>
 
         <p>
             Trier par :
-            <select class="selectpicker" id="sort-by-selection">
-                <!-- <option value="" disabled selected>Classer par</option> -->
-                <option>Popularité</option>
-                <option>Note</option>
-                <option>1ere date de diffusion</option>
+            <select name="sort_by" id="sort-by-selection" class="selectpicker">
+                <option value="popularity.desc">Popularité</option>
+                <option value="vote_average.desc">Note</option>
+                <option value="first_air_date.desc">1ere date de diffusion</option>
             </select>
         </p>
 
@@ -60,7 +59,7 @@
 
     <br/>
     
-    <h3>SERIES POPULAIRES</h3>
+    <h3 id="tv-shows-category-title">Séries populaires cette semaine</h3>
     <hr class="title-separations"/>
 
     <div id="tv-shows-container">

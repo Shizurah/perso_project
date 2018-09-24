@@ -4,8 +4,9 @@ body {
 }
 
 #main-wrap {
+    /* position: relative; */
     background-color: white;
-    padding-bottom: 150px;
+    padding-bottom: 100px;
 }
 
 header {
@@ -463,8 +464,52 @@ hr {
 
 /* ========================= */
 /* PAGE DES SERIES TV */
+#search-container {
+    display: flex;
+    align-items: center;
+    
+    width: 35%;
+    border: 2px solid #ced4da;
+    border-radius: 4px;
+}
+
+#search-container input {
+    height: 100%;
+    border: none;
+    border-radius: 0;
+    border-right: 1px solid #ced4da;
+}
+
+#search-container button {
+    height: 36px;
+    border: none;
+    background-color: white;
+    cursor: pointer;
+}
+
+#search-container button:hover {
+    background-color: #ced4da;
+}
+
+#search-container img {
+    width: 30px;
+}
+
+#discover-form {
+    display: flex;
+    justify-content: center;
+}
+
+#discover-form p {
+    padding: 10px 20px;
+}
+
+#discover-form input:last-child:hover {
+    cursor: pointer;
+}
 
 #tv-shows-container {
+    position: relative;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -479,7 +524,7 @@ hr {
     height: 100%;
 }
 
-#tv-shows-container a {
+.tv-shows-links {
     position: absolute;
     top: 0;
     left: 0;
@@ -490,14 +535,25 @@ hr {
     border: 10px solid white;
 }
 
-#tv-shows-container a:hover {
+.tv-shows-links:hover {
     border: 10px solid yellow;
     background-color: rgba(12, 12, 12, 0.7);
 }
 
-#loading-img {
-    position: relative;
-    top: 50px;
+#loading-img-container {
+    width: 100%;
+    text-align: center;
+}
+
+#scroll-up-arrow {
+    position: fixed;
+    z-index: 10;
+    bottom: 40px;
+    right: 505px;
+}
+
+#scroll-up-arrow :hover {
+    background-color:rgb(49, 50, 51);
 }
 
 /* détails série sélectionnée */
