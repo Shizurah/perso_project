@@ -15,6 +15,7 @@ header {
 
 section {
     margin-top: 50px;
+    min-height: 850px;
 }
 
 /* ========================= */
@@ -464,10 +465,59 @@ hr {
 
 /* ========================= */
 /* PAGE DES SERIES TV */
+
+#tv-shows-page-info {
+    margin-bottom: 30px;
+    padding: 25px;
+    text-align: center;
+    border: 1px solid grey;
+    border-radius: 10px;
+    background-color: rgb(46, 45, 45);
+    color: white;
+}
+
+#tv-shows-page-info a {
+    display: block;
+    width: 130px;
+    margin: auto;
+    margin-top: 3px;
+    padding-bottom: 2px;
+    font-size: 0.8em;
+    color: rgb(32, 32, 32);
+    border-radius: 3px;
+    background-color: rgb(255, 238, 0);
+}
+
+#tv-shows-page-info a:hover {
+    text-decoration: none;
+    background-color: white;
+    font-weight: bold;
+    color: black;
+}
+
+#forms-container {
+    padding: 0 100px;
+}
+
+.search-arrows {
+    width: 25px;
+}
+
+#tv-shows-research-show {
+    margin-bottom: 15px;
+    border-bottom: 1px solid grey;
+    padding: 20px 0 10px 0;
+}
+
+h5 {
+    text-decoration: underline;
+    margin-bottom: 0;
+    font-size: 1.1em;
+}
+
 #search-container {
     display: flex;
     align-items: center;
-    
     width: 35%;
     border: 2px solid #ced4da;
     border-radius: 4px;
@@ -495,13 +545,16 @@ hr {
     width: 30px;
 }
 
+#search-form {
+    padding-top: 10px;
+}
+
 #discover-form {
     display: flex;
-    justify-content: center;
 }
 
 #discover-form p {
-    padding: 10px 20px;
+    padding: 10px 15px;
 }
 
 #discover-form input:last-child:hover {

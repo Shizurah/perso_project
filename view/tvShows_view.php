@@ -19,43 +19,61 @@
 <!-- SECTION -->
 <?php ob_start(); ?>
 
-    <h3>RECHERCHER DES SERIES</h3>
+    <p id="tv-shows-page-info">
+        <img src="public/images/info_tv_shows.png" alt="info bulle">
+        Vous pourrez bientôt suivre vos séries préférées sur cette page, et retrouver chaque semaine leurs notifications dans votre espace !<br/>
+        <?php
+            if (!isset($_SESSION['id']) && !isset($_SESSION['userStatus'])) {
+                echo '<a href="index.php?action=connexionPage">Créer un compte</a>';
+            }
+        ?>
+    </p>
 
-    <hr class="title-separations"/>
+    <div id="forms-container">
+        <h3 id="tv-shows-research-show">
+            RECHERCHER DES SERIES 
+        </h3>
 
-    <h5>Par mots-clé</h4>
+        <!-- recherche par mots-clé -->
+        <div id="key-words-search-show">
+            <h5>
+                Par <span>mots-clé</span>
+            </h5>
+        </div>
+        
+        <form id="search-form">
+            <p id="search-container">
+                <input class="form-control" id="search-input" type="text" placeholder="Recherche...">
+                <button type="submit"><img src="public/images/search_icon.png" alt="icône de recherche"></button> 
+            </p>
+        </form>
 
-    <hr/>
+        <!-- recherche par filtres -->
+        <div id="filters-search-show">
+            <h5>
+                Par <span>filtres</span> 
+            </h5>
+        </div>
 
-    <form id="search-form">
-        <p id="search-container">
-            <input class="form-control" id="search-input" type="text" placeholder="Recherche...">
-            <button type="submit"><img src="public/images/search_icon.png" alt="icône de recherche"></button> 
-        </p>
-    </form>
+        <form id="discover-form">
+            <p>
+                Genres :
+                <select name="with_genres" id="genres-selection" class="selectpicker" data-live-search="true" multiple>
+                </select>
+            </p>
 
-    <h5>Par filtres</h4>
+            <p>
+                Trier par :
+                <select name="sort_by" id="sort-by-selection" class="selectpicker">
+                    <option value="popularity.desc">Popularité</option>
+                    <option value="vote_average.desc">Note</option>
+                    <option value="first_air_date.desc">1ere date de diffusion</option>
+                </select>
+            </p>
 
-    <hr/>
-
-    <form id="discover-form">
-        <p>
-            Genres :
-            <select name="with_genres" id="genres-selection" class="selectpicker" data-live-search="true" multiple>
-            </select>
-        </p>
-
-        <p>
-            Trier par :
-            <select name="sort_by" id="sort-by-selection" class="selectpicker">
-                <option value="popularity.desc">Popularité</option>
-                <option value="vote_average.desc">Note</option>
-                <option value="first_air_date.desc">1ere date de diffusion</option>
-            </select>
-        </p>
-
-        <p><input type="submit" value="FILTRER"></p>
-    </form>
+            <p><input type="submit" value="FILTRER"></p>
+        </form>
+    </div>
 
     <br/>
     
