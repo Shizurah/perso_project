@@ -75,13 +75,15 @@ $other = '<link href="assets/css/administration_style.css" rel="stylesheet"';
 
 
 <!-- FOOTER -->
-<?php ob_start(); ?>
+<?php 
+    ob_start(); 
+    $footer = ob_get_clean(); 
 
-<p>Ici des infos en bas de page</p>
-<a href="index.php?action=contact">Contact</a>
+    // SCRIPTS JS :
+    ob_start();
+        echo 
+            '<script src="assets/js/file.js"></script>';
+    $scripts = ob_get_clean();
 
-<?php $footer = ob_get_clean(); ?>
-
-<?php require('template.php'); ?>
-
-<script src="assets/js/file.js"></script>
+    require_once('template.php'); 
+?>
