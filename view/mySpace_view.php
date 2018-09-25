@@ -77,10 +77,15 @@
 <!-- FOOTER -->
 <?php 
     ob_start(); 
-    require_once('footer_template.php');
+        require_once('footer_template.php');
     $footer = ob_get_clean(); 
 
-    require('template.php'); 
+    // SCRIPTS JS :
+    ob_start();
+        echo 
+            '<script src="assets/js/file.js"></script>';
+    $scripts = ob_get_clean();
+
+    require_once('template.php'); 
 ?>
 
-<script src="assets/js/file.js"></script>
