@@ -17,7 +17,7 @@
         <input type="radio" name="postCategory" value="news" id="news" <?= $isNewsCategoryChecked ?>>
         <br/>
         <label for="next-releases">Prochaines sorties</label>
-        <input type="radio" name="postCategory" value="next-releases" id="next-releases" <?= $isNextReleasesCategoryChecked ?>>
+        <input type="radio" name="postCategory" value="next_releases" id="next_releases" <?= $isNextReleasesCategoryChecked ?>>
     </p>
 
     <textarea name="postContent" id="postContent" cols="30" rows="10"><?= $postContent ?></textarea>
