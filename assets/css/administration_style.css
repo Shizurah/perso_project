@@ -1,3 +1,39 @@
 body {
     background: url('');
 }
+
+#nav-line {
+    display: none;
+}
+
+#error-msg-container {
+    position: relative;
+    top: -25px;
+    padding-top: 200px;
+    padding-left: 500px;
+    height: 700px;
+    background-color: rgb(46, 45, 45);
+}
+
+#error-msg-container p {
+    font-size: 2.5em;
+    color: white;
+}
+
+#error-msg-container a {
+    display: block;
+    padding: 10px;
+    width: 180px;
+    text-align: center;
+    background-color: white;
+    color: grey;
+    border: 1px solid grey;
+    border-radius: 5px;
+}
+
+#error-msg-container a:hover {
+    text-decoration: none;
+    border: 1px solid white;
+    background-color: grey;
+    color: white;
+}

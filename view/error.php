@@ -22,6 +22,7 @@
         <p>
             <?= $errorMsg; ?>
         </p>
+        <a href="index.php">Retour page d'accueil</a>
     </div>
 <?php
     
