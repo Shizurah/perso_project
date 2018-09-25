@@ -1,0 +1,17 @@
+ErrorDocument 400 http://localhost/projets_openclassrooms/projet5/index.php?error=400
+
+ErrorDocument 401 http://localhost/projets_openclassrooms/projet5/index.php?error=401
+
+ErrorDocument 403 http://localhost/projets_openclassrooms/projet5/index.php?error=403
+
+ErrorDocument 404 http://localhost/projets_openclassrooms/projet5/index.php?error=404
+
+ErrorDocument 500 http://localhost/projets_openclassrooms/projet5/index.php?error=500
+
+ErrorDocument 503 http://localhost/projets_openclassrooms/projet5/index.php?error=503
+
+ErrorDocument 504 http://localhost/projets_openclassrooms/projet5/index.php?error=504
+
+
+
+
