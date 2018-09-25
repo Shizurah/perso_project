@@ -7,7 +7,7 @@
 <!-- HEADER -->
 <?php 
     ob_start(); 
-
+    $h1Header = '';
     require('header_template.php'); 
 
     $header = ob_get_clean(); 
@@ -44,8 +44,9 @@
             '<script src="assets/js/file.js"></script>';
     $scripts = ob_get_clean();
 
-    require('template.php'); 
+    require_once('template.php'); 
 ?>
+
 
 
 
