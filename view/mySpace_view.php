@@ -30,20 +30,36 @@
     
 
     <div id="avatar-form-container">
-        <p><img src="public/members/avatars/<?= $_SESSION['avatar'] ?>" alt="avatar"></p>
+        <h3 id="change-avatar-title">MODIFIER VOTRE AVATAR</h3>
 
-        <h3>Modifier votre avatar</h3>
+        <div id="avatar-form">
+            <p id="personal-space-avatar"><img  src="public/members/avatars/<?= $_SESSION['avatar'] ?>" alt="avatar"></p>
 
-        <form action="index.php?action=avatar" method="post" enctype="multipart/form-data">
-            <p>
-                <input type="hidden" name="max-file-size" value="204800"> <!-- valeur en octets -->
-                <input type="file" name="avatar">
-            </p>
-            
-            <input type="submit" name="submit-avatar" value="Importer votre avatar">
-        </form>
+            <div>
+                <form action="index.php?action=avatar" method="post" enctype="multipart/form-data">
+                    <p>
+                        <input type="hidden" name="max-file-size" value="204800"> <!-- valeur en octets -->
+                        <input type="file" name="avatar">
+                    </p>
+                    
+                    <input type="submit" name="submit-avatar" value="Valider">
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div id="personal-space-tv-shows-container">
+        <h3 id="personal-space-tv-shows-title">VOS SERIES<br/> (bientôt disponible)</h3>
+        <p>
+            <img src="public/images/banniere/popcorn1.png" alt="popcorn">
+        </p>
     </div>
     
+    
+    <!-- <div>
+        <h3>Vos séries (bientôt disponbile)</h3>
+        <hr class="title-separation"/>
+    </div> -->
 
 
     <!-- <h3>Modifier vos informations</h3>
@@ -93,7 +109,9 @@
     // SCRIPTS JS :
     ob_start();
         echo 
-            '<script src="assets/js/file.js"></script>';
+            '<script>
+                $("section").css("margin-top", "-11px");
+            </script>';
     $scripts = ob_get_clean();
 
     require_once('template.php'); 

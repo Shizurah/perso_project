@@ -16,7 +16,7 @@ header {
 section {
     padding: 0 20px;
     margin-top: 50px;
-    min-height: 850px;
+    min-height: 800px;
 }
 
 /* ========================= */
@@ -527,7 +527,8 @@ hr {
     width: 25px;
 }
 
-#tv-shows-research-show {
+#tv-shows-research-show,
+#change-avatar-title {
     margin-bottom: 15px;
     border-bottom: 1px solid grey;
     padding: 20px 0 10px 0;
@@ -633,7 +634,7 @@ h5 {
     background-color:rgb(49, 50, 51);
 }
 
-/* détails série sélectionnée */
+/* PAGE DES DETAILS D'UNE SERIE */
 #tv-show-container {
     position: relative;
     top: -100px;
@@ -783,6 +784,63 @@ h5 {
     font-size: 1em;  
 } 
 
+
+/* ========================= */
+/* PAGE 'MON ESPACE' */
+
+#avatar-form-container {
+    border: 2px solid rgb(192, 190, 190);
+    border-radius: 10px;
+    margin: 30px 80px;
+    padding: 10px 100px;
+}
+
+#personal-space-tv-shows-container {
+    margin-top: 80px;
+}
+
+#avatar-form {
+    display: flex;
+    align-items: center;
+}
+
+#personal-space-avatar {
+    width: 180px;
+    overflow: hidden;
+    border: 1px solid grey;
+    border-radius: 50%;
+    margin-right: 30px;
+}
+
+#personal-space-avatar img {
+    width: 100%;
+    height: 100%;
+}
+
+#avatar-form form input {
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+
+#personal-space-tv-shows-title {
+    margin: 0px 80px;
+    padding: 10px;
+    background-color: rgb(245, 245, 245);
+    text-align: center;
+    border: 1px solid rgb(226, 225, 225);
+    border-radius: 10px;
+    color: rgb(70, 69, 69);
+}
+
+#personal-space-tv-shows-container p {
+    margin-top: 50px;
+    text-align: center;
+}
+
+#personal-space-tv-shows-container p img {
+    width: 300px;
+}
+
 /* ========================= */
 /* FOOTER */
 
@@ -790,7 +848,7 @@ footer {
     position: relative;
     z-index: 10;
     background-color: rgb(35, 35, 35);
-    height: 100px;
+    height: 150px;
     padding: -15px;
 }
 
