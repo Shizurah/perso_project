@@ -3,7 +3,6 @@
 
     <head>
         <meta charset="utf-8"/>
-
         <title>Rédiger article</title>
         <!-- BOOTSTRAP -->
         <link href="bootstrap/css/bootstrap.css" rel="stylesheet">
@@ -19,12 +18,12 @@
     </head>
 
     <body>
-        <div class="container">
-            <?php 
-                $h2Header = '';
-                require('header_template.php');
 
-                // echo '<h2>Gestion du site</h2>';
+        <div class="container">
+
+            <?php 
+                $h1Header = '';
+                require('header_template.php');
                 require('asideForAdministration_template.php'); 
             ?>
 
