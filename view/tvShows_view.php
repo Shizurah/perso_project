@@ -19,15 +19,18 @@
 <!-- SECTION -->
 <?php ob_start(); ?>
 
-    <p id="tv-shows-page-info">
-        <img src="public/images/info_tv_shows.png" alt="info bulle">
-        Vous pourrez bientôt suivre vos séries préférées sur cette page, et retrouver chaque semaine leurs notifications dans votre espace !<br/>
+    <div id="tv-shows-page-info-container">
+        <div id="tv-shows-page-info">
+            <img src="public/images/info_tv_shows.png" alt="info bulle">
+            Vous pourrez bientôt suivre vos séries préférées sur cette page, et retrouver chaque semaine leurs notifications dans votre espace !<br/>
+        </div>
+
         <?php
             if (!isset($_SESSION['id']) && !isset($_SESSION['userStatus'])) {
                 echo '<a href="index.php?action=connexionPage">Créer un compte</a>';
             }
         ?>
-    </p>
+    </div>
 
     <div id="forms-container">
         <h3 id="tv-shows-research-show">

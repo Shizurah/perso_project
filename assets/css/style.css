@@ -14,6 +14,7 @@ header {
 }
 
 section {
+    padding: 0 20px;
     margin-top: 50px;
     min-height: 850px;
 }
@@ -335,6 +336,7 @@ hr {
     display: flex;
     align-items: center;
     padding: 10px 12px;
+    font-size: 1.1em;
     border-radius: 50px;
     background-color: rgb(46, 45, 45);
     color: white;
@@ -466,7 +468,7 @@ hr {
 /* ========================= */
 /* PAGE DES SERIES TV */
 
-#tv-shows-page-info {
+#tv-shows-page-info-container {
     margin-bottom: 30px;
     padding: 25px;
     text-align: center;
@@ -476,7 +478,29 @@ hr {
     color: white;
 }
 
-#tv-shows-page-info a {
+#tv-shows-page-info {
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+}
+
+#tv-shows-page-info p {
+    padding-bottom: 4px;
+    border-bottom: 1px solid yellow;
+}
+
+#tv-shows-page-info span {
+    font-size: 1.4em;
+    font-weight: bold;
+}
+
+#tv-shows-page-info img {
+    margin-right: 10px;
+    width: 50px;
+    height: 50px;
+}
+
+#tv-shows-page-info-container a {
     display: block;
     width: 130px;
     margin: auto;
@@ -488,7 +512,7 @@ hr {
     background-color: rgb(255, 238, 0);
 }
 
-#tv-shows-page-info a:hover {
+#tv-shows-page-info-container a:hover {
     text-decoration: none;
     background-color: white;
     font-weight: bold;
