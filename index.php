@@ -2,10 +2,11 @@
 
 // appel des fichiers + classes
 require_once('controllers/posts_controller.php');
-require_once('controllers/comments_controller.php');
-require_once('controllers/users_controller.php');
-require_once('controllers/comments_pagination.php');
 require_once('controllers/tvShows_controller.php');
+require_once('controllers/users_controller.php');
+require_once('controllers/comments_controller.php');
+require_once('controllers/errors_controller.php');
+
 
 function autoloading($class) {
     require 'model/' . $class . '.php';
@@ -13,7 +14,6 @@ function autoloading($class) {
 
 spl_autoload_register('autoloading');
 
-// 
 
 function startSession() {
     if (!isset($_SESSION)) {
@@ -21,20 +21,14 @@ function startSession() {
     }
 }
 
-//
 
 try {
 
     if (isset($_GET['action'])) {
 
         // Pages du site :
-    
-        if ($_GET['action'] == "weLove") {
-            session_start();
-            weLovePage();
-        }
 
-        elseif ($_GET['action'] == 'post_and_comments') {
+        if ($_GET['action'] == 'post_and_comments') {
             startSession();
 
             if (isset($_GET['postId']) && $_GET['postId'] > 0) {
@@ -276,12 +270,13 @@ try {
     // Par défaut : affichage de la page d'accueil du site
     else {
         session_start();
-        homePage();
-        // test :
-    //     mail(
-    //         'shizurah@gmail.com',
-    //         'Works!',
-    //         'An email has been generated from your localhost, congratulations!');
+
+        if (isset($_GET['error'])) {
+            displayErrorMsg($_GET['error']);
+        }
+        else {
+            homePage();
+        }         
     }
 
 
