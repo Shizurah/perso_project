@@ -1,5 +1,4 @@
 <?php
-
 // appel des fichiers + classes
 require_once('controllers/posts_controller.php');
 require_once('controllers/tvShows_controller.php');
@@ -186,7 +185,7 @@ try {
         elseif ($_GET['action'] == 'commentAdded') {
             startSession();
 
-            if (isset($_POST['comment-text']) && isset($_GET['postId']) && isset($_SESSION['id'])) {
+            if (isset($_POST['comment-text']) && !empty($_POST['comment-text']) && isset($_GET['postId']) && isset($_SESSION['id'])) {
                 addComment($_POST['comment-text'], $_GET['postId'], $_SESSION['id']);
                 
             }
@@ -316,5 +315,5 @@ try {
         }
     }
 
-    throw e;
+    // throw e;
 }
