@@ -16,9 +16,13 @@
 
 
 <!-- SECTION -->
-<?php ob_start(); ?>
+<?php ob_start(); 
 
-<!-- <div id="connexion-and-registration-forms-container" class="row"> -->
+    if (isset($_SESSION['registrationConfirmationMsg']) && !empty($_SESSION['registrationConfirmationMsg'])) {
+        echo '<p id="registrationConfirmation">' .$_SESSION['registrationConfirmationMsg']. '</p>';
+        $_SESSION['registrationConfirmationMsg'] = NULL;
+    }
+?>
     <div id="connexion-and-registration-forms-container">
 
         <h4 id="form-title">Connexion</h4>

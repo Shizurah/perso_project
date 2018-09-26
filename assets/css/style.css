@@ -64,9 +64,10 @@ nav a {
 
 #errorMsg {
     display: none;
+    margin-bottom: 20px;
     padding: 5px 14px;
     background-color: rgb(253, 228, 228);
-    border: 1px solid rgb(223, 53, 53);
+    border: 1px solid rgb(255, 186, 186);
     border-radius: 5px;
     color: rgb(224, 48, 48);
 }
@@ -94,6 +95,19 @@ nav a {
 #registration-form input[type=submit] {
     cursor: pointer;
     margin-bottom: 50px;
+}
+
+#registrationConfirmation {
+    /* margin: 0 200px; */
+    margin-top: -80px;
+    margin-bottom: 70px;
+    padding: 20px;
+    text-align: center;
+    background-color: rgb(228, 228, 228);
+    color: rgb(136, 135, 135);
+    /* border: 1px solid rgb(129, 129, 129); */
+    /* border-radius: 8px; */
+    font-weight: bold;
 }
 
 /* ========================= */
