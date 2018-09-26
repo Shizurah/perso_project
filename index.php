@@ -68,6 +68,10 @@ try {
             connexionPage();
         }
 
+        elseif ($_GET['action'] == "registrationPage") {
+            registrationPage();
+        }
+
         // Création de compte : 
         elseif ($_GET['action'] == 'registration') {
 
@@ -86,7 +90,7 @@ try {
                 userConnexion($_POST['pseudo'], $_POST['password']);
             } 
             else {
-                throw new Exception('Veuillez remplir tous les champs');
+                // throw new Exception('Veuillez remplir tous les champs');
             }
         }
 

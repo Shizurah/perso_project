@@ -4,6 +4,10 @@ function connexionPage() {
     require_once('view/connexion_view.php');
 }
 
+function registrationPage() {
+    require_once('view/registration_view.php');
+}
+
 function mySpacePage() {
 
     if (isset($_SESSION['id'])) {
