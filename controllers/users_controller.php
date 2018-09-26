@@ -1,6 +1,7 @@
 <?php
 
 function connexionPage() {
+    startSession();
     require_once('view/connexion_view.php');
 }
 
@@ -45,6 +46,7 @@ function contactPage() {
 
 function userRegistration($formPseudo, $pass1, $pass2, $email) {
 
+    $msg = '';
     $usersManager = new UsersManager();
     $bddPseudo = $usersManager->getPseudo($formPseudo);
 
@@ -73,17 +75,21 @@ function userRegistration($formPseudo, $pass1, $pass2, $email) {
             //     $msg, 
             //     $header);
 
-            connexionPage();
+            $msg = 'success';
+            startSession();
+            $_SESSION['registrationConfirmationMsg'] = 'Votre compte a bien été créé ! Vous pouvez maintenant vous connecter.';
         }
 
         else {
-            throw new Exception ('Les mots de passe ne sont pas identiques');
+            $msg = 'Les mots de passe ne sont pas identiques';
         }   
     } 
     
     else {
-        throw new Exception('Ce pseudo est déjà pris');
+        $msg = 'Ce pseudo est déjà pris';
     }
+
+    echo $msg;
 }
 
 
