@@ -28,7 +28,7 @@ $(function() {
                 }
                 else {
                     $('#errorMsg').text('');
-                    $('#errorMsg').text(response);
+                    $('#errorMsg').text(response).css('display', 'block');
                 }
             }
         });
