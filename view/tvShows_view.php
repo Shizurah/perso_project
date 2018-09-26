@@ -27,7 +27,7 @@
 
         <?php
             if (!isset($_SESSION['id']) && !isset($_SESSION['userStatus'])) {
-                echo '<a href="index.php?action=connexionPage">Créer un compte</a>';
+                echo '<a href="index.php?action=registrationPage">Créer un compte</a>';
             }
         ?>
     </div>
