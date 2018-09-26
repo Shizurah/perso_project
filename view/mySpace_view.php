@@ -36,6 +36,13 @@
             <p id="personal-space-avatar"><img  src="public/members/avatars/<?= $_SESSION['avatar'] ?>" alt="avatar"></p>
 
             <div>
+
+                <?php
+                if (isset($errorMsg) && !empty($errorMsg)) {
+                    echo '<p>' .$errorMsg. '</p>';
+                }
+                ?>
+                
                 <form action="index.php?action=avatar" method="post" enctype="multipart/form-data">
                     <p>
                         <input type="hidden" name="max-file-size" value="204800"> <!-- valeur en octets -->

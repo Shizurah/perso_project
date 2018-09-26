@@ -1,9 +1,5 @@
 <?php
 
-// use \eloise\projet5\PostsManager;
-// use \eloise\projet5\CommentsManager;
-// use \eloise\projet5\UsersManager;
-
 function connexionPage() {
     require_once('view/connexion_view.php');
 }
@@ -73,7 +69,6 @@ function userRegistration($formPseudo, $pass1, $pass2, $email) {
             //     $msg, 
             //     $header);
 
-           
             connexionPage();
         }
 
@@ -122,47 +117,54 @@ function userConnexion($pseudo, $formPass) {
 
 function updateAvatar($fileName, $fileSize, $fileError, $fileTmpName) {
 
-    if (isset($_SESSION['id'])) {
+    if (isset($_SESSION['id']) && isset($_SESSION['pseudo'])) {
 
-        $maxSize = 512000;
+        // $error = false;
+        $errorMsg = '';
+        $maxSize = 10000000;
         $valid_expansions = array('jpg', 'jpeg', 'png', 'gif');
         $uploaded_expansion = strtolower( substr( strrchr($fileName, '.'), 1) );
 
         if ($fileError == 0) {
 
-            if ($fileSize <= $maxSize) {
+            if ($fileSize > 0 && $fileSize <= $maxSize) {
 
                 if (in_array($uploaded_expansion, $valid_expansions)) {
                     $path = 'public/members/avatars/' . $_SESSION['id'] . '.' . $uploaded_expansion;
-                    $moving = move_uploaded_file($fileTmpName, $path);
 
-                    if ($moving) {
-                        $newAvatar = $_SESSION['id'] . '.' . $uploaded_expansion;
-                        // instanciation classe et appel des méthodes :
-                        $usersManager = new UsersManager();
-                        $usersManager->updateAvatar($_SESSION['id'], $newAvatar);
-                        $_SESSION['avatar'] = $newAvatar;
+                    if (!file_exists($path)) {
+                        $moving = move_uploaded_file($fileTmpName, $path);
 
-                        mySpacePage();
-                    }
+                        if ($moving) {
+                            $newAvatarName = $_SESSION['id'] . '.' . $uploaded_expansion;
 
-                    else {
-                        //erreur lors de l'importation de votre image
+                            // ajout de l'avatar en bdd :
+                            $usersManager = new UsersManager();
+                            $usersManager->updateAvatar($_SESSION['id'], $newAvatarName);
+                            $_SESSION['avatar'] = $newAvatarName;
+
+                            mySpacePage();
+                        }
+                        else {
+                            $errorMsg = 'Erreur lors de l\'importation de votre image';
+                        }
                     }
                 } 
-                
                 else {
-                    //extension incorrecte
+                    $errorMsg = 'L\'Extension de votre image est invalide';
                 }
             }
-
             else {
-                // le fichier est trop lourd
+                $errorMsg = 'La taille de votre image est invalide (jusqu\'à 10000000 octets)';
             }  
         }
-
         else {
-            //erreur lors du transfert de l'image
+            $errorMsg = 'Erreur lors du transfert de votre image';
+        }
+
+        if (!empty($errorMsg)) {
+            @unlink($path);
+            mySpacePage();
         }
     } 
 }
