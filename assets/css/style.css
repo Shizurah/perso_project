@@ -44,6 +44,59 @@ nav a {
 
 
 /* ========================= */
+/* PAGE DE CONNEXION : */
+
+#connexion-and-registration-forms-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    padding: 20px 0;
+    width: 100%;
+    margin: auto;
+    /* height: 500px; */
+    /* border: 1px solid grey; */
+}
+
+#connexion-and-registration-forms-container h4 {
+    margin-bottom: 30px;
+}
+
+#errorMsg {
+    display: none;
+    padding: 5px 14px;
+    background-color: rgb(253, 228, 228);
+    border: 1px solid rgb(223, 53, 53);
+    border-radius: 5px;
+    color: rgb(224, 48, 48);
+}
+
+#connexion-form, 
+#registration-form {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 50%;
+}
+
+#connexion-form p,
+#registration-form p {
+   width: 50%; 
+}
+
+#connexion-form input:not([type=submit]),
+#registration-form input:not([type=submit]) {
+    width: 100%;
+}
+
+#connexion-form input[type=submit],
+#registration-form input[type=submit] {
+    cursor: pointer;
+    margin-bottom: 50px;
+}
+
+/* ========================= */
 /* BOUTONS RESEAUX SOCIAUX : */
 
 #actions-btns {
