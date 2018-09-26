@@ -4,7 +4,7 @@ function addComment($content, $postId, $userId) {
     $content = nl2br($content);
 
     $commentsManager = new CommentsManager();
-    $lastCommentId = $commentsManager->addComment($content, $postId, $userId);
+    $lastCommentId = $commentsManager->addComment(htmlspecialchars($content), $postId, $userId);
 
     $comment = $commentsManager->getOneComment($lastCommentId);
     
@@ -23,7 +23,7 @@ function addComment($content, $postId, $userId) {
                     '</span>
                     
                     <span id="' .$lastCommentId. '">'
-                        .$comment->content().
+                        .htmlspecialchars($comment->content()).
                     '</span>                        
                 </div>
             </div>
@@ -168,11 +168,11 @@ function displayComments($postId, $page, $commentsPerPage) {
                 
                 <div>
                     <span class="authors">'
-                        .$comment->author_pseudo().
+                        .htmlspecialchars($comment->author_pseudo()).
                     '</span>
                     
                     <span id="' .$comment->comment_id(). '">'
-                        .$comment->comment_content().
+                        .htmlspecialchars($comment->comment_content()).
                     '</span>                        
                 </div>
             </div>

@@ -22,7 +22,7 @@
         <div id="tv-shows-page-info">
             <!-- <img src="public/images/info_tv_shows.png" alt="info bulle"> -->
             <p>
-                <span>Bonjour <?= $_SESSION['pseudo'] ?> !</span><br/>
+                <span>Bonjour <?= htmlspecialchars($_SESSION['pseudo']) ?> !</span><br/>
                 Nous vous informons que vous pourrez bientôt recevoir toutes les notifications de vos séries préférées dans votre espace !<br/>
             </p>
         </div>
