@@ -85,6 +85,7 @@ function userRegistration($formPseudo, $pass1, $pass2, $email) {
 
 function userConnexion($pseudo, $formPass) {
 
+    $msg = '';
     $usersManager = new UsersManager();
     $bddPass = $usersManager->getPass(htmlspecialchars($pseudo));
 
@@ -99,19 +100,18 @@ function userConnexion($pseudo, $formPass) {
             $_SESSION['pseudo'] = htmlspecialchars($pseudo);
             $_SESSION['avatar'] = $user->avatar();
     
-            mySpacePage();
+            $msg = 'success';
         }
-
         else { 
-            echo 'mot de passe incorrect';
-            // throw new Exception('Identifiant ou mot de passe incorrect');
+            $msg = 'Identifiant ou mot de passe incorrect'; // mot de passe incorrect
         }
+
+    }
+    else {
+        $msg = 'Identifiant ou mot de passe incorrect'; // identifiant incorrect
     }
 
-    else {
-        echo 'Identifiant incorrect';
-        // throw new Exception('Identifiant ou mot de passe incorrect');
-    }
+    echo $msg;
 }
 
 

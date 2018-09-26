@@ -17,36 +17,18 @@
 
 <!-- SECTION -->
 <?php ob_start(); ?>
-
-    <?php
-        if (isset($_SESSION['confirmationMsg'])) {
-            echo $_SESSION['confirmationMsg'];
-        }
-    ?>
-
-    <br/><br/>
-
-    <?php
-        if (isset($errorFields)) {
-            echo $errorFields;
-        }
-    ?>
     
     <div class="row">
 
         <div class="col-lg-6">
             <p>Je me connecte :</p>
 
-            <form action="index.php?action=connexion" method="post">
+            <p id="errorMsg"></p> <!-- message si erreur rencontrée -->
+
+            <form id="connexion-form" action="index.php?action=connexion" method="post">
                 <p>
                     <label for="pseudo">Pseudo :</label>
                     <input type="text" name="pseudo" id="pseudo" required>
-
-                    <?php
-                        if (isset($errorConnexion)) {
-                            echo $errorConnexion;
-                        }
-                    ?>
                 </p>
                     
                 <p>
@@ -111,12 +93,14 @@
 <!-- FOOTER -->
 <?php 
     ob_start(); 
-    require_once('footer_template.php');
+        require_once('footer_template.php');
     $footer = ob_get_clean(); 
 
-    require('template.php'); 
-?>
+    // SCRIPTS JS :
+    ob_start();
+        echo 
+            '<script src="assets/js/connexion.js"></script>';
+    $scripts = ob_get_clean();
 
-<script>
-    document.getElementById('actions-btns').style.display = "none";
-</script>
+    require_once('template.php'); 
+?>
