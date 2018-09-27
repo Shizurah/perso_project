@@ -18,7 +18,6 @@
 <!-- SECTION -->
 <?php ob_start(); ?>
  
-<!-- <a href="index.php?action=tvShows"><< Retour page d'accueil des séries</a> -->
 <div id="tv-show-container">
 
     <div id="tv-show-intro">
@@ -65,7 +64,7 @@
 
     <div id="tv-show-details">
 
-        <!-- // poster série : -->
+        <!-- poster série : -->
         <div id="tv-show-poster">
             <img src="https://image.tmdb.org/t/p/w300<?= $phpResponse->{'poster_path'}; ?>" alt="affiche série"/>
         </div>
@@ -91,15 +90,13 @@
 
         <!-- Infos série -->
         <div id="tv-show-infos">
-            <p id="tv-show-creators"><?= substr($creators, 0, -2) ?></p>
-            <!-- <p id="tv-show-genres"><?= substr($genres, 0, -2) ?></p> -->
-            <p id="tv-show-production-companies"><?= substr($productionCompanies, 0, -2) ?></p>
-            
-            <p id="tv-show-first-release"><span>Première diffusion</span>: <?= $phpResponse->{'first_air_date'}; ?></p>
+            <?php
+                $firstAirDate = date_create($phpResponse->{'first_air_date'});
+            ?>
 
-            <!-- <p id="tv-show-nb-of-episodes-and-seasons">
-                <?= $phpResponse->{'number_of_seasons'}; ?> saisons et <?= $phpResponse->{'number_of_episodes'}; ?> épisodes
-            </p> -->
+            <p id="tv-show-creators"><?= substr($creators, 0, -2) ?></p>
+            <p id="tv-show-production-companies"><?= substr($productionCompanies, 0, -2) ?></p>
+            <p id="tv-show-first-release"><span>Première diffusion</span>: <?= date_format($firstAirDate, "d/m/Y"); ?></p>
 
             <?php
             if ($phpResponse->{'in_production'}) {
@@ -134,9 +131,14 @@
         ?>
             <div id="tv-show-next-episode">
                 <h3>Prochain épisode</h3>
+
+                <?php
+                    $nextEpisodeDate = date_create($phpResponse->{'next_episode_to_air'}->{'air_date'});
+                ?>
+
                 <p>
                     E<?= $nextEpisodeId; ?>S<?= $nextEpisodeSeasonId; ?>: "<?= $phpResponse->{'next_episode_to_air'}->{'name'}; ?>" - 
-                    diffusion le <?= $phpResponse->{'next_episode_to_air'}->{'air_date'}; ?>
+                    diffusion le <?= date_format($nextEpisodeDate,"d/m/Y"); ?>
                 </p>
             </div>
             <hr/>
@@ -159,9 +161,14 @@
 
         <div id="tv-show-last-episode">
             <h3>Dernier épisode</h3>
+
+            <?php
+                $lastEpisodeDate = date_create($phpResponse->{'last_episode_to_air'}->{'air_date'});
+            ?>
+
             <p>
                 E<?= $lastEpisodeId; ?>S<?= $lastEpisodeSeasonId; ?>: "<?= $phpResponse->{'last_episode_to_air'}->{'name'}; ?>", 
-                diffusé le <?= $phpResponse->{'last_episode_to_air'}->{'air_date'}; ?>
+                diffusé le <?= date_format($lastEpisodeDate,"d/m/Y"); ?>
             </p>
         </div>
 
@@ -182,7 +189,16 @@
     $footer = ob_get_clean(); 
 
     // SCRIPTS JS :
-    $scripts = '<script src="assets/js/tvShow.js"></script>';
+    ob_start();
+?>
+    <script>
+        $('#nav-line').css('display', 'none');
+        $('section').css('padding', '20px');
+    </script>
+<?php
+    $scripts = ob_get_clean();
 
+
+    
     require('template.php'); 
 ?>
