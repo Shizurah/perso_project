@@ -65,7 +65,7 @@
     // SCRIPTS JS :
     ob_start();
         echo 
-            '<script src="assets/js/connexion.js"></script>';
+            '<script src="assets/js/forms.js"></script>';
     $scripts = ob_get_clean();
 
     require_once('template.php'); 
