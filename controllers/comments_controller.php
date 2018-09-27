@@ -7,68 +7,20 @@ function addComment($content, $postId, $userId) {
     $lastCommentId = $commentsManager->addComment(htmlspecialchars($content), $postId, $userId);
 
     $comment = $commentsManager->getOneComment($lastCommentId);
-    
-    echo 
 
-        '<div class="comments" id="comment' .$comment->id(). '"> 
+    $response = '';
+    $commentId = $comment->id();
+    $commentContent = htmlspecialchars($comment->content());
+    $commentDate = $comment->comment_date_fr();
+    $commentAuthorId = $comment->author_id();
+    $authorAvatar = $_SESSION['avatar'];
+    $authorPseudo = htmlspecialchars($_SESSION['pseudo']);
 
-            <div class="author-and-content">
-                <div>
-                    <img class="user-avatar-for-comments" src="public/members/avatars/' .$_SESSION['avatar']. '" alt="avatar membre"/>
-                </div>
-                
-                <div>
-                    <span class="authors">'
-                        .$_SESSION['pseudo'].
-                    '</span>
-                    
-                    <span id="' .$lastCommentId. '">'
-                        .htmlspecialchars($comment->content()).
-                    '</span>                        
-                </div>
-            </div>
+    ob_start();
+        require_once('view/commentsResponse_template.php');
+    $response = ob_get_clean();
 
-            <div class="comments-date-and-actions">
-                <i>' .$comment->comment_date_fr(). '</i>';
-            
-                if (isset($_SESSION['pseudo']) && isset($_SESSION['userStatus'])) {
-
-                    // 1. possibilité de modifier/supprimer son commentaire :
-                    if ($_SESSION['id'] == $comment->author_id()) {
-                    
-                        echo 
-                            ' <a class="updating-comment-btn" href="' .$comment->id(). '">
-                                    Modifier
-                            </a> - 
-
-                            <a class="deleting-comment-btn" href="' .$comment->id(). '" 
-                            onclick="return confirm(\'Êtes-vous sûr de vouloir supprimer votre commentaire ?\')">
-                                    Supprimer
-                            </a>';   
-                    }
-
-                    // 2. possibilité de signaler les commentaires :
-                    else {
-                        echo 
-                            '<a href="index.php?action=commentReporting&commentId=' .$comment->id(). '&postId=' .$comment->post_id(). '"
-                                onclick="return confirm(\'Êtes-vous sûr de vouloir signaler ce commentaire ?\')">
-                                    Signaler
-                            </a>';
-                    }
-
-                    // 3. Pour les admin, possibilité de supprimer chacun des commentaires directement depuis la page :
-                    if ($_SESSION['userStatus'] == 'admin' && $_SESSION['id'] != $comment->author_id()) {
-
-                        echo 
-                            ' - <a href="index.php?action=commentDeleted&commentId=' .$comment->id(). '&postId=' .$comment->post_id(). '"
-                                    onclick="return confirm(\'Êtes-vous sûr de vouloir supprimer ce commentaire ?\')">
-                                        Supprimer
-                                </a>';
-                    }
-                }
-
-        echo '</div>
-        </div>';       
+    echo $response;     
 }
 
 
@@ -155,68 +107,21 @@ function displayComments($postId, $page, $commentsPerPage) {
 
     $commentsAndUsersInfos = $commentsManager->getCommentsToDisplay($postId, $firstCommentToDisplay, $commentsPerPage);
 
-    // while ($comment = $req->fetch()) 
     foreach ($commentsAndUsersInfos as $comment) {
 
-        $comments .= 
-        '<div class="comments" id="comment' .$comment->comment_id(). '"> 
+        $response = '';
+        $commentId = $comment->comment_id();
+        $commentContent = htmlspecialchars($comment->comment_content());
+        $commentDate = $comment->comment_date_fr();
+        $commentAuthorId = $comment->author_id();
+        $authorAvatar = $comment->author_avatar();
+        $authorPseudo = htmlspecialchars($comment->author_pseudo());
 
-            <div class="author-and-content">
-                <div>
-                    <img class="user-avatar-for-comments" src="public/members/avatars/' .$comment->author_avatar(). '" alt="avatar membre"/>
-                </div>
-                
-                <div>
-                    <span class="authors">'
-                        .htmlspecialchars($comment->author_pseudo()).
-                    '</span>
-                    
-                    <span id="' .$comment->comment_id(). '">'
-                        .htmlspecialchars($comment->comment_content()).
-                    '</span>                        
-                </div>
-            </div>
+        ob_start();
+            require('view/commentsResponse_template.php');
+        $response = ob_get_clean();
 
-            <div class="comments-date-and-actions">
-                <i>' .$comment->comment_date_fr(). '</i>';
-    
-
-        if (isset($_SESSION['pseudo']) && isset($_SESSION['userStatus'])) {
-
-            // 1. possibilité de modifier/supprimer son commentaire :
-            if ($_SESSION['id'] == $comment->author_id()) {
-                $comments .=
-                    ' <a class="updating-comment-btn" href="' .$comment->comment_id(). '">
-                            Modifier
-                    </a> - 
-
-                    <a class="deleting-comment-btn" href="' .$comment->comment_id(). '" 
-                    onclick="return confirm(\'Êtes-vous sûr de vouloir supprimer votre commentaire ?\')">
-                            Supprimer
-                    </a>';   
-            }
-
-            // 2. possibilité de signaler les commentairess :
-            else {
-                $comments .=
-                    '<a class="reporting-comment-btn" href="' .$comment->comment_id(). '"
-                        onclick="return confirm(\'Êtes-vous sûr de vouloir signaler ce commentaire ?\')">
-                            Signaler
-                    </a>';
-            }
-
-            // 3. Pour les admin, possibilité de supprimer chacun des commentaires directement depuis la page :
-            if ($_SESSION['userStatus'] == 'admin' && $_SESSION['id'] != $comment->author_id()) {
-
-                $comments .= 
-                    ' - <a class="deleting-comment-btn" href="' .$comment->comment_id(). '"
-                            onclick="return confirm(\'Êtes-vous sûr de vouloir supprimer ce commentaire ?\')">
-                                Supprimer
-                        </a>';
-            }
-        }
-
-        $comments .= '</div></div>';              
+        $comments .= $response;
     }
 
     $dataBack = array('nbOfPages' => $nbOfPages, 'commentsList' => $comments);
