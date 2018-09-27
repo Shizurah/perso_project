@@ -10,7 +10,7 @@
     // echo '<div id="main-wrap" class="container">'; // --> DEBUT MAIN-WRAP
     $h1Header = '';
     // <img id="banner-img" src="public/images/logo2.png" alt="logo"/>
-    require('header_template.php'); 
+    require('view/templates/header_template.php'); 
 
     $header = ob_get_clean(); 
 ?>
@@ -33,7 +33,7 @@
 <!-- FOOTER -->
 <?php 
     ob_start(); 
-    require_once('footer_template.php');
+    // require_once('footer_template.php');
     $footer = ob_get_clean(); 
 
     // SCRIPTS JS :
@@ -42,5 +42,5 @@
             '<script src="assets/js/file.js"></script>';
     $scripts = ob_get_clean();
 
-    require_once('template.php'); 
+    require_once('view/templates/template.php'); 
 ?>

@@ -8,7 +8,7 @@ $other = '<link href="assets/css/administration_style.css" rel="stylesheet"';
     ob_start(); 
 
     $h2Header = '';
-    require('header_template.php'); 
+    require('view/templates/header_template.php'); 
 
     $header = ob_get_clean(); 
 ?>
@@ -17,7 +17,7 @@ $other = '<link href="assets/css/administration_style.css" rel="stylesheet"';
 <!-- SECTION -->
 <?php ob_start(); ?>
 
-    <?php require('asideForAdministration_template.php'); ?>
+    <?php require('view/templates/asideForAdministration_template.php'); ?>
 
     <br/>
 
@@ -85,5 +85,5 @@ $other = '<link href="assets/css/administration_style.css" rel="stylesheet"';
             '<script src="assets/js/file.js"></script>';
     $scripts = ob_get_clean();
 
-    require_once('template.php'); 
+    require_once('view/templates/template.php'); 
 ?>

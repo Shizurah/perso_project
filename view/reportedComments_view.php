@@ -7,7 +7,7 @@
 <?php 
     ob_start(); 
     $h2Header = '';
-    require('header_template.php'); 
+    require('view/templates/header_template.php'); 
 
     $header = ob_get_clean(); 
 ?>
@@ -74,6 +74,6 @@
             '<script src="assets/js/file.js"></script>';
     $scripts = ob_get_clean();
 
-    require_once('template.php'); 
+    require_once('view/templates/template.php'); 
 ?>
 

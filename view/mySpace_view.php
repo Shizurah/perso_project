@@ -9,7 +9,7 @@
 
     echo '<div id="main-wrap" class="container">'; // --> DEBUT MAIN-WRAP
     $h1Header = NULL;
-    require('header_template.php'); 
+    require('view/templates/header_template.php'); 
 
     $header = ob_get_clean(); 
 ?>
@@ -37,13 +37,9 @@
 
             <div>
 
-                <?php
-                if (isset($errorMsg) && !empty($errorMsg)) {
-                    echo '<p>' .$errorMsg. '</p>';
-                }
-                ?>
+                <p id="error-msg"></p>
                 
-                <form action="index.php?action=avatar" method="post" enctype="multipart/form-data">
+                <form id="avatar-form" action="index.php?action=avatar" method="post" enctype="multipart/form-data">
                     <p>
                         <input type="hidden" name="max-file-size" value="204800"> <!-- valeur en octets -->
                         <input type="file" name="avatar">
@@ -61,48 +57,7 @@
             <img src="public/images/banniere/popcorn1.png" alt="popcorn">
         </p>
     </div>
-    
-    
-    <!-- <div>
-        <h3>Vos séries (bientôt disponbile)</h3>
-        <hr class="title-separation"/>
-    </div> -->
-
-
-    <!-- <h3>Modifier vos informations</h3>
-
-    <form action="">
-        <p>
-            <label for="pseudo">Modifier votre pseudo :</label><br/>
-            <input type="text" name="pseudo" id="pseudo">
-        </p>
-        
-        <input type="submit" value="Modifier pseudo">
-    </form>
-
-    <form action="">
-        <p>
-            <label for="pass1">Modifier votre mot de passe :</label><br/>
-            <input type="password" name="pass1" id="pass1">
-        </p>
-
-        <p>
-            <label for="pass2">Confirmer mot de passe :</label><br/>
-            <input type="password" name="pass2" id="pass2">
-        </p>
-        
-        <input type="submit" value="Modifier mot de passe">
-    </form>
-
-    <form action="">
-        <p>
-            <label for="email">Modifier votre e-mail :</label><br/>
-            <input type="email" name="email" id="email">
-        </p>
-
-        <input type="submit" value="Modifier e-mail">
-    </form> -->
-
+   
 </div> <!-- FIN MAIN-WRAP -->
 <?php $section = ob_get_clean(); ?>
 
@@ -110,17 +65,19 @@
 <!-- FOOTER -->
 <?php 
     ob_start(); 
-        require_once('footer_template.php');
+        require_once('view/templates/footer_template.php');
     $footer = ob_get_clean(); 
 
     // SCRIPTS JS :
     ob_start();
-        echo 
-            '<script>
-                $("section").css("margin-top", "-11px");
-            </script>';
+?>
+       
+    <script>$("section").css("margin-top", "-11px");</script>;
+    <script src="assets/js/forms.js"></script>
+
+<?php
     $scripts = ob_get_clean();
 
-    require_once('template.php'); 
+    require_once('view/templates/template.php'); 
 ?>
 

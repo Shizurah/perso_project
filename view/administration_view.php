@@ -8,7 +8,7 @@
 <?php 
     ob_start(); 
     $h1Header = '';
-    require('header_template.php'); 
+    require('templates/header_template.php'); 
 
     $header = ob_get_clean(); 
 ?>
@@ -18,7 +18,7 @@
 <?php ob_start(); ?>
 
     <!-- <h2>Gestion du site</h2> -->
-    <?php require_once('asideForAdministration_template.php'); ?>
+    <?php require_once('templates/asideForAdministration_template.php'); ?>
 
     <br/>
     
@@ -44,7 +44,7 @@
             '<script src="assets/js/file.js"></script>';
     $scripts = ob_get_clean();
 
-    require_once('template.php'); 
+    require_once('templates/template.php'); 
 ?>
 
 

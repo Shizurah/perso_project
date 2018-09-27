@@ -9,7 +9,7 @@
 
     echo '<div id="main-wrap" class="container">'; // --> DEBUT MAIN-WRAP
     $h1Header = NULL;
-    require('header_template.php'); 
+    require_once('view/templates/header_template.php'); 
 
     $header = ob_get_clean(); 
 ?>
@@ -65,7 +65,7 @@
                 </div>
 
         <?php                    
-                require_once('view/commentsForm_template.php');
+                require_once('view/templates/commentsForm_template.php');
             } else {
                 echo '<hr/>';
             }
@@ -94,7 +94,7 @@
 <!-- FOOTER -->
 <?php 
     ob_start(); 
-    require_once('footer_template.php');
+    require_once('view/templates/footer_template.php');
     $footer = ob_get_clean(); 
 
     // SCRIPTS JS :
@@ -103,7 +103,7 @@
             '<script src="assets/js/postAndItsComments.js"></script>';
     $scripts = ob_get_clean();
 
-    require('template.php'); 
+    require('view/templates/template.php'); 
 ?>
 
 
