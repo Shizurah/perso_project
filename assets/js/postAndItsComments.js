@@ -1,6 +1,6 @@
 $('#actions-btns').css('display', 'none');
 
-// AFFICHAGE DES COMMENTAIRES EN AJAX :
+// AFFICHAGE DES COMMENTAIRES EN AJAX (pfagination)  :
 $(function() {
     $('#pagination a').trigger('click');
 });
@@ -29,7 +29,6 @@ $('#pagination').on('click', 'a', function(event) {
         success: function(response) {
             $('#comments-container p:first-child').after(response.commentsList);
 
-             // Pagination : 
             if (response.nbOfPages > 1) {
 
                 for (i = 1; i <= response.nbOfPages; i++) {
@@ -180,30 +179,37 @@ $('#comments-container').on('click', '.updating-comment-btn', function(event) {
 $('#comments-container').on('click', '.deleting-comment-btn', function(event) {
     event.preventDefault();
 
-    var that = $(this),
+    if (confirm('Êtes-vous sûr de vouloir supprimer votre commentaire ?')) {
+
+        var that = $(this),
         id = that.attr('href'),
         commentId = 'comment' + id,
 
         url = 'index.php?action=commentDeleted&commentId=' + id;
 
-    $.ajax({
-        url: url,
-        type: 'post',
-        data: '',
-
-        success: function(response) {
-            $('.nb-of-comments').each(function() {
-                $(this).text(parseInt(Number($(this).text())) - 1);
-            });
-
-            $('#' + commentId).fadeOut(700, function() { 
-                $(this).replaceWith(response);
-                setTimeout(function() {
-                    $('.success-msg').remove();
-                }, 2500);
-            });
-        }
-    });
+        $.ajax({
+            url: url,
+            type: 'post',
+            data: '',
+    
+            success: function(response) {
+                $('.nb-of-comments').each(function() {
+                    $(this).text(parseInt(Number($(this).text())) - 1);
+                });
+    
+                $('#' + commentId).fadeOut(700, function() { 
+                    $(this).replaceWith(response);
+                    setTimeout(function() {
+                        $('.success-msg').remove();
+                    }, 2500);
+                });
+            }
+        });    
+    }
+    else {
+        return false;
+    }
+    
 }); ////// FIN suppression des commentaires
 
 
@@ -211,21 +217,23 @@ $('#comments-container').on('click', '.deleting-comment-btn', function(event) {
 $('#comments-container').on('click', '.reporting-comment-btn', function(event) {
     event.preventDefault();
 
-    var that = $(this),
+    if (confirm('Êtes-vous sûr de vouloir signaler ce commentaire ?')) {
+        var that = $(this),
         id = that.attr('href'),
         commentId = 'comment' + id,
 
         url = 'index.php?action=commentReporting&commentId=' + id;
 
-    $.ajax({
-        url: url,
-        type: 'post',
-        data: '',
+        $.ajax({
+            url: url,
+            type: 'post',
+            data: '',
 
-        success: function(response) {
-            that.replaceWith(response);
-        }
-    });
+            success: function(response) {
+                that.replaceWith(response);
+            }
+        });
+    }  
 });
     
 
