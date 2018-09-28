@@ -3,12 +3,59 @@ body {
 }
 
 #nav-line {
-    display: none;
+    margin-bottom: 0;
+    /* display: none; */
+}
+
+section {
+    display: flex;
+    padding: 0;
+    position: relative;
+    /* top: -14px; */
+    height: 100%;
+}
+
+aside {
+    height: 100%;
+    border: 1px solid grey;
+    /* border-right: 1px solid grey;  */
+    background-color: rgb(49, 49, 49);
+}
+
+#administration-aside-content {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
+#administration-aside-content h2 {
+    margin: 0;
+    padding: 15px 0;
+    border-bottom: 1px solid grey;
+}
+
+#administration-aside-content a {
+    display: block;
+    margin-right: 0;
+    padding: 15px 50px;
+    color: white;
+    border-bottom: 1px solid grey;   
+}
+
+#administration-aside-content a:hover {
+    text-decoration: none;
+    background-color: rgb(241, 240, 240);
+    color: black;
+}
+
+#administration-main-content {
+    padding: 100px;
+    width: 80%;
 }
 
 #error-msg-container {
     position: relative;
-    top: -24px;
+    top: -12px;
     padding-top: 200px;
     padding-left: 500px;
     height: 700px;
