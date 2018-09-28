@@ -6,15 +6,17 @@ echo
     <div class="author-and-content">
         <div>
             <img class="user-avatar-for-comments" src="public/members/avatars/' .$authorAvatar. '" alt="avatar membre"/>
+            
         </div>
+        
         
         <div>
             <span class="authors">'
                 .$authorPseudo.
-            '</span>
-            
+            ': </span>
+
             <span id="' .$commentId. '">'
-                .htmlspecialchars($commentContent).
+                .nl2br(htmlspecialchars($commentContent)).
             '</span>                        
         </div>
     </div>
@@ -32,8 +34,7 @@ echo
                             Modifier
                     </a> - 
 
-                    <a class="deleting-comment-btn" href="' .$commentId. '" 
-                    onclick="return confirm(\'Êtes-vous sûr de vouloir supprimer votre commentaire ?\')">
+                    <a class="deleting-comment-btn" href="' .$commentId. '">
                             Supprimer
                     </a>';   
             }
@@ -41,8 +42,7 @@ echo
             // 2. possibilité de signaler les commentaires :
             else {
                 echo 
-                    '<a class="reporting-comment-btn" href="' .$commentId. '"
-                        onclick="return confirm(\'Êtes-vous sûr de vouloir signaler ce commentaire ?\')">
+                    '<a class="reporting-comment-btn" href="' .$commentId. '">
                             Signaler
                     </a>';
             }
@@ -51,8 +51,7 @@ echo
             if ($_SESSION['userStatus'] == 'admin' && $_SESSION['id'] != $commentAuthorId) {
 
                 echo 
-                    ' - <a class="deleting-comment-btn" href="' .$commentId. '"
-                            onclick="return confirm(\'Êtes-vous sûr de vouloir supprimer ce commentaire ?\')">
+                    ' - <a class="deleting-comment-btn" href="' .$commentId. '">
                                 Supprimer
                         </a>';
             }

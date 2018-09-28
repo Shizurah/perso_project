@@ -1,7 +1,7 @@
 <?php
 
 function addComment($content, $postId, $userId) {
-    $content = nl2br($content);
+    $content = $content;
 
     $commentsManager = new CommentsManager();
     $lastCommentId = $commentsManager->addComment(htmlspecialchars($content), $postId, $userId);
@@ -10,14 +10,14 @@ function addComment($content, $postId, $userId) {
 
     $response = '';
     $commentId = $comment->id();
-    $commentContent = htmlspecialchars($comment->content());
+    $commentContent = $comment->content();
     $commentDate = $comment->comment_date_fr();
     $commentAuthorId = $comment->author_id();
     $authorAvatar = $_SESSION['avatar'];
-    $authorPseudo = htmlspecialchars($_SESSION['pseudo']);
+    $authorPseudo = $_SESSION['pseudo'];
 
     ob_start();
-        require_once('view/commentsResponse_template.php');
+        require_once('view/templates/commentsResponse_template.php');
     $response = ob_get_clean();
 
     echo $response;     
@@ -96,6 +96,7 @@ function ignoreReportedComment($id) {
     }
 }
 
+
 // PAGINATION :
 function displayComments($postId, $page, $commentsPerPage) {
     $commentsManager = new CommentsManager();
@@ -111,14 +112,14 @@ function displayComments($postId, $page, $commentsPerPage) {
 
         $response = '';
         $commentId = $comment->comment_id();
-        $commentContent = htmlspecialchars($comment->comment_content());
+        $commentContent = $comment->comment_content();
         $commentDate = $comment->comment_date_fr();
         $commentAuthorId = $comment->author_id();
         $authorAvatar = $comment->author_avatar();
-        $authorPseudo = htmlspecialchars($comment->author_pseudo());
+        $authorPseudo = $comment->author_pseudo();
 
         ob_start();
-            require('view/commentsResponse_template.php');
+            require('view/templates/commentsResponse_template.php');
         $response = ob_get_clean();
 
         $comments .= $response;
