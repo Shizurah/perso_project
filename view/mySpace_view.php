@@ -39,7 +39,7 @@
 
                 <p id="error-msg"></p>
                 
-                <form id="avatar-form" action="index.php?action=avatar" method="post" enctype="multipart/form-data">
+                <form id="changing-avatar-form" action="index.php?action=avatar" method="post" enctype="multipart/form-data">
                     <p>
                         <input type="hidden" name="max-file-size" value="204800"> <!-- valeur en octets -->
                         <input type="file" name="avatar">
@@ -54,7 +54,7 @@
     <div id="personal-space-tv-shows-container">
         <h3 id="personal-space-tv-shows-title">VOS SERIES<br/> (bientôt disponible)</h3>
         <p>
-            <img src="public/images/banniere/popcorn1.png" alt="popcorn">
+            <!-- <img src="public/images/banniere/popcorn1.png" alt="popcorn"> -->
         </p>
     </div>
    
