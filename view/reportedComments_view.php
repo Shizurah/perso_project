@@ -17,7 +17,7 @@
 <?php ob_start(); ?>
 
     <!-- <h2>Gestion du site</h2> -->
-    <?php require_once('asideForAdministration_template.php'); ?>
+    <?php require_once('view/templates/asideForAdministration_template.php'); ?>
 
     <br/>
     
