@@ -4,7 +4,10 @@
     <div id="comment-form-fields-container">
       
         <div id="comment-form-author-and-textarea">
-            <img src="public/members/avatars/<?= $_SESSION['avatar'] ?>" alt="avatar">
+            <div>
+                <img src="public/members/avatars/<?= $_SESSION['avatar'] ?>" alt="avatar">
+            </div>
+            
             <textarea name="comment-text" id="comment-text" placeholder="Votre commentaire..." cols="40" rows="2"></textarea>  
         </div>
         
