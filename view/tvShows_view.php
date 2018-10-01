@@ -42,47 +42,50 @@
             <h5>
                 Par <span>mots-clé</span>
             </h5>
+
+            <form id="search-form">
+                <p id="search-container">
+                    <input class="form-control" id="search-input" type="text" placeholder="Recherche...">
+                    <button type="submit"><img src="public/images/search_icon.png" alt="icône de recherche"></button> 
+                </p>
+            </form>
         </div>
         
-        <form id="search-form">
-            <p id="search-container">
-                <input class="form-control" id="search-input" type="text" placeholder="Recherche...">
-                <button type="submit"><img src="public/images/search_icon.png" alt="icône de recherche"></button> 
-            </p>
-        </form>
 
         <!-- recherche par filtres -->
         <div id="filters-search-show">
             <h5>
                 Par <span>filtres</span> 
             </h5>
+
+            <form id="discover-form">
+                <p>
+                    Genres :
+                    <select name="with_genres" id="genres-selection" class="selectpicker" data-live-search="true" multiple>
+                    </select>
+                </p>
+
+                <p>
+                    Trier par :
+                    <select name="sort_by" id="sort-by-selection" class="selectpicker">
+                        <option value="popularity.desc">Popularité</option>
+                        <option value="vote_average.desc">Note</option>
+                        <option value="first_air_date.desc">1ere date de diffusion</option>
+                    </select>
+                </p>
+
+                <p><input type="submit" value="FILTRER"></p>
+            </form>
         </div>
 
-        <form id="discover-form">
-            <p>
-                Genres :
-                <select name="with_genres" id="genres-selection" class="selectpicker" data-live-search="true" multiple>
-                </select>
-            </p>
-
-            <p>
-                Trier par :
-                <select name="sort_by" id="sort-by-selection" class="selectpicker">
-                    <option value="popularity.desc">Popularité</option>
-                    <option value="vote_average.desc">Note</option>
-                    <option value="first_air_date.desc">1ere date de diffusion</option>
-                </select>
-            </p>
-
-            <p><input type="submit" value="FILTRER"></p>
-        </form>
+        
     </div>
 
     <br/>
     
     <h3 id="tv-shows-category-title">Séries populaires cette semaine</h3>
     <hr class="title-separations"/>
-
+    <p id="loading"><img  src="public/images/load2.gif" alt="Chargement..."/></p>
     <div id="tv-shows-container">
         <a id="scroll-up-arrow" href="#nav"><img src="public/images/scroll_up_arrow.png" alt="flèche retour haut de page"></a>
     </div>
