@@ -84,3 +84,40 @@ aside {
     background-color: grey;
     color: white;
 }
+
+table {
+    border: 1px solid grey;
+    
+}
+
+th {
+    text-align: center;
+}
+
+table td,
+table th {
+    padding: 10px 15px;
+    border: 1px solid grey;
+    border-collapse: collapse;
+}
+
+tr td:not(:first-child) {
+    font-size: 0.95em;
+}
+
+
+/* modification artciles */
+
+.updating-icon {
+    visibility: hidden;
+    margin-left: 10px;
+}
+
+.link-for-post-action {
+    font-weight: bold;
+    color: grey;
+}
+
+.link-for-post-action:hover {
+    color: grey;
+}
