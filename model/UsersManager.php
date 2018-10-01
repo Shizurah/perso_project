@@ -8,28 +8,37 @@ class UsersManager {
         $this->_db = DbManager::dbConnect();
     }
 
-    public function addUser($pseudo, $pass, $email, $key) {
-        $req = $this->_db->prepare('INSERT INTO users(pseudo, pass, email, controlKey) VALUES(:pseudo, :pass, :email, :controlKey)');
+    public function addUser($pseudo, $pass, $email) {
+        $req = $this->_db->prepare('INSERT INTO users(pseudo, pass, email) VALUES(:pseudo, :pass, :email)');
 
         $req->bindValue('pseudo', $pseudo, PDO::PARAM_STR);
         $req->bindValue('pass', $pass, PDO::PARAM_STR);
         $req->bindValue('email', $email, PDO::PARAM_STR);
-        $req->bindValue('controlKey', $key, PDO::PARAM_STR);
 
         $req->execute();
     }
 
-    public function getPseudo($formPseudo) { // renommer fonction en 'doesPseudoExist' ?
+    public function getPseudo($formPseudo) { 
         $req = $this->_db->prepare('SELECT pseudo FROM users WHERE pseudo = :pseudo');
 
         $req->bindValue('pseudo', $formPseudo, PDO::PARAM_STR);
         $req->execute();
 
-        $bddPseudo = $req->fetch();
-        return $bddPseudo['pseudo'];
+        $data = $req->fetch();
+        return $data['pseudo'];
     }
 
-    public function getPass($pseudo) { // renommer fonction en 'doesPassExist' ?
+    public function getEmail($formEmail) {
+        $req = $this->_db->prepare('SELECT email FROM users WHERE email = :email');
+
+        $req->bindParam('email', $formEmail, PDO::PARAM_STR);
+        $req->execute();
+
+        $data = $req->fetch();
+        return  $data['email'];
+    }
+
+    public function getPass($pseudo) { 
         $req = $this->_db->prepare('SELECT pass FROM users WHERE pseudo = :pseudo');
 
         $req->bindValue('pseudo', $pseudo, PDO::PARAM_STR);

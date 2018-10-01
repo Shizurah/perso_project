@@ -48,43 +48,56 @@ function userRegistration($formPseudo, $pass1, $pass2, $email) {
 
     $msg = '';
     $usersManager = new UsersManager();
-    $bddPseudo = $usersManager->getPseudo($formPseudo);
+    $dbPseudo = $usersManager->getPseudo($formPseudo);
+    $dbEmail = $usersManager->getEmail($email);
 
-    if (empty($bddPseudo)) {
+    if (empty($dbPseudo)) {
 
-        if ($pass1 == $pass2) {
-            $pass1 = password_hash($pass1, PASSWORD_DEFAULT);
-            $pseudo = htmlspecialchars($formPseudo);
-            $key = md5(microtime(TRUE)*100000);
+        if(empty($dbEmail)) {
 
-            $usersManager->addUser($pseudo, $pass1, $email, $key);
+            if (strlen($pass1) >= 7) {
 
-            // $subject = 'Activez votre compte';
-            // $header = 'From:localhost.com/inscription';
-            // $msg = "Bienvenue sur Localhost, \n
-            //         Pour activer votre compte, veuillez cliquer sur le lien ci dessous ou le copier/coller dans votre navigateur internet : \n
+                if ($pass1 == $pass2) {
+                    $pass1 = password_hash($pass1, PASSWORD_DEFAULT);
+                    $pseudo = htmlspecialchars($formPseudo);
+                    // $key = md5(microtime(TRUE)*100000);
+        
+                    $usersManager->addUser($pseudo, $pass1, $email);
+        
+                    // $subject = 'Activez votre compte';
+                    // $header = 'From:localhost.com/inscription';
+                    // $msg = "Bienvenue sur Localhost, \n
+                    //         Pour activer votre compte, veuillez cliquer sur le lien ci dessous ou le copier/coller dans votre navigateur internet : \n
+                            
+                    //         http://localhost/projet_perso_openclassrooms/index.php?action=activation&log=" . urlencode($pseudo) . "&key=" . urlencode($key) .
+                            
+                    //         "\n ----------------------------------------- \n 
+                    //         Ceci est un mail automatique, merci de ne pas y répondre";
                     
-            //         http://localhost/projet_perso_openclassrooms/index.php?action=activation&log=" . urlencode($pseudo) . "&key=" . urlencode($key) .
-                    
-            //         "\n ----------------------------------------- \n 
-            //         Ceci est un mail automatique, merci de ne pas y répondre";
-            
-            // mail(
-            //     $email, 
-            //     $subject, 
-            //     $msg, 
-            //     $header);
-
-            $msg = 'success';
-            startSession();
-            $_SESSION['registrationConfirmationMsg'] = 'Votre compte a bien été créé ! Vous pouvez maintenant vous connecter.';
-        }
-
-        else {
-            $msg = 'Les mots de passe ne sont pas identiques';
-        }   
-    } 
+                    // mail(
+                    //     $email, 
+                    //     $subject, 
+                    //     $msg, 
+                    //     $header);
+        
+                    $msg = 'success';
+                    startSession();
+                    $_SESSION['registrationConfirmationMsg'] = 'Votre compte a bien été créé ! Vous pouvez maintenant vous connecter.';
+                }
+                else {
+                    $msg = 'Les mots de passe ne sont pas identiques';
+                } 
     
+            } 
+            else {
+                $msg = 'Votre mot de passe doit contenir au moins 7 caractères';
+            }
+
+        }
+        else {
+            $msg = 'Vous possédez déjà un compte lié à cet email';
+        }
+    } 
     else {
         $msg = 'Ce pseudo est déjà pris';
     }
