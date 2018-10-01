@@ -19,6 +19,7 @@ $('#connexion-form').on('submit', function() {
         type: type,
         data: data,
         dataType: 'html',
+        timeout: 3000,
 
         success: function(response) {
             console.log(response);
@@ -30,6 +31,10 @@ $('#connexion-form').on('submit', function() {
                 $('#errorMsg').text('');
                 $('#errorMsg').text(response).css('display', 'block');
             }
+        },
+
+        error: function() {
+            alert('La requête n\'a pas abouti, veuillez essayer ultérieurement');
         }
     });
 
@@ -57,6 +62,7 @@ $('#registration-form').on('submit', function() {
         type: type,
         data: data,
         dataType: 'html',
+        timeout: 3000,
 
         success: function(response) {
             console.log(response);
@@ -68,8 +74,19 @@ $('#registration-form').on('submit', function() {
                 $('#errorMsg').text('');
                 $('#errorMsg').text(response).css('display', 'block');
             }
+        },
+
+        error: function() {
+            alert('La requête n\'a pas abouti, veuillez essayer ultérieurement');
         }
     });
+
+    return false;
+});
+
+
+$('#connexion-form').on('submit', function() {
+    
 
     return false;
 });

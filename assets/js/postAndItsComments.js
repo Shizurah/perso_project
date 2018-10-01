@@ -25,6 +25,7 @@ $('#pagination').on('click', 'a', function(event) {
         url: url,
         data: data,
         dataType: 'json',
+        timeout: 3000,
 
         success: function(response) {
             $('#comments-container p:first-child').after(response.commentsList);
@@ -46,9 +47,12 @@ $('#pagination').on('click', 'a', function(event) {
             
                 $('#pagination').html(pagination); 
             }
-        }
+        },
 
-        // error:
+        error: function() {
+            alert('La requête n\'a pas abouti, veuillez essayer ultérieurement');
+            // $('#pagination').html('<p class="error-msg">Impossible d\'afficher les commentaires pour le moment. Nous réglons ce problème au plus vite.</p>');
+        }
     });
 });
 
@@ -73,6 +77,7 @@ $('#comment-form').on('submit', function() {
             data: {
                 'comment-text': commentContent
             },
+            timeout: 3000,
             
             success: function(response) {
                 $('#comment-text').val('');
@@ -87,6 +92,13 @@ $('#comment-form').on('submit', function() {
                 if ($('#comments-container .comments').length > 10) {
                     $('#comments-container .comments').last().remove();
                 }  
+            },
+
+            error: function() {
+                alert('La requête n\'a pas abouti, veuillez essayer ultérieurement');
+                // $('#comments-container p:first-child').after('<p></p>')
+                //     .attr('class', 'error-msg')
+                //     .text('Oups, l\'ajout de votre commentaire a échoué. Veuillez ré-essayer ultérieurement.');
             }
         });
     }
@@ -163,11 +175,19 @@ $('#comments-container').on('click', '.updating-comment-btn', function(event) {
             url: url,
             type: type,
             data: data,
+            timeout: 3000,
 
             success: function(response) {
                 that.replaceWith(response);
                 $('#cancel-comment-updating-link-for-' + idAttr).replaceWith(aElt);
-            }            
+            },
+            
+            error: function() {
+                alert('La requête n\'a pas abouti, veuillez essayer ultérieurement');
+                // $(this).prepend('<p></p>')
+                //     .attr('class', 'error-msg')
+                //     .text('Oups, la modification de votre commentaire a échoué. Veuillez ré-essayer ultérieurement.');
+            }
         });
 
         return false;
@@ -179,7 +199,7 @@ $('#comments-container').on('click', '.updating-comment-btn', function(event) {
 $('#comments-container').on('click', '.deleting-comment-btn', function(event) {
     event.preventDefault();
 
-    if (confirm('Êtes-vous sûr de vouloir supprimer votre commentaire ?')) {
+    if (confirm('Êtes-vous sûr de vouloir supprimer le commentaire ?')) {
 
         var that = $(this),
         id = that.attr('id'),
@@ -191,6 +211,7 @@ $('#comments-container').on('click', '.deleting-comment-btn', function(event) {
             url: url,
             type: 'post',
             data: '',
+            timeout: 3000,
     
             success: function(response) {
                 $('.nb-of-comments').each(function() {
@@ -200,9 +221,16 @@ $('#comments-container').on('click', '.deleting-comment-btn', function(event) {
                 $('#' + commentId).fadeOut(700, function() { 
                     $(this).replaceWith(response);
                     setTimeout(function() {
-                        $('.success-msg').remove();
+                        $('.success-msg-for-deleting-comment').remove();
                     }, 2500);
                 });
+            },
+
+            error: function() {
+                alert('La requête n\'a pas abouti, veuillez essayer ultérieurement');
+                // $(this).prepend('<p></p>')
+                //     .attr('class', 'error-msg')
+                //     .text('Oups, la suppression de votre commentaire a échoué. Veuillez ré-essayer ultérieurement.');
             }
         });    
     }
@@ -228,17 +256,18 @@ $('#comments-container').on('click', '.reporting-comment-btn', function(event) {
             url: url,
             type: 'post',
             data: '',
+            timeout: 3000,
 
             success: function(response) {
                 that.replaceWith(response);
+            },
+
+            error: function() {
+                alert('La requête n\'a pas abouti, veuillez essayer ultérieurement');
+                // that.replaceWith('<p></p>')
+                //     .attr('class', 'error-msg-for-reporting-comment')
+                //     .text('Oups, le signalement du commentaire a échoué. Veuillez ré-essayer ultérieurement.');
             }
         });
     }  
-});
-    
-
-// 
-    
-    
-
-    
+});    
