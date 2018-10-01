@@ -18,7 +18,6 @@
 <?php 
     ob_start(); 
     $h1Header = '';
-    // require('templates/header_template.php'); 
 
     $header = ob_get_clean(); 
 ?>
@@ -27,7 +26,6 @@
 <!-- SECTION -->
 <?php ob_start(); ?>
 
-    <!-- <h2>Gestion du site</h2> -->
     <?php require_once('templates/asideForAdministration_template.php'); ?>
 
     <div id="administration-main-content">
