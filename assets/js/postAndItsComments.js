@@ -100,16 +100,16 @@ $('#comments-container').on('click', '.updating-comment-btn', function(event) {
     event.preventDefault();
 
     var aElt = $(this),
-        hrefAttr = aElt.attr('href'),
-        comment = $('#' + hrefAttr);
+        idAttr = aElt.attr('id'),
+        comment = $('#' + idAttr);
 
     console.log($(this));
 
     comment.replaceWith($('<form></form>')
         .attr({
-            id: 'updating-form-for-' + hrefAttr,
+            id: 'updating-form-for-' + idAttr,
             class: 'updating-comment-form', 
-            action: 'index.php?action=commentUpdated&commentId=' + hrefAttr,
+            action: 'index.php?action=commentUpdated&commentId=' + idAttr,
             method: 'post'
         })
         .append($('<textarea></textarea>')
@@ -132,7 +132,7 @@ $('#comments-container').on('click', '.updating-comment-btn', function(event) {
         .text('annuler')
         .attr({
             href: '#',
-            id: 'cancel-comment-updating-link-for-' + hrefAttr,
+            id: 'cancel-comment-updating-link-for-' + idAttr,
             class: 'cancel-comment-updating-link'
         })
 
@@ -140,12 +140,12 @@ $('#comments-container').on('click', '.updating-comment-btn', function(event) {
             e.preventDefault();
 
             $(this).replaceWith(aElt);
-            $('#updating-form-for-' + hrefAttr).replaceWith(comment);
+            $('#updating-form-for-' + idAttr).replaceWith(comment);
         })
     );
 
     // AJAX
-    $('#updating-form-for-' + hrefAttr).on('submit', function() {
+    $('#updating-form-for-' + idAttr).on('submit', function() {
         var that = $(this),
             url = that.attr('action'),
             type = that.attr('method'),
@@ -166,7 +166,7 @@ $('#comments-container').on('click', '.updating-comment-btn', function(event) {
 
             success: function(response) {
                 that.replaceWith(response);
-                $('#cancel-comment-updating-link-for-' + hrefAttr).replaceWith(aElt);
+                $('#cancel-comment-updating-link-for-' + idAttr).replaceWith(aElt);
             }            
         });
 
@@ -182,7 +182,7 @@ $('#comments-container').on('click', '.deleting-comment-btn', function(event) {
     if (confirm('Êtes-vous sûr de vouloir supprimer votre commentaire ?')) {
 
         var that = $(this),
-        id = that.attr('href'),
+        id = that.attr('id'),
         commentId = 'comment' + id,
 
         url = 'index.php?action=commentDeleted&commentId=' + id;
@@ -219,7 +219,7 @@ $('#comments-container').on('click', '.reporting-comment-btn', function(event) {
 
     if (confirm('Êtes-vous sûr de vouloir signaler ce commentaire ?')) {
         var that = $(this),
-        id = that.attr('href'),
+        id = that.attr('id'),
         commentId = 'comment' + id,
 
         url = 'index.php?action=commentReporting&commentId=' + id;

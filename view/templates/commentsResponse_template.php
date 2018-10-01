@@ -30,11 +30,11 @@ echo
             if ($_SESSION['id'] == $commentAuthorId) {
             
                 echo 
-                    ' <a class="updating-comment-btn" href="' .$commentId. '">
+                    ' <a id="' .$commentId. '" class="updating-comment-btn" href="#">
                             Modifier
                     </a> - 
 
-                    <a class="deleting-comment-btn" href="' .$commentId. '">
+                    <a id="' .$commentId. '" class="deleting-comment-btn" href="#">
                             Supprimer
                     </a>';   
             }
@@ -42,7 +42,7 @@ echo
             // 2. possibilité de signaler les commentaires :
             else {
                 echo 
-                    '<a class="reporting-comment-btn" href="' .$commentId. '">
+                    '<a id="' .$commentId. '" class="reporting-comment-btn" href="#">
                             Signaler
                     </a>';
             }
@@ -51,7 +51,7 @@ echo
             if ($_SESSION['userStatus'] == 'admin' && $_SESSION['id'] != $commentAuthorId) {
 
                 echo 
-                    ' - <a class="deleting-comment-btn" href="' .$commentId. '">
+                    ' - <a id="' .$commentId. '" class="deleting-comment-btn" href="#">
                                 Supprimer
                         </a>';
             }
