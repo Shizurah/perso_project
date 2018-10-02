@@ -23,6 +23,7 @@ $('.link-for-post-watching').hover(function() {
 });
 
 
+// Supression article :
 $('table tr').on('click', '.link-for-post-deleting', function(event) {
     event.preventDefault();
 
@@ -45,64 +46,81 @@ $('table tr').on('click', '.link-for-post-deleting', function(event) {
                 $('#' + linkId).closest('tr').fadeOut(700, function() {
                     $('h3').after(response);
                     setTimeout(function() {
-                        $('#success-msg').remove();
+                        $('.success-msg').remove();
                     }, 3000);
                 });
-                // $('#row' + linkId).html(response);
-                // $('#' + id).fadeOut(700, function() { 
-                //     $(this).replaceWith(response);
-                //     setTimeout(function() {
-                //         $('.success-msg-for-deleting-comment').remove();
-                //     }, 2500);
-                // });
             }
         });
     }
 
 });
 
-// index.php?action=postDeleting&amp;postId=<?= $post->id(); ?>
 
-// $('#comments-container').on('click', '.deleting-comment-btn', function(event) {
-//     event.preventDefault();
+// Suppression commentaire :
+$('table tr').on('click', '.link-for-comment-deleting', function(e) {
+    e.preventDefault();
 
-//     if (confirm('Êtes-vous sûr(e) de vouloir supprimer le commentaire ?')) {
+    if (confirm('Etes-vous sûr(e) de vouloir supprimer ce commentaire ?')) {
 
-//         var that = $(this),
-//         id = that.attr('id'),
-//         commentId = 'comment' + id,
+        var that = $(this),
+        rowElt = that.closest('tr'),
+        commentId = rowElt.attr('id'),
 
-//         url = 'index.php?action=commentDeleted&commentId=' + id;
+        url = 'index.php?action=commentDeleted';
 
-//         $.ajax({
-//             url: url,
-//             type: 'post',
-//             data: '',
-//             timeout: 3000,
-    
-//             success: function(response) {
-//                 $('.nb-of-comments').each(function() {
-//                     $(this).text(parseInt(Number($(this).text())) - 1);
-//                 });
-    
-//                 $('#' + commentId).fadeOut(700, function() { 
-//                     $(this).replaceWith(response);
-//                     setTimeout(function() {
-//                         $('.success-msg-for-deleting-comment').remove();
-//                     }, 2500);
-//                 });
-//             },
+        $.ajax({
+            url: url,
+            type: 'post',
+            data: {
+                // 'action': 'postDeleting',
+                'commentId': commentId
+            },
+            timeout: 3000,
 
-//             error: function() {
-//                 alert('La requête n\'a pas abouti, veuillez essayer ultérieurement');
-//                 // $(this).prepend('<p></p>')
-//                 //     .attr('class', 'error-msg')
-//                 //     .text('Oups, la suppression de votre commentaire a échoué. Veuillez ré-essayer ultérieurement.');
-//             }
-//         });    
-//     }
-//     else {
-//         return false;
-//     }
-    
-// }); ////// FIN suppression des commentaires
+            success: function(response) {
+
+                rowElt.fadeOut(700, function() {
+                    $('h3').after(response);
+                    setTimeout(function() {
+                        $('.success-msg').remove();
+                    }, 3000);
+                });
+            }
+        });
+    }
+});
+
+// Ignorer commentaire signalé :
+$('table tr').on('click', '.link-for-comment-ignoring', function(e) {
+    e.preventDefault();
+
+    if (confirm('Le commentaire ne sera plus visible depuis votre espace d\'administration, mais ne sera pas supprimé. \nEtes-vous sûr(e) de vouloir ignorer ce commentaire ?')) {
+
+        var that = $(this),
+            rowElt = that.closest('tr'),
+            commentId = rowElt.attr('id'),
+            
+            url = 'index.php?action=commentIgnored';
+
+        $.ajax({
+            url: url,
+            type: 'post',
+            data: {
+                // 'action': 'postDeleting',
+                'commentId': commentId
+            },
+            timeout: 3000,
+
+            success: function(response) {
+
+                rowElt.fadeOut(700, function() {
+                    $('h3').after(response);
+
+                    setTimeout(function() {
+                        $('.success-msg').remove();
+                    }, 3000);
+                });
+            }
+        });
+    }
+});

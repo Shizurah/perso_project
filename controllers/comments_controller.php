@@ -46,7 +46,7 @@ function deleteComment($id) {
         $comment = $commentsManager->getOneComment($id);
 
         if ($_SESSION['userStatus'] == 'admin' && $_SESSION['id'] != $comment->author_id()) {
-            echo '<p class="success-msg">Le commentaire a bien été supprimé !</p>';
+            echo '<p class="success-msg">Le commentaire a bien été supprimé</p>';
         }
         else {
             echo '<p class="success-msg">Votre commentaire a bien été supprimé !</p>';
@@ -93,12 +93,16 @@ function ignoreReportedComment($id) {
     if (isset($_SESSION['userStatus']) && $_SESSION['userStatus'] == 'admin') {
         $commentsManager = new CommentsManager();
         $commentsManager->ignoreReportedComment($id);
+
+        echo '<p class="success-msg">Le commentaire a bien été ignoré</p>';
     }
 }
 
 
 // PAGINATION :
 function displayComments($postId, $page, $commentsPerPage) {
+    header('Content-type: application/json');
+
     $commentsManager = new CommentsManager();
     $nbOfComments = $commentsManager->countNumberOfComments($postId);
 

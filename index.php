@@ -232,8 +232,8 @@ try {
         elseif ($_GET['action'] == 'commentDeleted') {
             startSession();
 
-            if (isset($_GET['commentId']) && $_GET['commentId'] > 0) {
-                deleteComment($_GET['commentId']);
+            if (isset($_POST['commentId']) && $_POST['commentId'] > 0) {
+                deleteComment($_POST['commentId']);
             }
 
             else {
@@ -258,9 +258,8 @@ try {
         elseif ($_GET['action'] == 'commentIgnored') {
             startSession();
 
-            if (isset($_GET['commentId']) && $_GET['commentId'] > 0) {
-                ignoreReportedComment($_GET['commentId']);
-                getReportedComments();
+            if (isset($_POST['commentId']) && $_POST['commentId'] > 0) {
+                ignoreReportedComment($_POST['commentId']);
             }
             else {
                 // Ce commentaire n'existe pas
