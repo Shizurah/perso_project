@@ -23,7 +23,7 @@ $other = '<link href="assets/css/administration_style.css" rel="stylesheet"';
         <table>
             <tr>
                 <th>Articles</th>
-                <th>Action</th>
+                <th><img src="public/images/eye.png"/></th>
                 <th>Date de publication</th>
                 <th>Catégorie</th>
             </tr>

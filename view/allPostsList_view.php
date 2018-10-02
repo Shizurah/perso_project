@@ -61,12 +61,7 @@ $other = '<link href="assets/css/administration_style.css" rel="stylesheet"';
                         <td>
                             <a id="<?= $post->id(); ?>" class="link-for-post-deleting" href="#">
                                 Supprimer
-                                <!-- <img src="public/images/trash1.png"/> -->
                             </a>
-                            <!-- <form action="index.php?action=postDeleting&amp;postId=<?= $post->id(); ?>" method="post">
-                                <input type="radio" name="action" value="postDeleting" required>
-                                <input type="submit" value="Supprimer">
-                            </form>   -->
                         </td>
                         
                     </tr>
