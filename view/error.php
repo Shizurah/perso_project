@@ -38,8 +38,14 @@
 
     // SCRIPTS JS :
     ob_start();
-        echo 
-            '<script src="assets/js/file.js"></script>';
+?>
+        <script src="assets/js/file.js"></script>;
+        <script>
+            $('section').css('display', 'block')
+                        .css('position', 'relative')
+                        .css('top', '-14px');
+        </script>
+<?php
     $scripts = ob_get_clean();
 
     require_once('view/templates/template.php'); 
