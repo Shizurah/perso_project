@@ -1,5 +1,4 @@
 <?php
-require_once('controllers/comments_pagination.php');
 
 function homePage() {
     $postsManager = new PostsManager();
@@ -138,7 +137,7 @@ function deletePost($id) {
         $postsManager = new PostsManager();
         $postsManager->deletePost($id);
 
-        allPostsPage();
+        echo '<p id="success-msg">L\'article a bien été supprimé</p>';
     }
 }
 
@@ -150,6 +149,21 @@ function allPostsPage() {
         $postsManager = new PostsManager();
         $posts = $postsManager->getAllPostsList();
         require_once('view/allPostsList_view.php');
+    } 
+    else {
+        echo 'fail';
+        // throw new Exception('Vous n\'êtes pas autorisé à vous rendre sur cette page');
+    }
+}
+
+
+function allPostsForUpdatingPage() {
+
+    if (isset($_SESSION['userStatus']) && $_SESSION['userStatus'] == 'admin') {
+
+        $postsManager = new PostsManager();
+        $posts = $postsManager->getAllPostsList();
+        require_once('view/allPostsListForUpdating_view.php');
     } 
     else {
         echo 'fail';

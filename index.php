@@ -149,6 +149,11 @@ try {
             allPostsPage();
         }
 
+        elseif ($_GET['action'] == 'allPostsListForUpdating') {
+            startSession();
+            allPostsForUpdatingPage();
+        }
+
         elseif ($_GET['action'] == 'postUpdating') {
             startSession();
 
@@ -175,9 +180,9 @@ try {
         elseif ($_GET['action'] == 'postDeleting') {
             startSession();
 
-            if (isset($_GET['postId']) && $_GET['postId'] > 0) {
-                deleteCommentsRelatedToAPost($_GET['postId']);
-                deletePost($_GET['postId']);
+            if (isset($_POST['postId']) && $_POST['postId'] > 0) {
+                deleteCommentsRelatedToAPost($_POST['postId']);
+                deletePost($_POST['postId']);
             }
             else {
                 echo 'Aucun identifiant d\' article renseigné';
@@ -242,10 +247,6 @@ try {
 
             if (isset($_GET['commentId']) && $_GET['commentId'] > 0) {
                 reportComment($_GET['commentId']);
-
-                if (isset($_GET['postId'])) {
-                    onePostPage(NULL, $_GET['postId'], NULL);
-                }  
             }
         }
 

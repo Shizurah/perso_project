@@ -25,8 +25,8 @@ $other = '<link href="assets/css/administration_style.css" rel="stylesheet"';
                 <th>Titre</th>
                 <th>Date de publication</th>
                 <th>Catégorie</th>
-                <th>Modifier l'article</th>
-                <th>Supprimer l'article</th>
+                <th><img src="public/images/pencil.png"/></th>
+                <th><img src="public/images/trash.png"/></th>
             </tr>
             
             <?php 
@@ -40,7 +40,10 @@ $other = '<link href="assets/css/administration_style.css" rel="stylesheet"';
             ?>
                     <tr>
                         <td>
-                            <strong><a href="index.php?action=post_and_comments&amp;postId=<?= $post->id(); ?>"><?= $post->title(); ?></a></strong>
+                            <a class="link-for-post-watching" href="index.php?action=post_and_comments&amp;postId=<?= $post->id(); ?>">
+                                <?= $post->title(); ?>
+                                <img class="updating-icon" src="public/images/eye.png"/>
+                            </a>
                         </td>
 
                         <td>
@@ -52,14 +55,18 @@ $other = '<link href="assets/css/administration_style.css" rel="stylesheet"';
                         </td>
                         
                         <td>
-                            <a href="index.php?action=postUpdating&amp;postId=<?= $post->id(); ?>">Modifier</a> 
+                            <a class="link-for-post-updating" href="index.php?action=postUpdating&amp;postId=<?= $post->id(); ?>">Modifier</a> 
                         </td>
 
                         <td>
-                            <form action="index.php?action=postDeleting&amp;postId=<?= $post->id(); ?>" method="post">
+                            <a id="<?= $post->id(); ?>" class="link-for-post-deleting" href="#">
+                                Supprimer
+                                <!-- <img src="public/images/trash1.png"/> -->
+                            </a>
+                            <!-- <form action="index.php?action=postDeleting&amp;postId=<?= $post->id(); ?>" method="post">
                                 <input type="radio" name="action" value="postDeleting" required>
                                 <input type="submit" value="Supprimer">
-                            </form>  
+                            </form>   -->
                         </td>
                         
                     </tr>
@@ -79,8 +86,14 @@ $other = '<link href="assets/css/administration_style.css" rel="stylesheet"';
 
     // SCRIPTS JS :
     ob_start();
-        echo 
-            '<script src="assets/js/file.js"></script>';
+?>
+
+    <script src="assets/js/file.js"></script>
+    <script>
+        $('table td').css('padding', '6px 20px');
+    </script>
+
+<?php
     $scripts = ob_get_clean();
 
     require_once('view/templates/template.php'); 
