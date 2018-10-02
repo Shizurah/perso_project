@@ -198,7 +198,9 @@ span {
 }
 
 .link-for-post-deleting,
-.link-for-post-updating {
+.link-for-post-updating,
+.link-for-comment-deleting,
+.link-for-comment-ignoring {
     display: block;
     width: 100%;
     padding: 5px 10px;
@@ -207,7 +209,9 @@ span {
 }
 
 .link-for-post-deleting:hover,
-.link-for-post-updating:hover {
+.link-for-post-updating:hover,
+.link-for-comment-deleting:hover,
+.link-for-comment-ignoring:hover {
     text-decoration: none;
     color: white;
 }
@@ -216,7 +220,11 @@ span {
     background-color: rgb(75, 128, 68);
 }
 
-.link-for-post-deleting:hover {
-    /* font-weight: bold; */
+.link-for-comment-ignoring:hover {
+    background-color: grey;
+}
+
+.link-for-post-deleting:hover,
+.link-for-comment-deleting:hover {
     background-color: rgb(252, 88, 88);
 }
