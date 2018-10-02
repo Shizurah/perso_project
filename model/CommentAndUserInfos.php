@@ -9,6 +9,7 @@ class CommentAndUserInfos {
     private $_author_avatar;
     private $_comment_content;
     private $_comment_date_fr;
+    private $_reports;
 
     public function __construct(array $data) {
         $this->hydrate($data);
@@ -52,6 +53,10 @@ class CommentAndUserInfos {
 
     public function comment_date_fr() {
         return $this->_comment_date_fr;
+    }
+
+    public function reports() {
+        return $this->_reports;
     }
 
     // setters :
@@ -100,6 +105,13 @@ class CommentAndUserInfos {
     public function setComment_date_fr($commentDate) {
         if (is_string($commentDate)) {
             $this->_comment_date_fr = $commentDate;
+        }
+    }
+
+    public function setReports($reports) {
+        $reports = (int) $reports;
+        if ($reports >= 0) {
+            $this->_reports = $reports;
         }
     }
 

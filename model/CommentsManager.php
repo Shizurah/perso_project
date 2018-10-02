@@ -99,8 +99,12 @@ class CommentsManager {
     public function getReportedComments() {
         $reports = 1;
 
-        $req = $this->_db->prepare('SELECT id, author_id, content, reports, post_id, DATE_FORMAT(comment_date, \'%d/%m/%Y\') AS comment_date_fr 
-                                    FROM comments WHERE reports >= :reports 
+        $req = $this->_db->prepare('SELECT reports, comments.id AS comment_id, post_id, author_id, content as comment_content,
+                                    DATE_FORMAT(comment_date, \'%d/%m/%Y à %Hh%i\') AS comment_date_fr, pseudo AS author_pseudo, avatar AS author_avatar
+                                    FROM comments
+                                    INNER JOIN users
+                                    ON comments.author_id = users.id
+                                    WHERE reports >= :reports 
                                     ORDER BY reports DESC');
 
         $req->bindParam('reports', $reports, PDO::PARAM_INT);
@@ -109,7 +113,7 @@ class CommentsManager {
         $reportedComments = [];
 
         while ($data = $req->fetch()) {
-            $reportedComments[] = new Comment($data);
+            $reportedComments[] = new CommentAndUserInfos($data);
         }
 
         return $reportedComments;
