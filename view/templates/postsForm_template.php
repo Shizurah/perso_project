@@ -1,22 +1,29 @@
 <form action="<?= $formActionAttribute ?>" method="post" enctype="multipart/form-data">
     <p>
-        <label for="postTitle">Titre : </label>
+        <label for="postTitle"><span>Titre</span></label><br/>
         <input type="text" name="postTitle" id="postTitle" value="<?= $titleValue ?>" required>
     </p>
 
     <p>
         <input type="hidden" name="max-file-size" value="204800">
 
-        <label for="postPoster">Affiche : </label>
+        <label for="postPoster">
+            <span>
+                Affiche 
+            </span>
+        </label>
+        <?= $note ?>
+        <br/>
         <input type="file" name="postPoster" id="postPoster">
     </p>
     
     <p>
-        Catégorie : <br/>
+        <span>Catégorie</span>
+        <br/>
         <label for="news">Actus</label>
         <input type="radio" name="postCategory" value="news" id="news" <?= $isNewsCategoryChecked ?>>
-        <br/>
-        <label for="next-releases">Prochaines sorties</label>
+        
+        <label for="next_releases">Prochaines sorties</label>
         <input type="radio" name="postCategory" value="next_releases" id="next_releases" <?= $isNextReleasesCategoryChecked ?>>
     </p>
 

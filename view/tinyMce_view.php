@@ -37,7 +37,7 @@
             else {
                 echo '<h3>Modifier l\'article</h3>';
             }
-    
+
             if (isset($_GET['action'])) {
 
                 if ($_GET['action'] == 'postWritten') {
@@ -52,6 +52,7 @@
                 if ($_GET['action'] == 'postUpdating' && isset($_GET['postId'])) {
                     $formActionAttribute = 'index.php?action=postUpdated&postId=' . $post->id();
                     $titleValue = $post->title();
+                    $note = '<span id="note">(l\'affiche actuelle de l\'article sera appliquée si une nouvelle image n\'est pas selectionnée)</span>';
 
                     if ($post->category() == 'news') {
                         $isNewsCategoryChecked = 'checked';
@@ -70,6 +71,7 @@
                     $isNewsCategoryChecked = NULL;
                     $isNextReleasesCategoryChecked = NULL;
                     $postContent = NULL;
+                    $note = NULL;
                 }
 
                 require_once('view/templates/postsForm_template.php');
@@ -90,6 +92,9 @@
 ?>
    
     <script src="assets/js/file.js"></script>
+    <script>
+        $('#administration-main-content').css('display', 'block');
+    </script>
 
 <?php
     $scripts = ob_get_clean();
