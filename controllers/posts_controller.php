@@ -137,7 +137,7 @@ function deletePost($id) {
         $postsManager = new PostsManager();
         $postsManager->deletePost($id);
 
-        echo '<p id="success-msg">L\'article a bien été supprimé</p>';
+        echo '<p class="success-msg">L\'article a bien été supprimé</p>';
     }
 }
 
