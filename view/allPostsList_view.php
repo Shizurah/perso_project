@@ -83,7 +83,7 @@ $other = '<link href="assets/css/administration_style.css" rel="stylesheet"';
     ob_start();
 ?>
 
-    <script src="assets/js/file.js"></script>
+    <script src="assets/js/admin.js"></script>
     <script>
         $('table td').css('padding', '6px 20px');
     </script>

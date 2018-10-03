@@ -74,7 +74,7 @@ $other = '<link href="assets/css/administration_style.css" rel="stylesheet"';
     // SCRIPTS JS :
     ob_start();
         echo 
-            '<script src="assets/js/file.js"></script>';
+            '<script src="assets/js/admin.js"></script>';
     $scripts = ob_get_clean();
 
     require_once('view/templates/template.php'); 

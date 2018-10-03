@@ -19,7 +19,7 @@
     <?php require_once('templates/asideForAdministration_template.php'); ?>
 
     <div id="administration-main-content">
-        <h3>Informations de votre site</h3>
+        <h3>Informations</h3>
 
         <p>Votre site compte actuellement <?= $nbOfUsers ?> utilisateurs inscrits</p>
         <p> <?= $nbOfPosts ?> articles publiés</p>
@@ -38,7 +38,7 @@
     ob_start();
 ?>
    
-    <script src="assets/js/file.js"></script>
+    <script src="assets/js/admin.js"></script>
 
 <?php
     $scripts = ob_get_clean();

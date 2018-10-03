@@ -91,7 +91,7 @@
     ob_start();
 ?>
    
-    <script src="assets/js/file.js"></script>
+    <script src="assets/js/admin.js"></script>
     <script>
         $('#administration-main-content').css('display', 'block');
     </script>

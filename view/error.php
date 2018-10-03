@@ -39,7 +39,8 @@
     // SCRIPTS JS :
     ob_start();
 ?>
-        <script src="assets/js/file.js"></script>;
+        <script src="assets/js/admin.js"></script>;
+        
         <script>
             $('section').css('display', 'block')
                         .css('position', 'relative')
