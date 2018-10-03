@@ -3,7 +3,8 @@ $('section').css('margin-top', '-20px');
 var key = '7d64a9ed6d8e781b0d44e1b214945855',
     url, // requête api
     pageId = 1, // page renvoyée par défaut par l'api
-    totalOfPages; // total des pages renvoyé par l'api
+    totalOfPages, // total des pages renvoyé par l'api
+    times = 0;
 
 
 $(function() {
@@ -39,6 +40,7 @@ $(function() {
         $("#loading").remove();
     });
 
+
     // 2. Récuperation SERIES TRENDING
     $.ajax({
         url: 'https://api.themoviedb.org/3/trending/tv/week?api_key=' + key + '&language=fr',
@@ -54,6 +56,16 @@ $(function() {
                                                 + '"></a><div id="' + tvShow.name + '" class="img-containers"><img src="https://image.tmdb.org/t/p/w200' 
                                                 + tvShow.poster_path + '"/></div></div>');
             });
+
+            var data = {
+                genres: $('#genres-selection').val(),
+                sortby: $('#sort-by-selection').val(),
+                titleForTvshowsContent: $('#tv-shows-category-title').html(),
+                tvshowsContent: $('#tv-shows-container').html()
+            };
+            
+            
+            history.pushState(data, 'default page', 'http://localhost/projets_openclassrooms/projet5/index.php?action=tvShows');
             
             url = 'https://api.themoviedb.org/3/trending/tv/week?api_key=' + key + '&language=fr';
             totalOfPages = trendingTvShows.total_pages;
@@ -85,10 +97,11 @@ $(function() {
             timeout: 3000,
         
             success: function(tvShows) {
+                $('#tv-shows-category-title h3').html('Résultat de votre recherche pour <span>"' + $('#search-input').val() + '"</span> - ');
                 $('#search-input').val('');
-                $('#tv-shows-category-title').text('Résultat de votre recherche');
+                
                 $('#back-to-trending-tv-shows').remove();
-                $('#tv-shows-category-title').after('<i><a id="back-to-trending-tv-shows" href="index.php?action=tvShows">Retour aux séries de la semaine</a></i>');
+                $('#tv-shows-category-title').append('<i><a id="back-to-trending-tv-shows" href="index.php?action=tvShows"> Retour aux séries de la semaine</a></i>');
                 $('#tv-shows-container div').remove();
 
                 tvShows.results.forEach(function(tvShow) {
@@ -98,7 +111,18 @@ $(function() {
                                                             + '"></a><div id="' + tvShow.name + '" class="img-containers"><img src="https://image.tmdb.org/t/p/w200' 
                                                             + tvShow.poster_path + '"/></div></div>');
                     }
+
                 });
+
+                times += 1;
+                var data = {
+                    // genres: $('#genres-selection').val(),
+                    // sortby: $('#sort-by-selection').val(),
+                    titleForTvshowsContent: $('#tv-shows-category-title').html(),
+                    tvshowsContent: $('#tv-shows-container').html()
+                };
+                    
+                history.pushState(data, "research" + times, 'http://localhost/projets_openclassrooms/projet5/index.php?action=tvShows');
 
                 pageId = 1;
                 url = 'https://api.themoviedb.org/3/search/tv?query=' + keywords + '&api_key=' + key + '&language=fr';
@@ -138,10 +162,11 @@ $(function() {
             dataType: 'json',
             timeout: 3000,
         
-            success: function(tvShows) {
-                $('#tv-shows-category-title').text('Résultat de votre recherche');
+            success: function(tvShows) {         
+
+                $('#tv-shows-category-title h3').text('Résultat de votre recherche - ');
                 $('#back-to-trending-tv-shows').remove();
-                $('#tv-shows-category-title').after('<i><a id="back-to-trending-tv-shows" href="index.php?action=tvShows">Retour aux séries de la semaine</a></i>');
+                $('#tv-shows-category-title').append('<i><a id="back-to-trending-tv-shows" href="index.php?action=tvShows"> Retour aux séries de la semaine</a></i>');
                 $('#tv-shows-container div').remove();
 
                 tvShows.results.forEach(function(tvShow) {
@@ -150,8 +175,20 @@ $(function() {
                                                             + '" href="index.php?action=tvShow&amp;tvShowId=' + tvShow.id 
                                                             + '"></a><div id="' + tvShow.name + '" class="img-containers"><img src="https://image.tmdb.org/t/p/w200' 
                                                             + tvShow.poster_path + '"/></div></div>');
+
+                        
                     }
                 });
+
+                times += 1;
+                var data = {
+                    genres: $('#genres-selection').val(),
+                    sortby: $('#sort-by-selection').val(),
+                    titleForTvshowsContent: $('#tv-shows-category-title').html(),
+                    tvshowsContent: $('#tv-shows-container').html()
+                };
+                    
+                history.pushState(data, "research" + times, 'http://localhost/projets_openclassrooms/projet5/index.php?action=tvShows#research' + times);
 
                 pageId = 1;
                 url = 'https://api.themoviedb.org/3/discover/tv?api_key=' + key + '&language=fr' + '&with_genres=' + selectedGenres + '&sort_by=' + sortBy;
@@ -167,6 +204,21 @@ $(function() {
 
         return false;
     });
+
+
+    // $('#tv-shows-container').on('click', '.tv-shows-links', function(e) {
+    //     e.preventDefault();
+    //     var data = {
+    //         genres: $('#genres-selection').val(),
+    //         sortby: $('#sort-by-selection').val(),
+    //         titleForTvshowsContent: $('#tv-shows-category-title').html(),
+    //         tvshowsContent: $('#tv-shows-container').html()
+    //     };
+
+    //     history.pushState(data, "research" + times, 'http://localhost/projets_openclassrooms/projet5/index.php?action=tvShows#research' + times);
+
+    //     // $(this).unbind('click');
+    // });
 });
 
 // Paramètre 'page' ajouté pour affichage des séries suivantes
@@ -175,7 +227,7 @@ $(window).scroll(function() {
     if (totalOfPages > 1 && pageId <= totalOfPages) {
 
         if ($(window).scrollTop() + $(window).height() > $(document).height() - 30) {
-            $('#tv-shows-container').append('<p id="loading"><img  src="public/images/load2.gif" alt="Chargement..."/></p>');
+            // $('#tv-shows-container').append('<p id="loading"><img  src="public/images/load2.gif" alt="Chargement..."/></p>');
             pageId += 1;
 
             $.ajax({
@@ -209,3 +261,18 @@ $(window).scroll(function() {
         }
     }  
 });
+
+
+window.onpopstate = function(event) {
+    console.log('inside onpopstate');
+    console.log(event.state);
+
+    $('#genres-selection').val(event.state.genres);
+    $('#sort-by-selection').val(event.state.sortby);
+
+    $('#genres-selection').selectpicker('refresh');
+    $('#sort-by-selection').selectpicker('refresh');
+
+    $('#tv-shows-category-title').html(event.state.titleForTvshowsContent);
+    $('#tv-shows-container').html(event.state.tvshowsContent);
+};
