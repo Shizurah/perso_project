@@ -1,4 +1,5 @@
 body {
+    position: relative;
     background-color: rgb(37, 36, 36);
     background: url("../../public/images/got1.png") fixed repeat top;
 }
@@ -62,7 +63,8 @@ nav a {
     margin-bottom: 30px;
 }
 
-#errorMsg {
+#errorMsg,
+.error-msg {
     display: none;
     margin-bottom: 20px;
     padding: 5px 14px;
@@ -348,9 +350,15 @@ hr {
     align-items: center;
 }
 
-#comment-form img {
+#comment-form-author-and-textarea div {
     margin-right: 10px;
-    width: 60px;
+    width: 65px;
+    height: 65px;
+}
+
+#comment-form img {
+    width: 100%;
+    height: 100%;
     border-radius: 50%;
     border: 1px solid rgb(168, 166, 166);
 }
@@ -409,10 +417,6 @@ hr {
     color: white;
 }
 
-.authors {
-    font-weight: bold;
-}
-
 .user-avatar-for-comments {
     width: 60px;
     border-radius: 50%;
@@ -420,20 +424,31 @@ hr {
 }
 
 .authors {
-    margin-right: 5px;
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+.author-and-content div:nth-child(1) {
+    margin-right: 10px;
+    width: 65px;
+    height: 65px;
+}
+
+.user-avatar-for-comments {
+    width: 100%;
+    height: 100%;
 }
 
 .author-and-content div:nth-child(2) {
     display: flex;
-    display: relative;
-    width: 100%;
+    width: 85%;
     align-items: center;
 }
 
 .author-and-content div:nth-child(2) span:nth-child(2) {
     display: block;
     padding: 5px 10px 5px 0;
-    word-break: break-all;
+    /* word-break: break-all; */
 }
 
 .comments-date-and-actions {
@@ -464,7 +479,7 @@ hr {
 .updating-comment-form textarea {
     padding: 5px 15px;
     margin-right: 20px;
-    width: 70%;
+    width: 80%;
     height: 60px;
     
 }
@@ -535,6 +550,20 @@ hr {
 /* ========================= */
 /* PAGE DES SERIES TV */
 
+#tv-shows-category-title {
+    display: flex;
+    align-items: baseline;
+}
+
+#tv-shows-category-title h3 span {
+    font-weight: bold;
+    background-color: yellow;
+}
+
+#tv-shows-category-title a {
+    margin-left: 5px;
+}
+
 #tv-shows-page-info-container {
     margin-bottom: 30px;
     padding: 25px;
@@ -549,11 +578,6 @@ hr {
     display: flex;
     justify-content: center;
     align-items: center; 
-}
-
-#tv-shows-page-info p {
-    padding-bottom: 4px;
-    border-bottom: 1px solid yellow;
 }
 
 #tv-shows-page-info span {
@@ -685,9 +709,14 @@ h5 {
     background-color: rgba(12, 12, 12, 0.7);
 }
 
-#loading-img-container {
+#loading {
+    /* display: none; */
+    width: 100px;
+    margin: auto;
+}
+
+#loading img {
     width: 100%;
-    text-align: center;
 }
 
 #scroll-up-arrow {
@@ -697,9 +726,6 @@ h5 {
     right: 505px;
 }
 
-#scroll-up-arrow :hover {
-    background-color:rgb(49, 50, 51);
-}
 
 /* PAGE DES DETAILS D'UNE SERIE */
 #tv-show-container {
@@ -856,9 +882,7 @@ h5 {
 /* PAGE 'MON ESPACE' */
 
 #avatar-form-container {
-    border: 2px solid rgb(192, 190, 190);
-    border-radius: 10px;
-    margin: 30px 80px;
+    margin: 50px 80px;
     padding: 10px 100px;
 }
 
@@ -872,7 +896,8 @@ h5 {
 }
 
 #personal-space-avatar {
-    width: 180px;
+    width: 150px;
+    height: 150px;
     overflow: hidden;
     border: 1px solid grey;
     border-radius: 50%;
@@ -912,15 +937,37 @@ h5 {
 /* FOOTER */
 
 footer {
+    /* position: absolute;
+    bottom: 0; */
+    color: white;
     position: relative;
+    display: flex;
+    justify-content: center;
     z-index: 10;
     background-color: rgb(35, 35, 35);
-    height: 150px;
-    padding: -15px;
 }
 
-footer a {
+footer div {
+    display: flex;
+    flex-direction: column;
+    padding: 50px;
+}
+
+footer div:first-child {
+    justify-content: center;
+}
+
+footer h5 {
+    font-weight: bold;
+    text-decoration: none;
+}
+
+footer a, h5{
     color: white;
+}
+
+#api-logo {
+    width: 45px;
 }
 
 
