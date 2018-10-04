@@ -139,8 +139,12 @@ try {
             if (isset($_POST['postTitle']) && isset($_FILES['postPoster']) && isset($_POST['postCategory']) && isset($_POST['postContent'])) {
                 addNewPost($_POST['postTitle'], $_FILES['postPoster'], $_POST['postCategory'], $_POST['postContent']);
             } 
+
             else {
-                echo 'Impossible d\'ajouter l\'article ';
+                $dataBack = array('status' => 'error', 'errorMsg' => '<p class="error-msg">Impossible d\'ajouter l\'article. Veuillez remplir tous les champs</p>');
+                $dataBack = json_encode($dataBack);
+
+                echo $dataBack;  
             }
         }
 
@@ -271,16 +275,28 @@ try {
     
 
     // Par défaut : affichage de la page d'accueil du site
-    else {
+    elseif (isset($_GET['error'])) {
         session_start();
+        displayErrorMsg($_GET['error']);
+    }
 
-        if (isset($_GET['error'])) {
-            displayErrorMsg($_GET['error']);
+    elseif (isset($_GET['nbOfPostsToDisplay']) && isset($_GET['currentNbOfPosts'])) {
+
+        if (ctype_digit($_GET['nbOfPostsToDisplay']) && ctype_digit($_GET['currentNbOfPosts'])) {
+            fetchNextPosts($_GET['nbOfPostsToDisplay'], $_GET['currentNbOfPosts']);
         }
         else {
-            homePage();
-        }         
+            http_response_code(400);
+        }
     }
+
+    else {
+        session_start();
+        homePage();
+    }
+
+
+        
 
 
 } catch (Exception $e) {

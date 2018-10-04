@@ -22,7 +22,10 @@ class PostsManager {
     }
 
     public function getAllPostsList() {
-        $req = $this->_db->prepare('SELECT id, title, category, content, DATE_FORMAT(postDate, \'%d/%m/%Y\') AS postDate_fr FROM posts ORDER BY postDate DESC');
+        $req = $this->_db->prepare('SELECT id, title, category, content, 
+                                    DATE_FORMAT(postDate, \'%d/%m/%Y\') AS postDate_fr 
+                                    FROM posts 
+                                    ORDER BY postDate DESC');
         $req->execute();
 
         $posts = [];
@@ -34,12 +37,20 @@ class PostsManager {
         return $posts;
     }
 
-    public function getNewsPostsList() {
+    public function getNewsPostsList($firstPost, $postsPerPage) {
         $category = 'news';
 
-        $req = $this->_db->prepare('SELECT id, poster, title, SUBSTR(content, 1, 190) AS content, DATE_FORMAT(postDate, \'%d/%m/%Y\') AS postDate_fr FROM posts WHERE category = :category ORDER BY postDate DESC');
+        $req = $this->_db->prepare('SELECT id, poster, title, SUBSTR(content, 1, 190) AS content, 
+                                    DATE_FORMAT(postDate, \'%d/%m/%Y\') AS postDate_fr 
+                                    FROM posts 
+                                    WHERE category = :category 
+                                    ORDER BY postDate DESC
+                                    LIMIT :firstPost, :postsPerPage');
 
         $req->bindParam('category', $category, PDO::PARAM_STR);
+        $req->bindParam('firstPost', $firstPost, PDO::PARAM_INT);
+        $req->bindParam('postsPerPage', $postsPerPage, PDO::PARAM_INT);
+
         $req->execute();
 
         $newsPosts = [];
@@ -50,6 +61,27 @@ class PostsManager {
 
         return $newsPosts;
     }
+
+    // public function getNewsPostsList() {
+    //     $category = 'news';
+
+    //     $req = $this->_db->prepare('SELECT id, poster, title, SUBSTR(content, 1, 190) AS content, 
+    //                                 DATE_FORMAT(postDate, \'%d/%m/%Y\') AS postDate_fr 
+    //                                 FROM posts 
+    //                                 WHERE category = :category 
+    //                                 ORDER BY postDate DESC');
+
+    //     $req->bindParam('category', $category, PDO::PARAM_STR);
+    //     $req->execute();
+
+    //     $newsPosts = [];
+
+    //     while ($data = $req->fetch()) {
+    //         $newsPosts[] = new Post($data);
+    //     }
+
+    //     return $newsPosts;
+    // }
 
     public function getNextReleasesPostsList() {
         $category = 'next_releases';

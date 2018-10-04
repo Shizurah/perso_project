@@ -80,6 +80,8 @@
             <?php   
                 }
             ?>
+
+            <div id="pagination"><a href="#">Voir plus d'articles</a></div>
         </div>
 
         <!-- AFFICHAGE DES PROCHAINES SORTIES -->
@@ -139,11 +141,17 @@
 
     // SCRIPTS JS :
     ob_start();
-        echo 
-            '<script>
+?>
+      
+            <script>
                 document.getElementById("main-wrap").style.marginTop = "150px";
                 document.getElementById("nav-line").style.display = "none";
-            </script>';
+            </script>
+
+            <script src="assets/js/newsPage.js"></script>
+            
+
+<?php
     $scripts = ob_get_clean();
 
     require('view/templates/template.php'); 
