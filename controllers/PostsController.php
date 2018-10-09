@@ -1,5 +1,6 @@
 <?php
 
+
 class PostsController extends Controller {
 
     private $_postsManager;
@@ -183,7 +184,7 @@ class PostsController extends Controller {
     public function deletePost($id) {
     
         if (isset($_SESSION['id']) && isset($_SESSION['userStatus']) && $_SESSION['userStatus'] == 'admin') {
-            $this->_postsManager->deletePost($id);
+            $this->_postsManager->delete($id, 'posts', 'Cet article n\'existe pas.');
             echo '<p class="success-msg">L\'article a bien été supprimé</p>';
         }
         else {

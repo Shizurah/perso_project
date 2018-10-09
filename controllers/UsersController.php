@@ -1,5 +1,6 @@
 <?php
 
+
 class UsersController extends Controller {
 
     private $_usersManager;
@@ -10,7 +11,7 @@ class UsersController extends Controller {
     public function __construct() {
         $this->_usersManager = new UsersManager();
         $this->_postsManager = new PostsManager();
-        $this->_commentsManager = new CommentsManager;
+        $this->_commentsManager = new CommentsManager();
     }
 
 
@@ -40,8 +41,8 @@ class UsersController extends Controller {
 
         if (isset($_SESSION['userStatus']) && $_SESSION['userStatus'] == 'admin') {
 
-            $nbOfUsers = $this->_usersManager->countUsers();
-            $nbOfPosts = $this->_postsManager->countPosts();
+            $nbOfUsers = $this->_usersManager->count('users');
+            $nbOfPosts = $this->_postsManager->count('posts');
             $nbOfReportedComments = $this->_commentsManager->countReportedComments();
 
             require_once('view/administration_view.php');

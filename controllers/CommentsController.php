@@ -1,5 +1,6 @@
 <?php
 
+
 class CommentsController extends Controller {
 
     private $_commentsManager;
@@ -62,7 +63,7 @@ class CommentsController extends Controller {
 
             $msg = '';
             $comment = $this->_commentsManager->getOneComment($id);
-            $this->_commentsManager->deleteComment($id);
+            $this->_commentsManager->delete($id, 'comments', 'Ce commentaire n\'existe pas');
             
             if ($_SESSION['userStatus'] == 'admin' && $_SESSION['id'] != $comment->author_id()) {
                 $msg = '<p class="success-msg">Le commentaire a bien été supprimé</p>';
