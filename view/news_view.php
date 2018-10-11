@@ -8,7 +8,15 @@
 <?php 
     ob_start(); 
     echo '<div id="main-wrap" class="container">'; // --> DEBUT MAIN-WRAP
+?>
 
+    <p id="intro">
+        GAME OF THRONES<br/>
+        <span>"Winter is coming"</span><br/>
+        <a href="http://localhost/projets_openclassrooms/projet5/index.php?action=tvShow&tvShowId=1399" target="_blank">Suivre la série</a>
+    </p>
+
+<?php
     $h1Header = '<img id="banner-img" src="public/images/logo2.png" alt="logo"/>';
     require('view/templates/header_template.php'); 
 
@@ -49,7 +57,7 @@
                         <div class="row">
                             <!-- affiche post -->
                             <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5">
-                                <a href="index.php?action=post_and_comments&postId=<?= $post->id(); ?>">
+                                <a class="posters-containers" href="index.php?action=post_and_comments&postId=<?= $post->id(); ?>">
                                     <img class="posters" src="public/posts/<?= $post->poster(); ?>" alt="affiche série"/>
                                 </a>
                             </div>
@@ -103,16 +111,14 @@
 
                         <div class="row"> 
                             <h3 class="col-lg-12">
-                                <a href="index.php?action=post_and_comments&amp;postId=<?= $post->id(); ?>">
-                                    <?= $post->title(); ?>
-                                </a>
+                                <?= $post->title(); ?>
                             </h3>
                         </div>
 
                         <div class="col-lg-12">
-                            <a class="posters-frames" href="index.php?action=post_and_comments&amp;postId=<?= $post->id(); ?>">
+                            <p class="posters-frames">
                                 <img class="posters" src="public/posts/<?= $post->poster(); ?>" alt="affiche série"/>
-                            </a>
+                            </p>
                         </div>
 
                         <div class="col-lg-12">
@@ -141,17 +147,7 @@
 
     // SCRIPTS JS :
     ob_start();
-?>
-      
-            <script>
-                document.getElementById("main-wrap").style.marginTop = "150px";
-                document.getElementById("nav-line").style.display = "none";
-            </script>
-
-            <script src="assets/js/newsPage.js"></script>
-            
-
-<?php
+        echo '<script src="assets/js/newsPage.js"></script>';
     $scripts = ob_get_clean();
 
     require('view/templates/template.php'); 
