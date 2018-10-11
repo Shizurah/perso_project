@@ -50,6 +50,7 @@
 
                 // FORMULAIRE (fichier postForm_template.php) :
                 if ($_GET['action'] == 'postUpdating' && isset($_GET['postId'])) {
+                    $formId = 'post-updating-form';
                     $formActionAttribute = 'index.php?action=postUpdated&postId=' . $post->id();
                     $titleValue = $post->title();
                     $note = '<span id="note">(l\'affiche actuelle de l\'article sera appliquée si une nouvelle image n\'est pas selectionnée)</span>';
@@ -66,6 +67,7 @@
                     $postContent = $post->content();
                 }
                 else {
+                    $formId = 'post-writing-form';
                     $formActionAttribute = 'index.php?action=postWritten';
                     $titleValue = NULL;
                     $isNewsCategoryChecked = NULL;
