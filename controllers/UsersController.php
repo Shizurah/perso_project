@@ -155,7 +155,6 @@ class UsersController extends Controller {
     
         if (isset($_SESSION['id']) && isset($_SESSION['userStatus'])) {
     
-            // $error = false;
             $errorMsg = '';
             $maxSize = 10000000;
             $valid_expansions = array('jpg', 'jpeg', 'png', 'gif');
@@ -168,9 +167,10 @@ class UsersController extends Controller {
                     if (in_array($uploaded_expansion, $valid_expansions)) {
                         $path = 'public/members/avatars/' . $_SESSION['id'] . '.' . $uploaded_expansion;
     
-                        if (!file_exists($path)) {
+                        // if (!file_exists($path)) {
                             $moving = move_uploaded_file($fileTmpName, $path);
-    
+                         
+
                             if ($moving) {
                                 $newAvatarName = $_SESSION['id'] . '.' . $uploaded_expansion;
     
@@ -178,12 +178,12 @@ class UsersController extends Controller {
                                 $this->_usersManager->updateAvatar($_SESSION['id'], $newAvatarName);
                                 $_SESSION['avatar'] = $newAvatarName;
     
-                                mySpacePage();
+                                $this->mySpacePage();
                             }
                             else {
                                 $errorMsg = 'Erreur lors de l\'importation de votre image';
                             }
-                        }
+                        // }
                     } 
                     else {
                         $errorMsg = 'L\'Extension de votre image est invalide';
