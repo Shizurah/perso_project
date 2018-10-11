@@ -77,21 +77,24 @@
                 <p><input type="submit" value="FILTRER"></p>
             </form>
         </div>
-
-        
     </div>
 
     <br/>
-    
-    <h3 id="tv-shows-category-title">Séries populaires cette semaine</h3>
+
+    <div id="tv-shows-category-title">
+        <h3>Séries populaires cette semaine</h3>
+    </div>
+
     <hr class="title-separations"/>
+
     <p id="loading"><img  src="public/images/load2.gif" alt="Chargement..."/></p>
+
     <div id="tv-shows-container">
         <a id="scroll-up-arrow" href="#nav"><img src="public/images/scroll_up_arrow.png" alt="flèche retour haut de page"></a>
     </div>
-
     
-    </div> <!-- FIN MAIN-WRAP -->
+</div> <!-- FIN MAIN-WRAP -->
+
 <?php $section = ob_get_clean(); ?>
 
 
