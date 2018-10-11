@@ -1,17 +1,25 @@
 <?php
 // appel des fichiers + classes
-require_once('controllers/posts_controller.php');
-require_once('controllers/tvShows_controller.php');
-require_once('controllers/users_controller.php');
-require_once('controllers/comments_controller.php');
-require_once('controllers/errors_controller.php');
+require_once('controllers/Controller.php');
+require_once('controllers/PostsController.php');
+require_once('controllers/UsersController.php');
+require_once('controllers/CommentsController.php');
+require_once('controllers/TvShowsController.php');
+require_once('controllers/ErrorsController.php');
 
 
-function autoloading($class) {
-    require 'model/' . $class . '.php';
+function modelsAutoloading($class) { // faire une 2e fonction d'autoload ds la classe Controller (parent) pour appel des classes du model ?
+    require_once 'models/' . $class . '.php'; // remplacer 'model' par 'controllers' ?
 }
 
-spl_autoload_register('autoloading');
+// function controllersAutoloading($class) { // faire une 2e fonction d'autoload ds la classe Controller (parent) pour appel des classes du model ?
+//     require 'controllers/' . $class . '.php'; // remplacer 'model' par 'controllers' ?
+// }
+
+// spl_autoload_register('controllersAutoloading');
+
+
+spl_autoload_register('modelsAutoloading');
 
 
 function startSession() {
@@ -19,6 +27,17 @@ function startSession() {
         session_start();
     }
 }
+
+
+$postsController = new PostsController();
+$usersController = new UsersController();
+$commentsController = new CommentsController();
+$tvShowsController = new TvShowsController();
+$errorsController = new ErrorsController();
+
+
+
+
 
 
 try {
@@ -32,10 +51,11 @@ try {
 
             if (isset($_GET['postId']) && $_GET['postId'] > 0) {
                 // 1: affichage de l'article
-                onePostPage($_GET['postId']);                 
+                $postsController->onePostPage($_GET['postId']);                 
             }
             else {
-                echo 'Cet article n\'existe pas';
+                $errorMsg = 'Cet article n\'existe pas.';
+                require_once('view/error.php');
             }
         }
 
@@ -43,40 +63,44 @@ try {
             startSession();
 
             if (isset($_GET['postId']) && isset($_GET['pageId']) && isset($_GET['commentsPerPage'])){
-                displayComments($_GET['postId'], $_GET['pageId'], $_GET['commentsPerPage']);
+                $commentsController->displayComments($_GET['postId'], $_GET['pageId'], $_GET['commentsPerPage']);
             }
         }
 
         elseif ($_GET['action'] == 'tvShows') {
             session_start();
-            tvShowsPage();
+            $tvShowsController->tvShowsPage();
         }
 
         elseif ($_GET['action'] == 'tvShow') {
             session_start();
 
             if (isset($_GET['tvShowId']) && $_GET['tvShowId'] > 0) {
-                tvShowDetailsPage($_GET['tvShowId']);
+                $tvShowsController->tvShowDetailsPage($_GET['tvShowId']);
+            } 
+            else {
+                $errorMsg = 'Impossible d\'afficher cette série.';
+                require_once('view/error.php');
             }
         }
 
         elseif ($_GET['action'] == "contact") {
-            contactPage();
+            $usersController->contactPage();
         }
 
         elseif ($_GET['action'] == "connexionPage") {
-            connexionPage();
+            $usersController->connexionPage();
         }
 
         elseif ($_GET['action'] == "registrationPage") {
-            registrationPage();
+            $usersController->registrationPage();
         }
 
         // Création de compte : 
         elseif ($_GET['action'] == 'registration') {
 
             if (isset($_POST['pseudo']) && isset($_POST['password1']) && isset($_POST['password2']) && isset($_POST['email'])) {
-                userRegistration($_POST['pseudo'], $_POST['password1'], $_POST['password2'], $_POST['email']);
+                $usersController->userRegistration($_POST['pseudo'], $_POST['password1'], $_POST['password2'], $_POST['email']);
             } 
             else {
                 throw new Exception('Veuillez remplir tous les champs');
@@ -87,7 +111,7 @@ try {
         elseif ($_GET['action'] == 'connexion') {
 
             if (isset($_POST['pseudo']) && isset($_POST['password'])) {
-                userConnexion($_POST['pseudo'], $_POST['password']);
+                $usersController->userConnexion($_POST['pseudo'], $_POST['password']);
             } 
             else {
                 // throw new Exception('Veuillez remplir tous les champs');
@@ -96,7 +120,7 @@ try {
 
         elseif ($_GET['action'] == "mySpace") {
             session_start();
-            mySpacePage();
+            $usersController->mySpacePage();
         }
 
         // changement d'avatar :
@@ -104,11 +128,11 @@ try {
             startSession();
             
             if (isset($_FILES['avatar']) && !empty($_FILES['avatar'])) {
-                updateAvatar($_FILES['avatar']['name'], $_FILES['avatar']['size'], $_FILES['avatar']['error'], $_FILES['avatar']['tmp_name']);
+                $usersController->updateAvatar($_FILES['avatar']['name'], $_FILES['avatar']['size'], $_FILES['avatar']['error'], $_FILES['avatar']['tmp_name']);
             } 
             else {
-                // Veuillez compléter les champs
-                echo 'fail';
+                $errorMsg = 'Impossible d\'effectuer cette action.';
+                require_once('view/error.php');
             }
         }
 
@@ -125,19 +149,19 @@ try {
 
         elseif ($_GET['action'] == 'administration') {
             startSession();
-            administrationPage();
+            $usersController->administrationPage();
         }
 
         elseif ($_GET['action'] == 'postWriting') {
             startSession();
-            tinyMcePage();
+            $postsController->tinyMcePage();
         }
 
         elseif ($_GET['action'] == 'postWritten') {
             startSession();
 
             if (isset($_POST['postTitle']) && isset($_FILES['postPoster']) && isset($_POST['postCategory']) && isset($_POST['postContent'])) {
-                addNewPost($_POST['postTitle'], $_FILES['postPoster'], $_POST['postCategory'], $_POST['postContent']);
+                $postsController->addNewPost($_POST['postTitle'], $_FILES['postPoster'], $_POST['postCategory'], $_POST['postContent']);
             } 
 
             else {
@@ -150,23 +174,24 @@ try {
 
         elseif ($_GET['action'] == 'allPostsList') {
             startSession();
-            allPostsPage();
+            $postsController->allPostsPage();
         }
 
         elseif ($_GET['action'] == 'allPostsListForUpdating') {
             startSession();
-            allPostsForUpdatingPage();
+            $postsController->allPostsForUpdatingPage();
         }
 
         elseif ($_GET['action'] == 'postUpdating') {
             startSession();
 
             if (isset($_GET['postId']) && $_GET['postId'] > 0) {
-                tinyMceForPostUpdating($_GET['postId']);
+                $postsController->tinyMceForPostUpdating($_GET['postId']);
             }
 
             else {
-                echo 'cet article n existe pas';
+                $errorMsg = 'Impossible d\'effectuer cette action.';
+                require_once('view/error.php');
             }
         }
 
@@ -174,10 +199,11 @@ try {
             startSession();
 
             if (isset($_GET['postId']) && isset($_POST['postTitle']) && isset($_POST['postCategory']) && isset($_POST['postContent'])) {
-                updatePost($_GET['postId'], $_POST['postTitle'], $_POST['postCategory'], $_POST['postContent']);
+                $postsController->updatePost($_GET['postId'], $_POST['postTitle'], $_POST['postCategory'], $_POST['postContent']);
             }
             else {
-                echo 'Impossible de modifier l\'article ';
+                $errorMsg = 'Impossible d\'effectuer cette action.';
+                require_once('view/error.php');
             }   
         }
 
@@ -185,11 +211,12 @@ try {
             startSession();
 
             if (isset($_POST['postId']) && $_POST['postId'] > 0) {
-                deleteCommentsRelatedToAPost($_POST['postId']);
-                deletePost($_POST['postId']);
+                $commentsController->deleteCommentsRelatedToAPost($_POST['postId']);
+                $postsController->deletePost($_POST['postId']);
             }
             else {
-                echo 'Aucun identifiant d\' article renseigné';
+                $errorMsg = 'Impossible d\'effectuer cette action.';
+                require_once('view/error.php');
             }
         }
 
@@ -199,11 +226,11 @@ try {
             startSession();
 
             if (isset($_POST['comment-text']) && !empty($_POST['comment-text']) && isset($_GET['postId']) && isset($_SESSION['id'])) {
-                addComment($_POST['comment-text'], $_GET['postId'], $_SESSION['id']);
-                
+                $commentsController->addComment($_POST['comment-text'], $_GET['postId'], $_SESSION['id']);
             }
             else {
-                echo 'Impossible d\'ajouter votre commentaire';
+                $errorMsg = 'Impossible d\'ajouter votre commentaire';
+                require_once('view/error.php');
             }
         }
 
@@ -211,129 +238,112 @@ try {
             startSession();
 
             if (isset($_GET['postId']) && isset($_GET['commentId']) && $_GET['postId'] > 0 && $_GET['commentId'] > 0) {
-                onePostPage($_GET['action'], $_GET['postId'], $_GET['commentId']);
+                $postsController->onePostPage($_GET['action'], $_GET['postId'], $_GET['commentId']);
             }
 
             else {
-                // Ce commentaire n'existe pas
-                echo 'fail';
+                throw new Exception('Impossible de modifier votre commentaire');
             }
         }
 
         elseif ($_GET['action'] == 'commentUpdated') {
             startSession();
 
+            // ajax
             if (isset($_GET['commentId']) && isset($_POST['updated-comment']) && $_GET['commentId'] > 0) {
-                updateComment($_GET['commentId'], $_POST['updated-comment']);  
+                $commentsController->updateComment($_GET['commentId'], $_POST['updated-comment']); 
             }
 
             else {
-                // Ce commentaire n'existe pas
-                echo 'fail';
+                throw new Exception('Impossible de modifier votre commentaire'); 
             }
         }
 
         elseif ($_GET['action'] == 'commentDeleted') {
             startSession();
 
+            // ajax
             if (isset($_POST['commentId']) && $_POST['commentId'] > 0) {
-                deleteComment($_POST['commentId']);
+                $commentsController->deleteComment($_POST['commentId']);
             }
 
             else {
-                // Ce commentaire n'existe pas
-                echo 'fail';
+                throw new Exception('Impossible de supprimer ce commentaire');
             }
         }
-
+        
         elseif ($_GET['action'] == 'commentReporting') {
             startSession();
 
-            if (isset($_GET['commentId']) && $_GET['commentId'] > 0) {
-                reportComment($_GET['commentId']);
+            // ajax
+            if (isset($_POST['commentId']) && $_POST['commentId'] > 0) {
+                $commentsController->reportComment($_POST['commentId']);
+            }
+
+            else {
+                throw new Exception('Impossible de signaler ce commentaire');
             }
         }
 
         elseif ($_GET['action'] == 'reportedComments') {
             startSession();
-            getReportedComments();    
+            $commentsController->getReportedComments();    
         }
 
         elseif ($_GET['action'] == 'commentIgnored') {
             startSession();
 
+            // if (isset($_GET['commentId']) && $_GET['commentId'] > 0){
+            //     throw new Exception('Impossible d\'effectuer cette action');
+            // }
+
+            // ajax
             if (isset($_POST['commentId']) && $_POST['commentId'] > 0) {
-                ignoreReportedComment($_POST['commentId']);
+                $commentsController->ignoreReportedComment($_POST['commentId']);
             }
             else {
-                // Ce commentaire n'existe pas
-                echo 'fail';
+                throw new Exception('Impossible d\'effectuer cette action');
             }
+
+            
         }
 
     } 
     
-
-    // Par défaut : affichage de la page d'accueil du site
     elseif (isset($_GET['error'])) {
-        session_start();
-        displayErrorMsg($_GET['error']);
+        startSession();
+        $errorsController->displayErrorMsg($_GET['error']);
     }
 
     elseif (isset($_GET['nbOfPostsToDisplay']) && isset($_GET['currentNbOfPosts'])) {
 
+        // ajax
         if (ctype_digit($_GET['nbOfPostsToDisplay']) && ctype_digit($_GET['currentNbOfPosts'])) {
-            fetchNextPosts($_GET['nbOfPostsToDisplay'], $_GET['currentNbOfPosts']);
+            $postsController->fetchNextPosts($_GET['nbOfPostsToDisplay'], $_GET['currentNbOfPosts']);
         }
         else {
-            http_response_code(400);
+            throw new Exception('Impossible d\'afficher plus d\'articles.');
         }
     }
 
+    // Par défaut : affichage de la page d'accueil du site
     else {
-        session_start();
-        homePage();
+        startSession();
+        $postsController->homePage();
     }
-
-
-        
 
 
 } catch (Exception $e) {
-    
-    $errorMsg = $e->getMessage();
-    $file = $e->getFile();
-    $path = 'E:\wamp64\www\projet_perso_openclassrooms';
+    startSession();
 
-// GERER LES ERREURS AVEC UN CODE -> EX : CODE 0 POUR ERREUR DE CONNEXION ??
-    if ($file == $path . '\controllers\users_controller.php') {
+    // $errorMsg = $e->getMessage();
+    // echo $errorMsg;
 
-        switch($errorMsg) {
-            case 'Ce pseudo est déjà pris' :
-                $errorPseudo = $errorMsg;
-                break;
+    $errorMsg = '<p id="error-msg">' .$e->getMessage(). '</p>';
 
-            case 'Les mots de passe ne sont pas identiques' :
-                $errorPass = $errorMsg;
-                break;
+    $dataBack = array('status' => 'error', 'message' => $errorMsg);
+    $dataBack = json_encode($dataBack);
 
-            case 'Identifiant ou mot de passe incorrect' :
-                $errorConnexion = $errorMsg;
-                break;
-        }
-        
-        require_once('view/connexion_view.php');
-    }
-
-    elseif ($file == $path . '\index.php') {
-
-        switch($errorMsg) {
-            case 'Veuillez remplir tous les champs':
-                $errorFields = $errorMsg;
-                require_once('view/connexion_view.php');
-                break;
-        }
-    }
-
-    // throw e;
+    echo $dataBack;
+    // require_once('view/error.php');
 }
