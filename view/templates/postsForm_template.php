@@ -1,4 +1,4 @@
-<form action="<?= $formActionAttribute ?>" method="post" enctype="multipart/form-data">
+<form id="<?= $formId ?>" action="<?= $formActionAttribute ?>" method="post" enctype="multipart/form-data">
     <p>
         <label for="postTitle"><span>Titre</span></label><br/>
         <input type="text" name="postTitle" id="postTitle" value="<?= $titleValue ?>" required>

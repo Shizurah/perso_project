@@ -15,8 +15,7 @@
         <?= $other ?>
 
         <!-- GOOGLE FONTS -->
-        <link href="https://fonts.googleapis.com/css?family=Cabin+Sketch" rel="stylesheet">
-        <link href="https://fonts.googleapis.com/css?family=Monoton|Permanent+Marker" rel="stylesheet"> 
+        <link href="https://fonts.googleapis.com/css?family=Monoton|Permanent+Marker|Anton" rel="stylesheet"> 
     </head>
 
     <body>
@@ -37,6 +36,7 @@
         <script src="assets/bootstrap-select-1.13.2/dist/js/bootstrap-select.min.js"></script>
         <script src="assets/bootstrap-select-1.13.2/dist/js/i18n/defaults-fr_FR.min.js"></script>
         
+        <!-- autres scripts -->
         <?= $scripts ?>
     </body>
 
