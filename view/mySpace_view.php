@@ -53,9 +53,6 @@
 
     <div id="personal-space-tv-shows-container">
         <h3 id="personal-space-tv-shows-title">VOS SERIES<br/> (bientôt disponible)</h3>
-        <p>
-            <!-- <img src="public/images/banniere/popcorn1.png" alt="popcorn"> -->
-        </p>
     </div>
    
 </div> <!-- FIN MAIN-WRAP -->
@@ -72,7 +69,10 @@
     ob_start();
 ?>
        
-    <script>$("section").css("margin-top", "-11px");</script>;
+    <script>
+        $("section").css("margin-top", "-11px");
+    </script>;
+    
     <script src="assets/js/forms.js"></script>
 
 <?php
