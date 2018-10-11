@@ -1,6 +1,20 @@
-// $(function() {
-//     $('#pagination a').trigger('click');
-// });
+document.getElementById("nav-line").style.display = "none"
+
+if ($(window).width() < 992) {
+    $('#main-wrap').css('margin-top', '0px');
+} else {
+    $('#main-wrap').css('margin-top', '260px');
+}
+
+
+if ($(window).width() <= 425 ) {
+    $('#banner-img').attr('src', 'public/images/mobil_banner2.png');
+}
+
+
+if ($(window).width() <= 320 ) {
+    $('section').css('margin-top', '10px');
+}
 
 var currentNbOfPosts = 10;
 
