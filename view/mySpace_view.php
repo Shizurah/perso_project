@@ -71,7 +71,7 @@
        
     <script>
         $("section").css("margin-top", "-11px");
-    </script>;
+    </script>
     
     <script src="assets/js/forms.js"></script>
 
