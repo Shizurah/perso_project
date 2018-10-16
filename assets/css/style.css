@@ -707,8 +707,9 @@ h5 {
 
 #search-container {
     display: flex;
+    margin-left: 15px;
     align-items: center;
-    width: 35%;
+    width: 285px;
     border: 2px solid #ced4da;
     border-radius: 4px;
 }
@@ -741,6 +742,7 @@ h5 {
 
 #discover-form {
     display: flex;
+    align-items: center;
 }
 
 #discover-form p {
@@ -794,10 +796,13 @@ h5 {
 }
 
 #scroll-up-arrow {
-    position: fixed;
+    position: absolute;
+    right: -25px;
+    top: 90%;
+    /* position: fixed;
     z-index: 10;
     bottom: 40px;
-    right: 390px;
+    right: 390px; */
 }
 
 
@@ -1054,6 +1059,27 @@ footer a:hover {
 /* ========================= */
 /* MEDIA QUERIES */
 
+@media (max-width: 1199px) {
+
+    #tv-shows-page-info-container a {
+        width: 110px;
+    }
+
+    #tv-shows-page-info {
+        margin-bottom: 16px;
+        line-height: 1.2;
+    }
+
+    #tv-shows-page-info img {
+        display: none;
+    }
+
+    #forms-container {
+        padding: 0 50px;
+    }
+} 
+
+
 @media (max-width: 992px) {
     body {
         background: url('');
@@ -1075,8 +1101,44 @@ footer a:hover {
         max-width: 992px;
     }
 
+    /*  */
+
+    #forms-container {
+        padding: 0;
+    }
+
+    /* #search-container {
+        width: 280px;
+    } */
+
     footer div {
         padding: 50px 30px;
+    }
+}
+
+
+@media (max-width: 850px) {
+
+    #search-container {
+        margin: auto;
+        margin-bottom: 20px;
+    }
+
+    #discover-form {
+        flex-direction: column;
+        margin-bottom: 50px;
+    }
+
+    #discover-form p {
+        margin-bottom: 0;
+    }
+
+    #discover-form p .bootstrap-select {
+        margin-left: 10px;
+    }
+
+    #discover-form p:first-child .bootstrap-select {
+        margin-left: 16px;
     }
 }
 
@@ -1258,11 +1320,6 @@ footer a:hover {
         font-size: 1em;
     }
 
-    /* #news-posts-container .news-posts:first-child div h3,
-    #next-releases-posts-container .next-releases-posts:first-child div h3 {
-        margin-top: 0px;
-    } */
-
     #news-posts-container p,
     #next-releases-posts-container p  {
         line-height: 1.2;
@@ -1281,6 +1338,15 @@ footer a:hover {
         height: 100%;
         margin: auto;
         margin-bottom: 8px;
+    }
+
+    #tv-shows-category-title {
+        flex-direction: column;
+    }
+
+    #tv-shows-category-title h3 {
+        /* font-size: 1.1em; */
+        margin-bottom: 2px;
     }
 }
 
@@ -1320,6 +1386,20 @@ footer a:hover {
 
     .posters-frames .posters {
         width: 80%;
+    }
+
+    /*  */
+
+    #scroll-up-arrow img {
+        width: 40px;
+    }
+}
+
+
+@media (max-width: 352px) {
+
+    #search-container {
+        width: 230px;
     }
 }
 

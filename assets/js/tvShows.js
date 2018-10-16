@@ -1,10 +1,17 @@
 $('section').css('margin-top', '-20px');
+$('#tv-shows-category-title h3').css('font-family', '"Anton", sans-serif').css('color', 'grey').css('letter-spacing', '0.1em');
+
+if ($(window).width() <= 575) {
+    $('body').css('font-size', '0.9em');
+    $('nav').css('font-size', '1.1em');
+}
 
 var key = '7d64a9ed6d8e781b0d44e1b214945855',
     url, // requête api
     pageId = 1, // page renvoyée par défaut par l'api
     totalOfPages, // total des pages renvoyé par l'api
-    times = 0;
+    times = 0,
+    arrowTopPosition = 0;
 
 
 $(function() {
@@ -52,8 +59,7 @@ $(function() {
 
             trendingTvShows.results.forEach(function(tvShow) {
                 $('#tv-shows-container').append('<div><a class="tv-shows-links" id="' + tvShow.id 
-                                                + '" href="index.php?action=tvShow&amp;tvShowId=' + tvShow.id 
-                                                + '"></a><div id="' + tvShow.name + '" class="img-containers"><img src="https://image.tmdb.org/t/p/w200' 
+                                                + '" href="index.php?action=tvShow&amp;tvShowId=' + tvShow.id + '" target="_blank"></a><div id="' + tvShow.name + '" class="img-containers"><img src="https://image.tmdb.org/t/p/w200' 
                                                 + tvShow.poster_path + '"/></div></div>');
             });
 
@@ -61,7 +67,7 @@ $(function() {
                 genres: $('#genres-selection').val(),
                 sortby: $('#sort-by-selection').val(),
                 titleForTvshowsContent: $('#tv-shows-category-title').html(),
-                tvshowsContent: $('#tv-shows-container').html()
+                content: $('#tv-shows-container').html()
             };
             
             
@@ -107,8 +113,7 @@ $(function() {
                 tvShows.results.forEach(function(tvShow) {
                     if (tvShow.poster_path != null) {
                         $('#tv-shows-container').append('<div><a class="tv-shows-links" id="' + tvShow.id 
-                                                            + '" href="index.php?action=tvShow&amp;tvShowId=' + tvShow.id 
-                                                            + '"></a><div id="' + tvShow.name + '" class="img-containers"><img src="https://image.tmdb.org/t/p/w200' 
+                                                            + '" href="index.php?action=tvShow&amp;tvShowId=' + tvShow.id + '"></a><div id="' + tvShow.name + '" class="img-containers"><img src="https://image.tmdb.org/t/p/w200' 
                                                             + tvShow.poster_path + '"/></div></div>');
                     }
 
@@ -119,10 +124,10 @@ $(function() {
                     // genres: $('#genres-selection').val(),
                     // sortby: $('#sort-by-selection').val(),
                     titleForTvshowsContent: $('#tv-shows-category-title').html(),
-                    tvshowsContent: $('#tv-shows-container').html()
+                    content: $('#tv-shows-container').html()
                 };
                     
-                history.pushState(data, "research" + times, 'http://localhost/projets_openclassrooms/projet5/index.php?action=tvShows');
+                history.pushState(data, "research" + times, 'http://localhost/projets_openclassrooms/projet5/index.php?action=tvShows#research' + times);
 
                 pageId = 1;
                 url = 'https://api.themoviedb.org/3/search/tv?query=' + keywords + '&api_key=' + key + '&language=fr';
@@ -172,11 +177,8 @@ $(function() {
                 tvShows.results.forEach(function(tvShow) {
                     if (tvShow.poster_path != null) {
                         $('#tv-shows-container').append('<div><a class="tv-shows-links" id="' + tvShow.id 
-                                                            + '" href="index.php?action=tvShow&amp;tvShowId=' + tvShow.id 
-                                                            + '"></a><div id="' + tvShow.name + '" class="img-containers"><img src="https://image.tmdb.org/t/p/w200' 
-                                                            + tvShow.poster_path + '"/></div></div>');
-
-                        
+                                                        + '" href="index.php?action=tvShow&amp;tvShowId=' + tvShow.id + '"></a><div id="' + tvShow.name + '" class="img-containers"><img src="https://image.tmdb.org/t/p/w200' 
+                                                        + tvShow.poster_path + '"/></div></div>'); 
                     }
                 });
 
@@ -185,7 +187,7 @@ $(function() {
                     genres: $('#genres-selection').val(),
                     sortby: $('#sort-by-selection').val(),
                     titleForTvshowsContent: $('#tv-shows-category-title').html(),
-                    tvshowsContent: $('#tv-shows-container').html()
+                    content: $('#tv-shows-container').html()
                 };
                     
                 history.pushState(data, "research" + times, 'http://localhost/projets_openclassrooms/projet5/index.php?action=tvShows#research' + times);
@@ -205,20 +207,6 @@ $(function() {
         return false;
     });
 
-
-    // $('#tv-shows-container').on('click', '.tv-shows-links', function(e) {
-    //     e.preventDefault();
-    //     var data = {
-    //         genres: $('#genres-selection').val(),
-    //         sortby: $('#sort-by-selection').val(),
-    //         titleForTvshowsContent: $('#tv-shows-category-title').html(),
-    //         tvshowsContent: $('#tv-shows-container').html()
-    //     };
-
-    //     history.pushState(data, "research" + times, 'http://localhost/projets_openclassrooms/projet5/index.php?action=tvShows#research' + times);
-
-    //     // $(this).unbind('click');
-    // });
 });
 
 // Paramètre 'page' ajouté pour affichage des séries suivantes
@@ -227,7 +215,6 @@ $(window).scroll(function() {
     if (totalOfPages > 1 && pageId <= totalOfPages) {
 
         if ($(window).scrollTop() + $(window).height() > $(document).height() - 30) {
-            // $('#tv-shows-container').append('<p id="loading"><img  src="public/images/load2.gif" alt="Chargement..."/></p>');
             pageId += 1;
 
             $.ajax({
@@ -240,15 +227,18 @@ $(window).scroll(function() {
                 timeout: 3000,
     
                 success: function(tvShows) {
-                    console.log(tvShows);
+                    
                     
                     tvShows.results.forEach(function(tvShow) {
                         if (tvShow.poster_path != null) {
                             $('#tv-shows-container').append('<div><a class="tv-shows-links" id="' + tvShow.id 
-                                                            + '" href="index.php?action=tvShow&amp;tvShowId=' + tvShow.id + '"></a><div class="img-containers"><img src="https://image.tmdb.org/t/p/w200' 
-                                                            + tvShow.poster_path + '"/></div></div>');
+                                                        + '" href="index.php?action=tvShow&amp;tvShowId=' + tvShow.id + '" target="_blank"></a><div class="img-containers"><img src="https://image.tmdb.org/t/p/w200' 
+                                                        + tvShow.poster_path + '"/></div></div>');
                         }
                     });
+
+                    arrowTopPosition += 1000;
+                    $('#scroll-up-arrow').css('top', arrowTopPosition);
                 },
 
                 error: function() {
@@ -264,7 +254,7 @@ $(window).scroll(function() {
 
 
 window.onpopstate = function(event) {
-    console.log('inside onpopstate');
+    console.log('trigger popstate');
     console.log(event.state);
 
     $('#genres-selection').val(event.state.genres);
@@ -274,5 +264,5 @@ window.onpopstate = function(event) {
     $('#sort-by-selection').selectpicker('refresh');
 
     $('#tv-shows-category-title').html(event.state.titleForTvshowsContent);
-    $('#tv-shows-container').html(event.state.tvshowsContent);
+    $('#tv-shows-container').html(event.state.content);
 };
