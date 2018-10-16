@@ -1114,6 +1114,11 @@ footer a:hover {
     footer div {
         padding: 50px 30px;
     }
+
+    #connexion-form p input,
+    #registration-form p input {
+        width: 222px;
+    }
 }
 
 
@@ -1255,6 +1260,26 @@ footer a:hover {
     #pagination {
         top: -40px;
     }
+
+    /*  */
+
+    #avatar-form-container {
+        margin: 50px 20px;
+        
+    }
+
+    #avatar-form {
+        font-size: 0.9em;
+    }
+
+    #personal-space-avatar {
+        width: 100px;
+        height: 100px;
+    }
+
+    #personal-space-tv-shows-title {
+        margin: 0 20px;
+    }
 }
 
 
@@ -1305,6 +1330,10 @@ footer a:hover {
         font-size: 0.8em;
     }
 
+    #main-wrap {
+        padding-bottom: 0;
+    }
+
     #news-posts-container h3,
     #news-posts-container p {
         text-align: center;
@@ -1340,13 +1369,42 @@ footer a:hover {
         margin-bottom: 8px;
     }
 
+    /*  */
+
+
     #tv-shows-category-title {
         flex-direction: column;
     }
 
     #tv-shows-category-title h3 {
-        /* font-size: 1.1em; */
         margin-bottom: 2px;
+    }
+
+    /*  */
+
+    #tv-shows-page-info-container {
+        font-size: 0.9em;
+        margin-bottom: 0;
+    }
+
+    #tv-shows-page-info,
+    #tv-shows-page-info p {
+        margin-bottom: 0;
+    }
+
+    #avatar-form {
+        flex-direction: column;
+    }
+
+    #changing-avatar-form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    #change-avatar-title,
+    #personal-space-tv-shows-title {
+        font-size: 1em;
     }
 }
 
@@ -1393,6 +1451,22 @@ footer a:hover {
     #scroll-up-arrow img {
         width: 40px;
     }
+
+    /*  */
+
+    #connexion-form,
+    #registration-form {
+        width: 100%;
+    }
+
+    #connexion-form p,
+    #registration-form p {
+        width: 70%;
+    }
+
+    /* #connexion-form p {
+        width: 60%;
+    } */
 }
 
 
@@ -1423,4 +1497,8 @@ footer a:hover {
     #main-wrap {
         padding-bottom: 50px;
     }
+
+    /* #connexion-form p {
+        width: 80%;
+    } */
 }

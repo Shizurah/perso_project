@@ -1,3 +1,7 @@
+if ($(window).width() <= 575) {
+    $('section').css('padding', '0');
+}
+
 
 $('#connexion-form').on('submit', function() {
 
@@ -85,8 +89,4 @@ $('#registration-form').on('submit', function() {
 });
 
 
-$('#connexion-form').on('submit', function() {
-    
 
-    return false;
-});
