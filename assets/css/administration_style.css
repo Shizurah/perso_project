@@ -62,6 +62,7 @@ h3 {
 
 #success-msg {
     padding: 10px 20px;
+    margin-bottom: 20px;
     text-align: center;
     border-radius: 20px;
     font-weight: bold;
@@ -71,6 +72,15 @@ h3 {
 }
 
 /* page d'erreur */
+#error-msg {
+    margin-bottom: 20px;
+    padding: 10px 20px;
+    background-color: rgb(253, 228, 228);
+    border: 1px solid rgb(255, 186, 186);
+    border-radius: 5px;
+    color: rgb(224, 48, 48);
+}
+
 #error-msg-container {
     position: relative;
     top: -12px;
@@ -103,10 +113,6 @@ h3 {
     color: white;
 }
 
-table {
-    border: 1px solid grey;
-}
-
 th {
     text-align: center;
 }
@@ -126,6 +132,7 @@ tr td:not(:first-child) {
     text-align: center;
     font-size: 0.95em;
 }
+
 
 /* rédaction articles : */
 
