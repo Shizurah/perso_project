@@ -1,5 +1,5 @@
 <?php
-// appel des fichiers + classes
+
 require_once('controllers/Controller.php');
 require_once('controllers/PostsController.php');
 require_once('controllers/UsersController.php');
@@ -8,18 +8,12 @@ require_once('controllers/TvShowsController.php');
 require_once('controllers/ErrorsController.php');
 
 
-function modelsAutoloading($class) { // faire une 2e fonction d'autoload ds la classe Controller (parent) pour appel des classes du model ?
-    require_once 'models/' . $class . '.php'; // remplacer 'model' par 'controllers' ?
+function autoload($class) {
+    // require_once $_SERVER['DOCUMENT_ROOT'] . '/projet5/models/' . $class . '.php'; 
+    require_once $_SERVER['DOCUMENT_ROOT'] . '/projet5/models/' . $class . '.php';
 }
 
-// function controllersAutoloading($class) { // faire une 2e fonction d'autoload ds la classe Controller (parent) pour appel des classes du model ?
-//     require 'controllers/' . $class . '.php'; // remplacer 'model' par 'controllers' ?
-// }
-
-// spl_autoload_register('controllersAutoloading');
-
-
-spl_autoload_register('modelsAutoloading');
+spl_autoload_register('autoload');
 
 
 function startSession() {
@@ -28,14 +22,11 @@ function startSession() {
     }
 }
 
-
 $postsController = new PostsController();
 $usersController = new UsersController();
 $commentsController = new CommentsController();
 $tvShowsController = new TvShowsController();
 $errorsController = new ErrorsController();
-
-
 
 
 
@@ -51,7 +42,7 @@ try {
 
             if (isset($_GET['postId']) && $_GET['postId'] > 0) {
                 // 1: affichage de l'article
-                $postsController->onePostPage($_GET['postId']);                 
+                $postsController->onePostPage($_GET['postId']);            
             }
             else {
                 $errorMsg = 'Cet article n\'existe pas.';
@@ -63,7 +54,8 @@ try {
             startSession();
 
             if (isset($_GET['postId']) && isset($_GET['pageId']) && isset($_GET['commentsPerPage'])){
-                $commentsController->displayComments($_GET['postId'], $_GET['pageId'], $_GET['commentsPerPage']);
+                $commentsPerPage = (int) $_GET['commentsPerPage'];
+                $commentsController->displayComments($_GET['postId'], $_GET['pageId'], $commentsPerPage);
             }
         }
 
@@ -128,6 +120,9 @@ try {
             startSession();
             
             if (isset($_FILES['avatar']) && !empty($_FILES['avatar'])) {
+            // if (isset($_FILES[0]) && !empty($_FILES[0])) {
+            //     print_r($_FILES[0]);
+                
                 $usersController->updateAvatar($_FILES['avatar']['name'], $_FILES['avatar']['size'], $_FILES['avatar']['error'], $_FILES['avatar']['tmp_name']);
             } 
             else {
@@ -319,7 +314,9 @@ try {
 
         // ajax
         if (ctype_digit($_GET['nbOfPostsToDisplay']) && ctype_digit($_GET['currentNbOfPosts'])) {
-            $postsController->fetchNextPosts($_GET['nbOfPostsToDisplay'], $_GET['currentNbOfPosts']);
+            $nbOfPostsToDisplay = (int) $_GET['nbOfPostsToDisplay'];
+            $currentNbOfPosts = (int) $_GET['currentNbOfPosts'];
+            $postsController->fetchNextPosts($nbOfPostsToDisplay, $currentNbOfPosts);
         }
         else {
             throw new Exception('Impossible d\'afficher plus d\'articles.');
