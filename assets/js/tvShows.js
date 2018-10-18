@@ -11,9 +11,18 @@ var key = '7d64a9ed6d8e781b0d44e1b214945855',
     pageId = 1, // page renvoyée par défaut par l'api
     totalOfPages, // total des pages renvoyé par l'api
     times = 0,
-    arrowTopPosition = 0;
+    historyUrl = '';
 
 
+if (window.location.hostname == 'localhost') {
+    historyUrl = 'http://localhost/projet5/index.php?action=tvShows';
+}
+else {
+    historyUrl = 'http://eloise-martin.com/projet5/index.php?action=tvShows';
+}
+    
+
+    
 $(function() {
 
     // Au chargement de la page :
@@ -59,7 +68,8 @@ $(function() {
 
             trendingTvShows.results.forEach(function(tvShow) {
                 $('#tv-shows-container').append('<div><a class="tv-shows-links" id="' + tvShow.id 
-                                                + '" href="index.php?action=tvShow&amp;tvShowId=' + tvShow.id + '" target="_blank"></a><div id="' + tvShow.name + '" class="img-containers"><img src="https://image.tmdb.org/t/p/w200' 
+                                                + '" href="index.php?action=tvShow&amp;tvShowId=' + tvShow.id + '" target="_blank"></a><div id="' + tvShow.name 
+                                                + '" class="img-containers"><img src="https://image.tmdb.org/t/p/w200' 
                                                 + tvShow.poster_path + '"/></div></div>');
             });
 
@@ -71,7 +81,7 @@ $(function() {
             };
             
             
-            history.pushState(data, 'default page', 'http://localhost/projets_openclassrooms/projet5/index.php?action=tvShows');
+            history.pushState(data, 'default page', historyUrl);
             
             url = 'https://api.themoviedb.org/3/trending/tv/week?api_key=' + key + '&language=fr';
             totalOfPages = trendingTvShows.total_pages;
@@ -113,10 +123,10 @@ $(function() {
                 tvShows.results.forEach(function(tvShow) {
                     if (tvShow.poster_path != null) {
                         $('#tv-shows-container').append('<div><a class="tv-shows-links" id="' + tvShow.id 
-                                                            + '" href="index.php?action=tvShow&amp;tvShowId=' + tvShow.id + '"></a><div id="' + tvShow.name + '" class="img-containers"><img src="https://image.tmdb.org/t/p/w200' 
+                                                            + '" href="index.php?action=tvShow&amp;tvShowId=' + tvShow.id + '"></a><div id="' + tvShow.name 
+                                                            + '" class="img-containers"><img src="https://image.tmdb.org/t/p/w200' 
                                                             + tvShow.poster_path + '"/></div></div>');
                     }
-
                 });
 
                 times += 1;
@@ -127,7 +137,7 @@ $(function() {
                     content: $('#tv-shows-container').html()
                 };
                     
-                history.pushState(data, "research" + times, 'http://localhost/projets_openclassrooms/projet5/index.php?action=tvShows#research' + times);
+                history.pushState(data, "research" + times, historyUrl + '#research' + times);
 
                 pageId = 1;
                 url = 'https://api.themoviedb.org/3/search/tv?query=' + keywords + '&api_key=' + key + '&language=fr';
@@ -177,7 +187,8 @@ $(function() {
                 tvShows.results.forEach(function(tvShow) {
                     if (tvShow.poster_path != null) {
                         $('#tv-shows-container').append('<div><a class="tv-shows-links" id="' + tvShow.id 
-                                                        + '" href="index.php?action=tvShow&amp;tvShowId=' + tvShow.id + '"></a><div id="' + tvShow.name + '" class="img-containers"><img src="https://image.tmdb.org/t/p/w200' 
+                                                        + '" href="index.php?action=tvShow&amp;tvShowId=' + tvShow.id + '"></a><div id="' + tvShow.name 
+                                                        + '" class="img-containers"><img src="https://image.tmdb.org/t/p/w200' 
                                                         + tvShow.poster_path + '"/></div></div>'); 
                     }
                 });
@@ -190,7 +201,7 @@ $(function() {
                     content: $('#tv-shows-container').html()
                 };
                     
-                history.pushState(data, "research" + times, 'http://localhost/projets_openclassrooms/projet5/index.php?action=tvShows#research' + times);
+                history.pushState(data, "research" + times, historyUrl + '#research' + times);
 
                 pageId = 1;
                 url = 'https://api.themoviedb.org/3/discover/tv?api_key=' + key + '&language=fr' + '&with_genres=' + selectedGenres + '&sort_by=' + sortBy;
@@ -232,7 +243,8 @@ $(window).scroll(function() {
                     tvShows.results.forEach(function(tvShow) {
                         if (tvShow.poster_path != null) {
                             $('#tv-shows-container').append('<div><a class="tv-shows-links" id="' + tvShow.id 
-                                                        + '" href="index.php?action=tvShow&amp;tvShowId=' + tvShow.id + '" target="_blank"></a><div class="img-containers"><img src="https://image.tmdb.org/t/p/w200' 
+                                                        + '" href="index.php?action=tvShow&amp;tvShowId=' + tvShow.id 
+                                                        + '" target="_blank"></a><div class="img-containers"><img src="https://image.tmdb.org/t/p/w200' 
                                                         + tvShow.poster_path + '"/></div></div>');
                         }
                     });

@@ -3,6 +3,16 @@ if ($(window).width() <= 575) {
 }
 
 
+var urlRedirection = '';
+
+if (window.location.hostname == 'localhost') {
+    urlRedirection = 'http://localhost/projet5/index.php?action=';
+}
+else {
+    urlRedirection = 'http://eloise-martin.com/projet5/index.php?action=';
+}
+
+
 $('#connexion-form').on('submit', function() {
 
     var that = $(this),
@@ -23,13 +33,13 @@ $('#connexion-form').on('submit', function() {
         type: type,
         data: data,
         dataType: 'html',
-        timeout: 3000,
+        timeout: 5000,
 
         success: function(response) {
             console.log(response);
             
             if (response == 'success') {
-                document.location.replace('http://localhost/projets_openclassrooms/projet5/index.php?action=mySpace');
+                document.location.replace(urlRedirection + 'mySpace');
             }
             else {
                 $('#errorMsg').text('');
@@ -66,13 +76,13 @@ $('#registration-form').on('submit', function() {
         type: type,
         data: data,
         dataType: 'html',
-        timeout: 3000,
+        timeout: 5000,
 
         success: function(response) {
             console.log(response);
             
             if (response == 'success') {
-                document.location.replace('http://localhost/projets_openclassrooms/projet5/index.php?action=connexionPage');
+                document.location.replace(urlRedirection + 'connexionPage');
             }
             else {
                 $('#errorMsg').text('');
@@ -89,4 +99,39 @@ $('#registration-form').on('submit', function() {
 });
 
 
+// changement avatar :
 
+// var files;
+
+// $('#avatar').on('change', function(e) {
+//     files = e.target.files;
+// });
+
+
+// $('#changing-avatar-form').on('submit', function(e) {
+//     e.stopPropagation(); 
+//     e.preventDefault();
+
+//     var that = $(this),
+//         url = that.attr('action'),
+//         type = that.attr('method'),
+//         data = new FormData();
+
+//     $.each(files, function(key, value) {
+//         data.append(key, value);
+//     });
+
+//     $.ajax({
+//         url: url,
+//         type: type,
+//         data: data,
+//         cache: false,
+//         dataType: 'html',
+//         processData: false, // Don't process the files
+//         contentType: false, // Set content type to false as jQuery will tell the server its a query string request
+
+//         success: function(response) {
+
+//         }
+//     });
+// });
