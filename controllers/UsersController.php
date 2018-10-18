@@ -199,7 +199,7 @@ class UsersController extends Controller {
     
             if (!empty($errorMsg)) {
                 @unlink($path);
-                mySpacePage();
+                $this->mySpacePage();
             }
         } 
         else {
