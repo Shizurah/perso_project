@@ -3,7 +3,6 @@ $('section').css('margin-top', '0px');
 $('footer').css('background-color', 'white');
 $('footer a').css('color', 'black');
 
-// $('#error-msg-container')
 
 var height = $(window).height();
 $('section').css('min-height', height);
@@ -36,10 +35,10 @@ $('table tr').on('click', '.link-for-post-deleting', function(event) {
             url: url,
             type: 'post',
             data: {
-                // 'action': 'postDeleting',
                 'postId': linkId
             },
-            timeout: 3000,
+            dataType: 'json',
+            timeout: 10000,
 
             success: function(response) {
 
@@ -72,23 +71,31 @@ $('table tr').on('click', '.link-for-comment-deleting', function(e) {
             url: url,
             type: 'post',
             data: {
-                // 'action': 'postDeleting',
                 'commentId': commentId
             },
-            timeout: 3000,
+            dataType: 'json',
+            timeout: 10000,
 
             success: function(response) {
 
-                rowElt.fadeOut(700, function() {
-                    $('h3').after(response);
-                    setTimeout(function() {
-                        $('.success-msg').remove();
-                    }, 3000);
-                });
+                if (response.status == 'success') {
+                    rowElt.fadeOut(1000, function() {
+                        $('h3').after(response.message);
+    
+                        setTimeout(function() {
+                            $('.success-msg').remove();
+                        }, 3000);
+                    });
+                }
+                else if (response.status == 'error') {
+                    $('#error-msg').remove();
+                    $('h3').after(response.message);
+                }
             }
         });
     }
 });
+
 
 // Ignorer commentaire signalé :
 $('table tr').on('click', '.link-for-comment-ignoring', function(e) {
@@ -106,20 +113,26 @@ $('table tr').on('click', '.link-for-comment-ignoring', function(e) {
             url: url,
             type: 'post',
             data: {
-                // 'action': 'postDeleting',
                 'commentId': commentId
             },
-            timeout: 3000,
+            dataType: 'json',
+            timeout: 10000,
 
             success: function(response) {
 
-                rowElt.fadeOut(700, function() {
-                    $('h3').after(response);
-
-                    setTimeout(function() {
-                        $('.success-msg').remove();
-                    }, 3000);
-                });
+                if (response.status == 'success') {
+                    rowElt.fadeOut(1000, function() {
+                        $('h3').after(response.message);
+    
+                        setTimeout(function() {
+                            $('.success-msg').remove();
+                        }, 3000);
+                    });
+                }
+                else if (response.status == 'error') {
+                    $('#error-msg').remove();
+                    $('h3').after(response.message);
+                }
             }
         });
     }
