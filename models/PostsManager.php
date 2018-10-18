@@ -7,7 +7,7 @@ class PostsManager extends Manager {
         $this->_db = DbManager::dbConnect();
     }
 
-
+    
     public function addPost($poster, $title, $category, $content) {
         $req = $this->_db->prepare('INSERT INTO posts(poster, title, category, content, postDate) 
                                     VALUES(:poster, :title, :category, :content, NOW())');
@@ -104,8 +104,6 @@ class PostsManager extends Manager {
         else {
             throw new Exception('Cet article n\'existe pas');
         }
-
-        
     }
 
 
