@@ -15,6 +15,12 @@ body {
     padding-bottom: 100px;
 }
 
+section {
+    padding: 0 20px;
+    margin-top: 50px;
+    min-height: 800px;
+}
+
 #intro {
     position: absolute;
     top: -180px;
@@ -44,7 +50,6 @@ body {
     font-family: serif;
     font-size: 0.3em;
     color: rgb(190, 190, 190);
-
 }
 
 #intro a:hover {
@@ -53,10 +58,11 @@ body {
     text-decoration: none;
 }
 
-section {
-    padding: 0 20px;
-    margin-top: 50px;
-    min-height: 800px;
+h2, 
+#next-releases-posts-container h3,
+.news-posts h3,
+#post-container h3 {
+    font-family: 'Anton', sans-serif;
 }
 
 /* ========================= */
@@ -149,7 +155,7 @@ nav a {
 /* ========================= */
 /* BOUTONS RESEAUX SOCIAUX : */
 
-#actions-btns {
+/* #actions-btns {
     padding: 0 15px;
 }
 
@@ -190,7 +196,7 @@ nav a {
     border-bottom: 3px solid red;
     padding-right: -20px;
     padding-top: -20px;
-}
+} */
 
 /* ========================= */
 
@@ -214,12 +220,6 @@ a:hover {
 #next-releases-posts-container h2,
 #next-releases-posts-container hr {
     margin-bottom: 0;
-}
-
-h2, 
-#next-releases-posts-container h3,
-.news-posts h3 {
-    font-family: 'Anton', sans-serif;
 }
 
 h2 {
@@ -332,7 +332,8 @@ hr {
 
 #post-container h3 {
     font-size: 1.6em;
-    padding: 30px;
+    margin-bottom: 0;
+    padding: 30px 0 12px 0;
 }
 
 #post-container h3,
