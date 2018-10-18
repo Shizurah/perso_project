@@ -45,9 +45,7 @@
                 <label for="password2">Confirmation du mot de passe</label>
             </p>
 
-            
             <input type="submit" value="Créer son compte">
-            
         </form>
 
         <a href="index.php?action=connexionPage">Déjà inscrit ?</a>
