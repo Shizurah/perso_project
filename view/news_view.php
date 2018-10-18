@@ -13,7 +13,7 @@
     <p id="intro">
         GAME OF THRONES<br/>
         <span>"Winter is coming"</span><br/>
-        <a href="http://localhost/projets_openclassrooms/projet5/index.php?action=tvShow&tvShowId=1399" target="_blank">Suivre la série</a>
+        <a href="index.php?action=tvShow&tvShowId=1399" target="_blank">Suivre la série</a>
     </p>
 
 <?php
