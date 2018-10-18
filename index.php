@@ -1,34 +1,44 @@
 <?php
 
-require_once('controllers/Controller.php');
-require_once('controllers/PostsController.php');
-require_once('controllers/UsersController.php');
-require_once('controllers/CommentsController.php');
-require_once('controllers/TvShowsController.php');
-require_once('controllers/ErrorsController.php');
-
-
-function autoload($class) {
-    // require_once $_SERVER['DOCUMENT_ROOT'] . '/projet5/models/' . $class . '.php'; 
-    require_once $_SERVER['DOCUMENT_ROOT'] . '/projet5/models/' . $class . '.php';
-}
-
-spl_autoload_register('autoload');
-
-
 function startSession() {
     if (!isset($_SESSION)) {
         session_start();
     }
 }
 
+
+function autoload($class, $dir = null) {
+ 
+    if (is_null($dir)) {
+        $dir = $_SERVER['DOCUMENT_ROOT']. '/projet5/class';
+    }
+     
+    foreach (scandir($dir) as $file) { // scandir => liste les fichiers et dossiers dans un dossier (tableau retourné)
+ 
+        // dossier ?
+        if (is_dir($dir. '/' .$file) && substr($file, 0, 1) !== '.') {
+            autoload($class, $dir. '/' .$file. '/');
+        }
+
+        // fichier php ?
+        if (substr($file, 0, 2) !== '._' && preg_match("/.php$/i" , $file )) {
+
+            // nom du fichier = nom de la classe ?
+            if (str_replace('.php', '', $file) == $class) {
+                include $dir . $file;
+            }
+        }
+    }
+}
+
+
+spl_autoload_register('autoload');
+
 $postsController = new PostsController();
 $usersController = new UsersController();
 $commentsController = new CommentsController();
 $tvShowsController = new TvShowsController();
 $errorsController = new ErrorsController();
-
-
 
 
 try {
@@ -41,7 +51,6 @@ try {
             startSession();
 
             if (isset($_GET['postId']) && $_GET['postId'] > 0) {
-                // 1: affichage de l'article
                 $postsController->onePostPage($_GET['postId']);            
             }
             else {
@@ -300,7 +309,6 @@ try {
                 throw new Exception('Impossible d\'effectuer cette action');
             }
 
-            
         }
 
     } 
@@ -332,9 +340,6 @@ try {
 
 } catch (Exception $e) {
     startSession();
-
-    // $errorMsg = $e->getMessage();
-    // echo $errorMsg;
 
     $errorMsg = '<p id="error-msg">' .$e->getMessage(). '</p>';
 
