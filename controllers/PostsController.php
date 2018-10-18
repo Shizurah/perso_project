@@ -102,7 +102,7 @@ class PostsController extends Controller {
     public function addNewPost($title, $poster, $category, $content) {
     
         if (isset($_SESSION['id']) && isset($_SESSION['userStatus']) && $_SESSION['userStatus'] == 'admin') {
-            $maxSize = 512000;
+            $maxSize = 10000000;
             $valid_expansions = array('jpg', 'jpeg', 'png', 'gif');
             $uploaded_expansion = strtolower( substr( strrchr($poster['name'], '.'), 1) );
     
@@ -119,7 +119,7 @@ class PostsController extends Controller {
                         if ($moving) {
                             $newPosterName = $uniqId . '.' . $uploaded_expansion;
                             // instanciation classe et appel des méthodes :
-                            $newPostId = $this->_postsManager->addPost($title, $newPosterName, $category, $content);
+                            $newPostId = $this->_postsManager->addPost($newPosterName, $title, $category, $content);
     
                             // $dataBack = array('status' => 'success', 'successMsg' => '<p class="error-msg">Votre article a bien été publié !</p>');
                             // $dataBack = json_encode($dataBack);
