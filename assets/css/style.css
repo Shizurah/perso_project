@@ -94,8 +94,6 @@ nav a {
     padding: 20px 0;
     width: 100%;
     margin: auto;
-    /* height: 500px; */
-    /* border: 1px solid grey; */
 }
 
 #connexion-and-registration-forms-container h4 {
@@ -139,15 +137,12 @@ nav a {
 }
 
 #registrationConfirmation {
-    /* margin: 0 200px; */
     margin-top: -80px;
     margin-bottom: 70px;
     padding: 20px;
     text-align: center;
     background-color: rgb(228, 228, 228);
     color: rgb(136, 135, 135);
-    /* border: 1px solid rgb(129, 129, 129); */
-    /* border-radius: 8px; */
     font-weight: bold;
 }
 
@@ -185,8 +180,6 @@ nav a {
     color: rgb(226, 4, 4);
     text-decoration: underline;
     border: 3px solid rgb(226, 4, 4);
-    /* border-left: 10px solid rgb(226, 4, 4); */
-    /* border-bottom: 10px solid rgb(226, 4, 4); */
     margin: auto;
     width: 100%;
     height: 100%;
@@ -200,6 +193,7 @@ nav a {
 }
 
 /* ========================= */
+
 a:hover {
     color: rgb(44, 144, 168);
 }
@@ -297,7 +291,6 @@ h3 {
 }
 
 #next-releases-posts-container p {
-    /* font-size: 1.2em; */
     text-align: center;
 }
 
@@ -324,7 +317,6 @@ hr {
 #pagination {
     font-size: 0.85em;
     position: relative;
-    /* top: -10px; */
 }
 
 
@@ -522,7 +514,6 @@ hr {
 .author-and-content div:nth-child(2) span:nth-child(2) {
     display: block;
     padding: 5px 10px 5px 0;
-    /* word-break: break-all; */
 }
 
 .comments-date-and-actions {
@@ -786,7 +777,6 @@ h5 {
 }
 
 #loading {
-    /* display: none; */
     width: 100px;
     margin: auto;
 }
@@ -799,10 +789,6 @@ h5 {
     position: absolute;
     right: -25px;
     top: 90%;
-    /* position: fixed;
-    z-index: 10;
-    bottom: 40px;
-    right: 390px; */
 }
 
 
@@ -857,7 +843,6 @@ h5 {
     padding: 5px 15px;
     border-radius: 5px;
     background-color: rgb(255, 230, 0);
-    /* border: 2px solid grey; */
     color: rgb(68, 68, 68);
     font-weight: bold;
 }
@@ -1107,10 +1092,6 @@ footer a:hover {
         padding: 0;
     }
 
-    /* #search-container {
-        width: 280px;
-    } */
-
     footer div {
         padding: 50px 30px;
     }
@@ -1191,10 +1172,6 @@ footer a:hover {
     #next-releases-posts-container {
         margin-top: 80px;
     }
-
-    /* .posters-frames .posters {
-        width: 60%;
-    } */
 
     #post-container {
         margin: 0;
@@ -1463,10 +1440,6 @@ footer a:hover {
     #registration-form p {
         width: 70%;
     }
-
-    /* #connexion-form p {
-        width: 60%;
-    } */
 }
 
 
@@ -1485,10 +1458,6 @@ footer a:hover {
         font-size: 0.6em;
     }
 
-    
-
-
-
     .posters-frames .posters,
     .posters-containers .posters  {
         width: 100%;
@@ -1497,8 +1466,4 @@ footer a:hover {
     #main-wrap {
         padding-bottom: 50px;
     }
-
-    /* #connexion-form p {
-        width: 80%;
-    } */
 }
