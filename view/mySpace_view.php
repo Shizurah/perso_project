@@ -20,7 +20,6 @@
 
     <div id="tv-shows-page-info-container">
         <div id="tv-shows-page-info">
-            <!-- <img src="public/images/info_tv_shows.png" alt="info bulle"> -->
             <p>
                 <span>Bonjour <?= htmlspecialchars($_SESSION['pseudo']) ?> !</span><br/>
                 Nous vous informons que vous pourrez bientôt recevoir toutes les notifications de vos séries préférées dans votre espace !<br/>
@@ -36,13 +35,12 @@
             <p id="personal-space-avatar"><img  src="public/members/avatars/<?= $_SESSION['avatar'] ?>" alt="avatar"></p>
 
             <div>
-
                 <p id="error-msg"></p>
                 
                 <form id="changing-avatar-form" action="index.php?action=avatar" method="post" enctype="multipart/form-data">
                     <p>
-                        <input type="hidden" name="max-file-size" value="204800"> <!-- valeur en octets -->
-                        <input type="file" name="avatar">
+                        <input type="hidden" name="max-file-size" value="10000000"> 
+                        <input type="file" name="avatar" id="avatar">
                     </p>
                     
                     <input type="submit" name="submit-avatar" value="Valider">
@@ -59,7 +57,7 @@
 <?php $section = ob_get_clean(); ?>
 
 
-<!-- FOOTER -->
+    <!-- FOOTER -->
 <?php 
     ob_start(); 
         require_once('view/templates/footer_template.php');
@@ -68,16 +66,16 @@
     // SCRIPTS JS :
     ob_start();
 ?>
-       
+
     <script>
         $("section").css("margin-top", "-11px");
     </script>
-    
+
     <script src="assets/js/forms.js"></script>
 
 <?php
     $scripts = ob_get_clean();
-
+    
     require_once('view/templates/template.php'); 
 ?>
 
