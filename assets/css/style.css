@@ -1063,6 +1063,10 @@ footer a:hover {
     #forms-container {
         padding: 0 50px;
     }
+
+    #tv-show-poster img {
+        width: 200px;
+    }
 } 
 
 
@@ -1126,6 +1130,15 @@ footer a:hover {
 
     #discover-form p:first-child .bootstrap-select {
         margin-left: 16px;
+    }
+
+    #tv-show-intro div:first-child {
+        /* flex-direction: column; */
+    }
+
+    #tv-show-note {
+        /* position: relative; */
+        /* left: 0; */
     }
 }
 
@@ -1258,6 +1271,21 @@ footer a:hover {
     #personal-space-tv-shows-title {
         margin: 0 20px;
     }
+
+    #following-tvshows-btn {
+        display: none;
+    }
+
+    #tv-show-intro div:first-child {
+        display: flex;
+        flex-direction: column;
+    }
+
+    #tv-show-note {
+        display: none;
+    }
+
+    
 }
 
 
@@ -1297,6 +1325,20 @@ footer a:hover {
 
     footer div a {
         display: none;
+    }
+
+    #tv-show-poster {
+        margin: auto;
+        margin-top: 20px;
+    }
+
+    #tv-show-infos {
+        padding: 20px;
+        margin-top: 0;
+    }
+
+    #tv-show-details {
+        flex-direction: column;
     }
 }
 
@@ -1384,6 +1426,23 @@ footer a:hover {
     #personal-space-tv-shows-title {
         font-size: 1em;
     }
+
+    #second-intro-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        height: 120px;
+    }
+
+    #tv-show-nb-of-episodes-and-seasons {
+        padding: 0;
+    }
+    
+    #second-intro-container div {
+        position: relative;
+        right: 5px;
+        /* margin: auto; */
+    }
 }
 
 
@@ -1440,6 +1499,15 @@ footer a:hover {
     #connexion-form p,
     #registration-form p {
         width: 70%;
+    }
+
+    #tv-shows-category-title h3 {
+        line-height: 1.4;
+    }
+
+    #tv-shows-category-title h3 span {
+        font-weight: normal;
+        font-size: 1em;
     }
 }
 
